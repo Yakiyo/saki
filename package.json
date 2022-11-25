@@ -1,0 +1,35 @@
+{
+  "name": "saki",
+  "version": "0.1.0",
+  "description": "Saki bot for Gimai Seikatsu Discord Server",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "start": "node .",
+    "prestart": "rm -rf dist/ && tsc",
+    "ts": "ts-node"
+  },
+  "keywords": [
+    "gimai",
+    "discord",
+    "bot",
+    "anime"
+  ],
+  "author": "Yakiyo#1206",
+  "license": "MIT",
+  "dependencies": {
+    "@prisma/client": "^4.6.1",
+    "discord.js": "^14.6.0",
+    "dotenv": "^16.0.3",
+    "node-fetch": "2.6.7",
+    "tslib": "^2.4.1"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.9",
+    "@types/node-fetch": "^2.6.2",
+    "prisma": "^4.6.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.3"
+  }
+}

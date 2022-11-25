@@ -1,0 +1,15 @@
+name: Build
+on: [push, pull_request]
+
+jobs:
+    lint-files:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - uses: actions/setup-node@v2
+              with:
+                  node-version: '16.x'
+            - name: Install Packages
+              run: npm install
+            - name: Build Files
+              run: npm run build

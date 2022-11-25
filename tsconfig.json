@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "target": "ES6",                                                             
+    "rootDir": "./src",                              
+    "moduleResolution": "node",                
+    "esModuleInterop": true,                      
+    "forceConsistentCasingInFileNames": true,        
+    "strict": true,                                  
+    "noImplicitAny": true,                           
+    "noUnusedLocals": true,                          
+    "noUnusedParameters": true,                      
+    "noImplicitReturns": true,
+    "module": "CommonJS",
+    "outDir": "./dist",
+    "importHelpers": true,
+    "pretty": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true                
+  },
+  "include": [
+    "src/"
+  ]
+}
