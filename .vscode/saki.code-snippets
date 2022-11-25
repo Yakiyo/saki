@@ -1,0 +1,19 @@
+{
+    "command": {
+        "prefix": ["slash", "command"],
+        "description": "Creates boilerplate code for a slash command",
+        "body": [
+            "import { SlashCommandBuilder } from \"discord.js\";",
+            "import { Command } from \"../../struct/types\";",
+            "",
+            "export const command: Command = {",
+                "\tdata: new SlashCommandBuilder()",
+                    "\t\t.setName('${1:name}')",
+                    "\t\t.setDescription('${2:description}'),",
+                "\tasync execute(_interaction) {",
+                    "\t\t// --snip--",                    
+                "\t},",
+            "}"
+        ]
+    }
+}
