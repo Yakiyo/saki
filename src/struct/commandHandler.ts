@@ -1,9 +1,10 @@
-import { Collection, type ChatInputCommandInteraction } from "discord.js";
+import { Collection, type GuildMember, type ChatInputCommandInteraction } from "discord.js";
 import { join, resolve } from "node:path";
 import { readdirSync } from "node:fs";
 import { REST, Routes } from 'discord.js';
 import { type Command } from "./types";
 import config from "../config";
+import { isStaff } from "../util";
 const { clientId, guildId } = config;
 
 export class CommandHandler {
@@ -35,6 +36,10 @@ export class CommandHandler {
         const command = this.commands.get(interaction.commandName);
         if (!command) return;
         try {
+            if (command.category === 'staff' && !isStaff(interaction.member as GuildMember)) {
+                interaction.reply({ content: "Staff only command. Inaccessible for you.", ephemeral: true });
+                return;
+            }
             await command.execute(interaction);
         } catch(e) {
             console.log(e);
