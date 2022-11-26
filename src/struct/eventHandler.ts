@@ -1,5 +1,4 @@
-import type { Client } from "./types";
-import { type Event } from "./types";
+import type { Client, Event } from "./types";
 import { join, resolve } from "node:path";
 import { readdirSync } from "node:fs";
 
