@@ -7,12 +7,16 @@ interface Config {
     }
 }
 
-let config: any = {};
+let config = require("../config.json");
 
-if (process.env.NODE_ENV === 'production') {
-    config = require("../config.json");
-} else {
-    config = require("../config.dev.json");
+if (process.env.NODE_ENV !== 'production') {
+    try {
+        let dev = require("../config.dev.json");
+        config = {
+            ...config,
+            ...dev
+        };
+    } catch (_) {}
 }
 
-export default { ...config} as Config;
+export default config as Config;
