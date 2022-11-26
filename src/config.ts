@@ -4,6 +4,9 @@ interface Config {
     owners: string[],
     channels: {
         affiliate: string
+    },
+    roles: {
+        mod: string
     }
 }
 
