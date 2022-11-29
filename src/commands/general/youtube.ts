@@ -6,8 +6,6 @@ export const command: Command = {
         .setName('youtube')
         .setDescription('Sends link to Gimai Seikatsu YouTube channel.'),
     async execute(interaction) {
-        interaction.reply(`Youtube Related Links 
-        **YouTube Channel:** <https://www.youtube.com/channel/UCOQyW7GmCyTKwjCJEaTBWRw>.
-        **English Subbed Episodes:** <https://bit.ly/gimaiyoutube>`);
+        interaction.reply(`**YouTube Channel:**\n<https://www.youtube.com/channel/UCOQyW7GmCyTKwjCJEaTBWRw>.\n**English Subbed Episodes:**\n<https://bit.ly/gimaiyoutube>`);
     },
 }

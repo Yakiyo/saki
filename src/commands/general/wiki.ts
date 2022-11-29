@@ -6,6 +6,6 @@ export const command: Command = {
         .setName('wiki')
         .setDescription('Sends link to the Gimai Seikatsu wiki'),
     async execute(interaction) {
-        interaction.reply("Here's the link to the **Wiki** <https://gimai-seikatsu.fandom.com/wiki/Gimai_Seikatsu_Wiki>.");
+        interaction.reply("Here's the link to the **Wiki**\n<https://gimai-seikatsu.fandom.com/wiki/Gimai_Seikatsu_Wiki>.");
     },
 }
