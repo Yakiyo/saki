@@ -10,8 +10,8 @@
                 "\tdata: new SlashCommandBuilder()",
                     "\t\t.setName('${1:name}')",
                     "\t\t.setDescription('${2:description}'),",
-                "\tasync execute(_interaction) {",
-                    "\t\t// --snip--",                    
+                "\tasync execute(interaction) {",
+                    "\t\tinteraction.reply(\"Done\");",                    
                 "\t},",
             "}"
         ]
