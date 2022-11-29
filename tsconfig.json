@@ -15,7 +15,8 @@
     "importHelpers": true,
     "pretty": true,
     "skipLibCheck": true,
-    "resolveJsonModule": true                
+    "resolveJsonModule": true,
+    "removeComments": true             
   },
   "include": [
     "src/"
