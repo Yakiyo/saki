@@ -3,7 +3,8 @@ interface Config {
     guildId: string,
     owners: string[],
     channels: {
-        affiliate: string
+        affiliate: string,
+        updates: string
     },
     roles: {
         mod: string
