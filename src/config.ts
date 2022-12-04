@@ -4,7 +4,10 @@ interface Config {
     owners: string[],
     channels: {
         affiliate: string,
-        updates: string
+        updates: string,
+        activity_log: string,
+        mod_log: string,
+        modmail: string,
     },
     roles: {
         mod: string
