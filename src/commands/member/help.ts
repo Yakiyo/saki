@@ -27,7 +27,7 @@ export const command: Command = {
                 fields: categories.map(c => {
                     return {
                         name: `__${casify(c.first()?.category as string)}__`,
-                        value: c.map(com => `\`${casify(com.data.name)}\`: ${com.data.description}`).join("\n")
+                        value: c.map(com => `\`${com.data.name}\`: ${com.data.description}`).join("\n")
                     }
                 }) as APIEmbedField[],
                 footer: {
