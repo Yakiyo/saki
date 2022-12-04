@@ -27,12 +27,15 @@ export const command: Command = {
         const path = join(__dirname, '..', '..' , 'commands');
 
         let folder: string | undefined;
+        console.log(command.category);
         if (command.category) {
             folder = command.category;
         } else {
             const commandFolders = readdirSync(path);
             folder = commandFolders.find(subfolder => readdirSync(`${path}/${subfolder}`).filter(x => x == `${command.data.name}.js` || x == `${command.data.name}.ts`));
+            command.category = folder;
         }
+        console.log(command.category, folder);
         const filePath = resolve(process.cwd(), `${path}/${folder}/${command.data.name}`);
         delete require.cache[require.resolve(filePath)];
         try {
