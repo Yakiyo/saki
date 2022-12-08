@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@naval-base/ms': ^3.1.0
   '@prisma/client': ^4.6.1
   '@types/node': ^18.11.9
   '@types/node-fetch': ^2.6.2
@@ -13,6 +14,7 @@ specifiers:
   typescript: ^4.9.3
 
 dependencies:
+  '@naval-base/ms': 3.1.0
   '@prisma/client': 4.6.1_prisma@4.6.1
   discord.js: 14.6.0
   dotenv: 16.0.3
@@ -86,6 +88,10 @@ packages:
       '@jridgewell/resolve-uri': 3.1.0
       '@jridgewell/sourcemap-codec': 1.4.14
     dev: true
+
+  /@naval-base/ms/3.1.0:
+    resolution: {integrity: sha512-3xSG3J2f9xSEgni7liDFBNnlhOf6/sLedCMaEtWv3iaJkeaWvyfdWBYhd2bTko3BLMcQfY4MgICoUGRla1bXiQ==}
+    dev: false
 
   /@prisma/client/4.6.1_prisma@4.6.1:
     resolution: {integrity: sha512-M1+NNrMzqaOIxT7PBGcTs3IZo7d1EW/+gVQd4C4gUgWBDGgD9AcIeZnUSidgWClmpMSgVUdnVORjsWWGUameYA==}
