@@ -1,4 +1,4 @@
-import { type GuildMember } from "discord.js";
+import type { GuildMember,  APIEmbed , JSONEncodable, TextChannel } from "discord.js";
 import config from "./config";
 
 /**
@@ -28,4 +28,24 @@ export function casify(string: string) {
 
     return string.split(/_/g).map(word => word.charAt(0).toUpperCase() + word.substring(1).toLowerCase()).join(' ');
 
+}
+
+/**
+ * Log a message to activity/mod logs channel
+ */
+export async function sendLog(payload: string | APIEmbed | JSONEncodable<APIEmbed>, destination: 'activity' | 'mod' = 'activity') {
+    const client = globalThis.client;
+    const cid = destination == "activity" ? config.channels.activity_log : config.channels.mod_log;
+    const channel = await client.channels.fetch(cid).catch(() => null) as TextChannel | null;
+    if (!channel) {
+        console.error(`Error when fetching ${destination} logs`);
+        return;
+    }
+    if (typeof payload == 'string') {
+        channel.send(payload);
+    } else {
+        channel.send({
+            embeds: [payload]
+        });
+    }
 }
