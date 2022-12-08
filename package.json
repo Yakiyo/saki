@@ -19,6 +19,7 @@
   "author": "Yakiyo#1206",
   "license": "MIT",
   "dependencies": {
+    "@napi-rs/canvas": "^0.1.30",
     "@naval-base/ms": "^3.1.0",
     "@prisma/client": "^4.6.1",
     "discord.js": "^14.6.0",
