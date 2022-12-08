@@ -23,4 +23,10 @@ if (process.env.DEPLOY === 'TRUE') {
     require("./deploy");
 }
 
+declare global {
+    var client: Client;
+}
+
+global.client = client;
+
 client.login(process.env.DISCORD_TOKEN);
