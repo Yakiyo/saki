@@ -34,6 +34,7 @@ export function casify(string: string) {
  * Log a message to activity/mod logs channel
  */
 export async function sendLog(payload: string | APIEmbed | JSONEncodable<APIEmbed>, destination: 'activity' | 'mod' = 'activity') {
+    // @ts-ignore
     const client = globalThis.client;
     const cid = destination == "activity" ? config.channels.activity_log : config.channels.mod_log;
     const channel = await client.channels.fetch(cid).catch(() => null) as TextChannel | null;
