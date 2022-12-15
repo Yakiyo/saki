@@ -8,7 +8,8 @@
     "build": "tsc",
     "start": "node .",
     "prestart": "rm -rf dist/ && tsc",
-    "ts": "ts-node"
+    "ts": "ts-node",
+    "deploy": "ts-node src/deploy.ts"
   },
   "keywords": [
     "gimai",
