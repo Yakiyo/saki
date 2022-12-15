@@ -42,6 +42,7 @@ export const command: Command = {
             interaction.editReply('This user is higher then me in hierarchy. Cannot timeout them');
             return;
         }
+        const reason = interaction.options.getString('reason') as string | undefined;
         switch (interaction.options.getSubcommand()) {
             case 'add': {
                 let time: number | null;
@@ -54,12 +55,19 @@ export const command: Command = {
                     interaction.editReply('Invalid time format. Please provide a valid duration.');
                     return;
                 }
-                await target.timeout(time, interaction.options.getString('reason') as string | undefined);
-                // TODO: Send dm to user
+                await target.timeout(time, reason);
+                
+                target.send({
+                    embeds: [{
+                        description: `You have been muted in **Gimai Seikatsu** server.\n${ reason ? '**Reason:** ' + reason : '' }`,
+                        color: 16025922,
+                    }]
+                }).catch(console.error);
+
                 sendLog({
                     title: 'Mute Case',
                     color: 16025922,
-                    description: `**Offender:** ${target.user.id} | <@!${target.user.id}>\n**Moderator:** ${interaction.user.tag}\n**Reason:** ${interaction.options.getString('reason') || 'No reason provided'}\n**Duration:** ${ms(time, true)}`,
+                    description: `**Offender:** ${target.user.id} | <@!${target.user.id}>\n**Moderator:** ${interaction.user.tag}\n**Reason:** ${reason || 'No reason provided'}\n**Duration:** ${ms(time, true)}`,
                 }, LogDestination.mod);
                 interaction.editReply(`Successfully timed out **${target.user.tag}** for ${ms(time, true)} duration`);
                 break;
@@ -69,11 +77,19 @@ export const command: Command = {
                     interaction.editReply('Target user is not timed out. Cannot untimeout.');
                     return;
                 }
-                await target.timeout(null, interaction.options.getString('reason') as string | undefined);
+                await target.timeout(null, reason);
+                
+                target.send({
+                    embeds: [{
+                        description: 'You have been unmuted in **Gimai Seikatsu** server.',
+                        color: 243000,
+                    }]
+                }).catch(console.error);
+
                 sendLog({
                     title: 'Unmute Case',
                     color: 4388007,
-                    description: `**Offender:** ${target.user.id} | <@!${target.user.id}>\n**Moderator:** ${interaction.user.tag}\n**Reason:** ${interaction.options.getString('reason') || 'No reason provided'}\n`,
+                    description: `**Offender:** ${target.user.id} | <@!${target.user.id}>\n**Moderator:** ${interaction.user.tag}\n**Reason:** ${reason || 'No reason provided'}\n`,
                 }, LogDestination.mod);
                 interaction.editReply(`Successfully untimed out **${target.user.tag}**`);
                 break;
