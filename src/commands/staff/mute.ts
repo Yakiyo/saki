@@ -55,6 +55,7 @@ export const command: Command = {
                     return;
                 }
                 await target.timeout(time, interaction.options.getString('reason') as string | undefined);
+                // TODO: Send dm to user
                 sendLog({
                     title: 'Mute Case',
                     color: 16025922,
