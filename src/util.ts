@@ -1,5 +1,6 @@
 import type { GuildMember,  APIEmbed , JSONEncodable, TextChannel } from "discord.js";
 import config from "./config";
+import pino from "pino";
 
 /**
  * If a member is staff or not
@@ -57,4 +58,24 @@ export async function sendLog(payload: string | APIEmbed | JSONEncodable<APIEmbe
 export enum LogDestination {
     activity,
     mod
+}
+
+const logger = pino(pino.transport({
+    target: 'pino/file',
+    options: {
+        destination: './error.log',
+        mkdir: true
+    }
+}));
+
+/**
+ * Function to log errors to a log file.
+ */
+export function log(p: any) {
+    // Set DEBUG env to any value to log stuff
+    // in development
+    if (process.env.DEBUG) {
+        console.error(p);
+    }
+    logger.error(p);
 }
