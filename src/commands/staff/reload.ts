@@ -3,6 +3,7 @@ import { Command } from "../../struct/types";
 import { readdirSync } from "node:fs";
 import { join, resolve } from "node:path";
 import config from "../../config";
+import { log } from "../../util";
 
 export const command: Command = {
     data: new SlashCommandBuilder()
@@ -42,7 +43,7 @@ export const command: Command = {
             interaction.client.commandHandler.commands.set(reloaded.data.name, reloaded);
             return await interaction.editReply(`Command ${reloaded.data.name} was successfully reloaded`);
         } catch (error) {
-            console.error(error);
+            log(error);
             return await interaction.editReply('Something went wrong');
         }
     },

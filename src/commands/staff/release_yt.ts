@@ -1,6 +1,7 @@
 import { type GuildTextBasedChannel, SlashCommandBuilder } from "discord.js";
 import type { Command } from "../../struct/types";
 import config from "../../config";
+import { log } from "../../util";
 
 export const command: Command = {
     data: new SlashCommandBuilder()
@@ -37,7 +38,7 @@ Gimai Seikatsu's new YouTube VN with English subtitle is up! Discussion in <#806
 **Official Playlist:** <https://bit.ly/gimaiyoutube>`);
 
     await message.crosspost()
-        .catch(e => console.error(e));
+        .catch(log);
 
     interaction.editReply("Announcement posted!");
     return;
