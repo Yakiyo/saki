@@ -1,7 +1,7 @@
 import { FetchMemberOptions, SlashCommandBuilder } from "discord.js";
 import type { Command } from "../../struct/types";
 import ms from '@naval-base/ms';
-import { LogDestination, sendLog } from "../../util";
+import { LogDestination, sendLog, log } from "../../util";
 
 export const command: Command = {
     data: new SlashCommandBuilder()
@@ -62,7 +62,7 @@ export const command: Command = {
                         description: `You have been muted in **Gimai Seikatsu** server.\n${ reason ? '**Reason:** ' + reason : '' }`,
                         color: 16025922,
                     }]
-                }).catch(console.error);
+                }).catch(log);
 
                 sendLog({
                     title: 'Mute Case',
@@ -84,7 +84,7 @@ export const command: Command = {
                         description: 'You have been unmuted in **Gimai Seikatsu** server.',
                         color: 243000,
                     }]
-                }).catch(console.error);
+                }).catch(log);
 
                 sendLog({
                     title: 'Unmute Case',

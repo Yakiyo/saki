@@ -4,7 +4,7 @@ import { readdirSync } from "node:fs";
 import { REST, Routes } from 'discord.js';
 import { type Command } from "./types";
 import config from "../config";
-import { isStaff } from "../util";
+import { isStaff, log } from "../util";
 const { clientId, guildId } = config;
 
 export class CommandHandler {
@@ -28,7 +28,7 @@ export class CommandHandler {
     
             console.log(`Successfully reloaded application (/) commands.`);
         } catch (error) {
-            console.error(error);
+            log(error);
         }
     }
 
@@ -42,7 +42,7 @@ export class CommandHandler {
             }
             await command.execute(interaction);
         } catch(e) {
-            console.log(e);
+            log(e);
             if (interaction.replied || interaction.deferred) {
                 await interaction.editReply({ content: 'Internal error when executing the command!' });
             } else {

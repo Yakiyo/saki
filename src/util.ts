@@ -40,7 +40,7 @@ export async function sendLog(payload: string | APIEmbed | JSONEncodable<APIEmbe
     const cid = destination == LogDestination.activity ? config.channels.activity_log : config.channels.mod_log;
     const channel = await client.channels.fetch(cid).catch(() => null) as TextChannel | null;
     if (!channel) {
-        console.error(`Error when fetching ${LogDestination[destination]} logs`);
+        log(`Error when fetching ${LogDestination[destination]} logs`);
         return;
     }
     if (typeof payload == 'string') {
