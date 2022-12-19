@@ -6,7 +6,10 @@ import "dotenv/config";
 
 
 const client = new DiscordClient({
-    intents: [Intents.Guilds],
+    intents: [
+        Intents.Guilds,
+        Intents.GuildMembers
+    ],
     presence: {
         status: 'online',
         activities: [{
