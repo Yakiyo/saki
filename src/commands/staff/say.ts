@@ -15,7 +15,7 @@ export const command: Command = {
             .setDescription('Select a channel to send the message in (optional)')
             .addChannelTypes(CT.GuildText, CT.PublicThread, CT.PrivateThread)),
     async execute(interaction) {
-		await interaction.deferReply({ ephemeral: true });
+	await interaction.deferReply({ ephemeral: true });
         const sentence = interaction.options.getString('message') as string;
         const channel = (interaction.options.getChannel('channel') || interaction.channel) as GuildTextBasedChannel;
 
