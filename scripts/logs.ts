@@ -9,10 +9,17 @@
 
 const { readFileSync } = require('node:fs');
 
-let json: string[] = readFileSync('./error.log', 'utf8')
+let json: string[];
+
+try {
+    json = readFileSync('./error.log', 'utf8')
     .split('\n')
     .filter((v: string) => v !== '');
-
+} catch(_e) {
+    // File doesnt exist so theres prolly no error logged.
+    console.error('File `error.log` doesn\'t exist. There is no error.');
+    process.exit(0);
+}
 let n = Number(process.argv[2]);
 
 if (isNaN(n) || n > json.length) {
