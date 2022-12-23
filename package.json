@@ -10,7 +10,8 @@
     "prestart": "rm -rf dist/ && tsc",
     "ts": "ts-node",
     "deploy": "ts-node src/deploy.ts",
-    "logs": "ts-node scripts/logs.ts"
+    "logs": "ts-node scripts/logs.ts",
+    "prisma": "prisma"
   },
   "keywords": [
     "gimai",
