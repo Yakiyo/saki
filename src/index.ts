@@ -2,7 +2,6 @@ import { Client as DiscordClient, GatewayIntentBits as Intents, ActivityType } f
 import { CommandHandler } from "./struct/commandHandler";
 import { EventHandler } from "./struct/eventHandler";
 import type { Client } from './struct/types';
-import { DisTube } from 'distube';
 import { log } from './util';
 import "dotenv/config";
 
@@ -27,24 +26,12 @@ if (process.env.DEPLOY === 'TRUE') {
     require("./deploy");
 }
 
-const distube = new DisTube(client, {
-    searchSongs: 5,
-    searchCooldown: 30,
-    leaveOnEmpty: false,
-	leaveOnFinish: false,
-	leaveOnStop: false,
-    joinNewVoiceChannel: true
-});
-
 client.on('error', log);
-distube.on('error', log);
 
 declare global {
     var client: Client;
-    var distube: DisTube;
 }
 
 global.client = client;
-global.distube = distube;
 
 client.login(process.env.DISCORD_TOKEN);
