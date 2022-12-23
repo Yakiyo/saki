@@ -28,7 +28,6 @@
     "@prisma/client": "^4.6.1",
     "discord-music-player": "^9.1.1",
     "discord.js": "^14.6.0",
-    "distube": "^4.0.4",
     "dotenv": "^16.0.3",
     "node-fetch": "2.6.7",
     "pino": "^7.0.0-rc.9",
