@@ -29,7 +29,8 @@
     "dotenv": "^16.0.3",
     "node-fetch": "2.6.7",
     "pino": "^7.0.0-rc.9",
-    "tslib": "^2.4.1"
+    "tslib": "^2.4.1",
+    "undici": "^5.14.0"
   },
   "devDependencies": {
     "@types/node": "^18.11.9",
