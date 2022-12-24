@@ -10,7 +10,8 @@ interface Config {
         modmail: string,
     },
     roles: {
-        mod: string
+        mod: string,
+        member: string
     }
 }
 
