@@ -79,3 +79,8 @@ export function log(p: any) {
     }
     logger.error(p);
 }
+
+/**
+ * Generate a random number between max and min (both inclusive)
+ */
+export const rand = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1) + min);
