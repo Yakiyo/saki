@@ -8,6 +8,7 @@ interface Config {
         activity_log: string,
         mod_log: string,
         modmail: string,
+        welcome: string,
     },
     roles: {
         mod: string,
