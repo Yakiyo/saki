@@ -24,7 +24,6 @@
   "dependencies": {
     "@napi-rs/canvas": "^0.1.30",
     "@naval-base/ms": "^3.1.0",
-    "@prisma/client": "^4.6.1",
     "discord.js": "^14.6.0",
     "dotenv": "^16.0.3",
     "node-fetch": "2.6.7",
@@ -35,7 +34,6 @@
   "devDependencies": {
     "@types/node": "^18.11.9",
     "@types/node-fetch": "^2.6.2",
-    "prisma": "^4.6.1",
     "ts-node": "^10.9.1",
     "typescript": "^4.9.3"
   }
