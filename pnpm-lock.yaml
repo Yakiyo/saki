@@ -9,6 +9,7 @@ specifiers:
   dotenv: ^16.0.3
   node-fetch: 2.6.7
   pino: ^7.0.0-rc.9
+  rethinkdb: ^2.4.2
   ts-node: ^10.9.1
   tslib: ^2.4.1
   typescript: ^4.9.3
@@ -21,6 +22,7 @@ dependencies:
   dotenv: 16.0.3
   node-fetch: 2.6.7
   pino: 7.11.0
+  rethinkdb: 2.4.2
   tslib: 2.4.1
   undici: 5.14.0
 
@@ -269,6 +271,10 @@ packages:
     engines: {node: '>=8.0.0'}
     dev: false
 
+  /bluebird/2.11.0:
+    resolution: {integrity: sha512-UfFSr22dmHPQqPP9XWHRhq+gWnHCYguQGkXQlbyPtW5qTnhFWA8/iXg765tH0cAjy7l/zPJ1aBTO0g5XgA7kvQ==}
+    dev: false
+
   /busboy/1.6.0:
     resolution: {integrity: sha512-8SFQbg/0hQ9xy3UNTB0YEnsNBbWfhf7RtnzpL7TkBiTBRfrQ9Fxcnz7VJsleJpyp6rVLvXiuORqjlHi5q+PYuA==}
     engines: {node: '>=10.16.0'}
@@ -483,6 +489,13 @@ packages:
   /real-require/0.1.0:
     resolution: {integrity: sha512-r/H9MzAWtrv8aSVjPCMFpDMl5q66GqtmmRkRjpHTsp4zBAa+snZyiQNlMONiUmEJcsnaw0wCauJ2GWODr/aFkg==}
     engines: {node: '>= 12.13.0'}
+    dev: false
+
+  /rethinkdb/2.4.2:
+    resolution: {integrity: sha512-6DzwqEpFc8cqesAdo07a845oBRxLiHvWzopTKBo/uY2ypGWIsJQFJk3wjRDtSEhczxJqLS0jnf37rwgzYAw8NQ==}
+    engines: {node: '>= 0.10.0'}
+    dependencies:
+      bluebird: 2.11.0
     dev: false
 
   /safe-buffer/5.2.1:
