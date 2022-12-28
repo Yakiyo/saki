@@ -1,6 +1,16 @@
-.env
-config.dev.json
+# Typescript builds
 dist/
+
+# Nodejs related files
 node_modules/
 package-lock.json
+
+# Environment variables and secrets
+.env
+
+# Devlopment files
+config.dev.json
+**/dev.ts
+
+# Error logs
 error.log
