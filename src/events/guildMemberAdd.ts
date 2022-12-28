@@ -15,12 +15,18 @@ export const event: Event = {
         }
 
 
-        // TODO: Check if welcome module is enabled or not from db
-        if (!member.user.bot) {
-            welcome(member, client);
-        }
-
+        const isEnabled = await global.prisma.modules.findUnique({
+            where: {
+                id: 1,
+            }
+        })
+        .then(m => m?.Welcome);
         
+        if (!member.user.bot && isEnabled === true) {
+            welcome(member, client);
+        } else {
+            console.log('skipped');
+        }        
 
     },
 };
