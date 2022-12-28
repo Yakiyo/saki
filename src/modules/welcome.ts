@@ -26,7 +26,7 @@ export async function welcome(member: GuildMember, client: Client<true>) {
     
     // Draw the bg first
     ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
-    const name = member.nickname ? member.nickname + '#' + member.user.discriminator : member.user.tag;
+    const name = member.user.tag;
 
     // Fetch user avatar
     const { body } = await request(member.user.avatarURL({ extension: 'png', size: 1024 }) as string);
@@ -81,6 +81,7 @@ export async function welcome(member: GuildMember, client: Client<true>) {
         .setColor(16102651);
 
     channel.send({
+        content: `Hey there <@${member.id}>`,
         embeds: [embed],
         files: [attachment]
     })
