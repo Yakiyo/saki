@@ -3,13 +3,14 @@ lockfileVersion: 5.4
 specifiers:
   '@napi-rs/canvas': ^0.1.30
   '@naval-base/ms': ^3.1.0
+  '@prisma/client': ^4.8.0
   '@types/node': ^18.11.9
   '@types/node-fetch': ^2.6.2
   discord.js: ^14.6.0
   dotenv: ^16.0.3
   node-fetch: 2.6.7
   pino: ^7.0.0-rc.9
-  rethinkdb: ^2.4.2
+  prisma: ^4.8.0
   ts-node: ^10.9.1
   tslib: ^2.4.1
   typescript: ^4.9.3
@@ -18,17 +19,18 @@ specifiers:
 dependencies:
   '@napi-rs/canvas': 0.1.30
   '@naval-base/ms': 3.1.0
+  '@prisma/client': 4.8.0_prisma@4.8.0
   discord.js: 14.6.0
   dotenv: 16.0.3
   node-fetch: 2.6.7
   pino: 7.11.0
-  rethinkdb: 2.4.2
   tslib: 2.4.1
   undici: 5.14.0
 
 devDependencies:
   '@types/node': 18.11.9
   '@types/node-fetch': 2.6.2
+  prisma: 4.8.0
   ts-node: 10.9.1_wup25etrarvlqkprac7h35hj7u
   typescript: 4.9.3
 
@@ -193,6 +195,28 @@ packages:
     resolution: {integrity: sha512-3xSG3J2f9xSEgni7liDFBNnlhOf6/sLedCMaEtWv3iaJkeaWvyfdWBYhd2bTko3BLMcQfY4MgICoUGRla1bXiQ==}
     dev: false
 
+  /@prisma/client/4.8.0_prisma@4.8.0:
+    resolution: {integrity: sha512-Y1riB0p2W52kh3zgssP/YAhln3RjBFcJy3uwEiyjmU+TQYh6QTZDRFBo3JtBWuq2FyMOl1Rye8jxzUP+n0l5Cg==}
+    engines: {node: '>=14.17'}
+    requiresBuild: true
+    peerDependencies:
+      prisma: '*'
+    peerDependenciesMeta:
+      prisma:
+        optional: true
+    dependencies:
+      '@prisma/engines-version': 4.8.0-61.d6e67a83f971b175a593ccc12e15c4a757f93ffe
+      prisma: 4.8.0
+    dev: false
+
+  /@prisma/engines-version/4.8.0-61.d6e67a83f971b175a593ccc12e15c4a757f93ffe:
+    resolution: {integrity: sha512-MHSOSexomRMom8QN4t7bu87wPPD+pa+hW9+71JnVcF3DqyyO/ycCLhRL1we3EojRpZxKvuyGho2REQsMCvxcJw==}
+    dev: false
+
+  /@prisma/engines/4.8.0:
+    resolution: {integrity: sha512-A1Asn2rxZMlLAj1HTyfaCv0VQrLUv034jVay05QlqZg1qiHPeA3/pGTfNMijbsMYCsGVxfWEJuaZZuNxXGMCrA==}
+    requiresBuild: true
+
   /@sapphire/async-queue/1.5.0:
     resolution: {integrity: sha512-JkLdIsP8fPAdh9ZZjrbHWR/+mZj0wvKS5ICibcLrRI1j84UmLMshx5n9QmL8b95d4onJ2xxiyugTgSAX7AalmA==}
     engines: {node: '>=v14.0.0', npm: '>=7.0.0'}
@@ -269,10 +293,6 @@ packages:
   /atomic-sleep/1.0.0:
     resolution: {integrity: sha512-kNOjDqAh7px0XWNI+4QbzoiR/nTkHAWNud2uvnJquD1/x5a7EQZMJT0AczqK0Qn67oY/TTQ1LbUKajZpp3I9tQ==}
     engines: {node: '>=8.0.0'}
-    dev: false
-
-  /bluebird/2.11.0:
-    resolution: {integrity: sha512-UfFSr22dmHPQqPP9XWHRhq+gWnHCYguQGkXQlbyPtW5qTnhFWA8/iXg765tH0cAjy7l/zPJ1aBTO0g5XgA7kvQ==}
     dev: false
 
   /busboy/1.6.0:
@@ -462,6 +482,14 @@ packages:
       thread-stream: 0.15.2
     dev: false
 
+  /prisma/4.8.0:
+    resolution: {integrity: sha512-DWIhxvxt8f4h6MDd35mz7BJff+fu7HItW3WPDIEpCR3RzcOWyiHBbLQW5/DOgmf+pRLTjwXQob7kuTZVYUAw5w==}
+    engines: {node: '>=14.17'}
+    hasBin: true
+    requiresBuild: true
+    dependencies:
+      '@prisma/engines': 4.8.0
+
   /process-warning/1.0.0:
     resolution: {integrity: sha512-du4wfLyj4yCZq1VupnVSZmRsPJsNuxoDQFdCFHLaYiEbFBD7QE0a+I4D7hOxrVnh78QE/YipFAj9lXHiXocV+Q==}
     dev: false
@@ -489,13 +517,6 @@ packages:
   /real-require/0.1.0:
     resolution: {integrity: sha512-r/H9MzAWtrv8aSVjPCMFpDMl5q66GqtmmRkRjpHTsp4zBAa+snZyiQNlMONiUmEJcsnaw0wCauJ2GWODr/aFkg==}
     engines: {node: '>= 12.13.0'}
-    dev: false
-
-  /rethinkdb/2.4.2:
-    resolution: {integrity: sha512-6DzwqEpFc8cqesAdo07a845oBRxLiHvWzopTKBo/uY2ypGWIsJQFJk3wjRDtSEhczxJqLS0jnf37rwgzYAw8NQ==}
-    engines: {node: '>= 0.10.0'}
-    dependencies:
-      bluebird: 2.11.0
     dev: false
 
   /safe-buffer/5.2.1:
