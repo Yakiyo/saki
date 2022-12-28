@@ -17,7 +17,7 @@ model Modules {
   Logs           Boolean @default(true)
   Mangadex       Boolean @default(true)
   Memes          Boolean @default(true)
-  Radio          Boolean @default(true)
+  Radio          Boolean @default(false)
   Facts          Boolean @default(true)
   Reaction_Roles Boolean @default(true)
   Reddit         Boolean @default(true)
