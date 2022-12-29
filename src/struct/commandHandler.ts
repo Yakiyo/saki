@@ -15,13 +15,14 @@ export class CommandHandler {
 		this.registerCommands();
 	}
 
-	public async registerInteractions() {
+	public async registerInteractions(asGlobal: boolean = false) {
 		const rest = new REST({ version: '10' }).setToken(process.env.DISCORD_TOKEN as string);
 		const commands = this.commands.map((v) => v.data.toJSON());
+		const route = asGlobal !== true ? Routes.applicationGuildCommands(clientId, guildId) : Routes.applicationCommands(clientId);
 		try {
 			console.log(`Started refreshing ${commands.length} application (/) commands.`);
 
-			await rest.put(Routes.applicationGuildCommands(clientId, guildId), {
+			await rest.put(route, {
 				body: commands,
 			});
 

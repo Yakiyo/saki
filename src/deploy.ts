@@ -1,4 +1,7 @@
 import { CommandHandler } from './struct/commandHandler';
 import 'dotenv/config';
 
-new CommandHandler().registerInteractions();
+const asGlobal = process.env.NODE_ENV === 'production' ? true : false;
+
+// We should deploy globally on prod. Maybe?
+new CommandHandler().registerInteractions(asGlobal);
