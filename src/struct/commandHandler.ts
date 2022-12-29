@@ -67,6 +67,10 @@ export class CommandHandler {
 				const { command } = require(resolve(process.cwd(), `${path}/${folder}/${file}`)) as {
 					command: Command;
 				};
+				if (!('data' in command) || !('execute' in command)) {
+					console.warn(`[WARNING] The command at ${path}/${folder}/${file} is missing a required "data" or "execute" property.`);
+					continue;
+				}
 				command.category = folder;
 				this.commands.set(command.data.name, command);
 			}
