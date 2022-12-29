@@ -24,8 +24,6 @@ export const event: Event = {
 
 		if (!member.user.bot && isEnabled === true) {
 			welcome(member, client);
-		} else {
-			console.log('skipped');
 		}
 	},
 };
