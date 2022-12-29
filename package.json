@@ -16,7 +16,7 @@
     "prs:gen": "prisma generate"
   },
   "prisma": {
-    "seed": "ts-node prisma/seed.ts"
+    "seed": "ts-node scripts/seed.ts"
   },
   "keywords": [
     "gimai",
