@@ -1,9 +1,4 @@
-import type {
-	GuildMember,
-	APIEmbed,
-	JSONEncodable,
-	TextChannel,
-} from 'discord.js';
+import type { GuildMember, APIEmbed, JSONEncodable, TextChannel } from 'discord.js';
 import config from './config';
 import pino from 'pino';
 
@@ -34,10 +29,7 @@ export function casify(string: string) {
 
 	return string
 		.split(/_/g)
-		.map(
-			(word) =>
-				word.charAt(0).toUpperCase() + word.substring(1).toLowerCase()
-		)
+		.map((word) => word.charAt(0).toUpperCase() + word.substring(1).toLowerCase())
 		.join(' ');
 }
 
@@ -50,13 +42,8 @@ export async function sendLog(
 ) {
 	// @ts-ignore
 	const client = globalThis.client;
-	const cid =
-		destination == LogDestination.activity
-			? config.channels.activity_log
-			: config.channels.mod_log;
-	const channel = (await client.channels
-		.fetch(cid)
-		.catch(() => null)) as TextChannel | null;
+	const cid = destination == LogDestination.activity ? config.channels.activity_log : config.channels.mod_log;
+	const channel = (await client.channels.fetch(cid).catch(() => null)) as TextChannel | null;
 	if (!channel) {
 		log(`Error when fetching ${LogDestination[destination]} logs`);
 		return;
@@ -103,5 +90,4 @@ export function log(p: any) {
 /**
  * Generate a random number between max and min (both inclusive)
  */
-export const rand = (min: number, max: number) =>
-	Math.floor(Math.random() * (max - min + 1) + min);
+export const rand = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1) + min);

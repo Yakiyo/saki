@@ -1,25 +1,16 @@
-import {
-	Collection,
-	SlashCommandBuilder,
-	type APIEmbedField,
-} from 'discord.js';
+import { Collection, SlashCommandBuilder, type APIEmbedField } from 'discord.js';
 import { casify } from '../../util';
 import { type Command } from '../../struct/types';
 
 export const command: Command = {
-	data: new SlashCommandBuilder()
-		.setName('help')
-		.setDescription('Display the bot commands.'),
+	data: new SlashCommandBuilder().setName('help').setDescription('Display the bot commands.'),
 	async execute(interaction) {
 		await interaction.deferReply();
 		// @ts-ignore
 		const { commands } = interaction.client.commandHandler as {
 			commands: Collection<string, Command>;
 		};
-		const categories = new Collection<
-			string,
-			Collection<string, Command>
-		>();
+		const categories = new Collection<string, Collection<string, Command>>();
 		commands.forEach((c) => {
 			const category = categories.get(c.category as string);
 			if (category) {
@@ -27,10 +18,7 @@ export const command: Command = {
 			} else {
 				categories.set(
 					c.category as string,
-					new Collection().set(c.data.name, c) as Collection<
-						string,
-						Command
-					>
+					new Collection().set(c.data.name, c) as Collection<string, Command>
 				);
 			}
 		});
@@ -42,15 +30,8 @@ export const command: Command = {
 					color: 16105148,
 					fields: categories.map((c) => {
 						return {
-							name: `__${casify(
-								c.first()?.category as string
-							)}__`,
-							value: c
-								.map(
-									(com) =>
-										`\`${com.data.name}\`: ${com.data.description}`
-								)
-								.join('\n'),
+							name: `__${casify(c.first()?.category as string)}__`,
+							value: c.map((com) => `\`${com.data.name}\`: ${com.data.description}`).join('\n'),
 						};
 					}) as APIEmbedField[],
 					footer: {

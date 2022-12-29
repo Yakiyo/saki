@@ -7,28 +7,17 @@ export const command: Command = {
 		.setName('kick')
 		.setDescription('Kicks a user from the server')
 		.addUserOption((option) =>
-			option
-				.setName('user')
-				.setDescription('The user to kick from the server')
-				.setRequired(true)
+			option.setName('user').setDescription('The user to kick from the server').setRequired(true)
 		)
-		.addStringOption((option) =>
-			option
-				.setName('reason')
-				.setDescription('The reason for banning the user')
-		),
+		.addStringOption((option) => option.setName('reason').setDescription('The reason for banning the user')),
 	async execute(interaction) {
 		await interaction.deferReply();
 		const target = (await interaction.guild?.members.fetch(
 			interaction.options.getUser('user')?.id as string
 		)) as GuildMember;
-		const reason = interaction.options.getString('reason') as
-			| string
-			| undefined;
+		const reason = interaction.options.getString('reason') as string | undefined;
 		if (!interaction.guild?.members.me?.permissions.has('KickMembers')) {
-			interaction.editReply(
-				'I do not have the required permissions to kick users.'
-			);
+			interaction.editReply('I do not have the required permissions to kick users.');
 			return;
 		}
 		if (!target.kickable) {
@@ -54,20 +43,16 @@ export const command: Command = {
 			await interaction.guild.members.kick(target, reason);
 		} catch (e) {
 			log(e);
-			interaction.editReply(
-				'Unexpected error while attempting to kick user.'
-			);
+			interaction.editReply('Unexpected error while attempting to kick user.');
 			return;
 		}
 		sendLog(
 			{
 				title: 'Kick Case',
 				color: 16025922,
-				description: `**Offender:** ${target.user.id} | <@!${
-					target.user.id
-				}>\n**Moderator:** ${interaction.user.tag}\n**Reason:** ${
-					reason || 'No reason provided'
-				}`,
+				description: `**Offender:** ${target.user.id} | <@!${target.user.id}>\n**Moderator:** ${
+					interaction.user.tag
+				}\n**Reason:** ${reason || 'No reason provided'}`,
 			},
 			LogDestination.mod
 		);

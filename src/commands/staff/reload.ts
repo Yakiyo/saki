@@ -10,10 +10,7 @@ export const command: Command = {
 		.setName('reload')
 		.setDescription('Reloads a slash commands. Dev only :)')
 		.addStringOption((option) =>
-			option
-				.setName('command')
-				.setDescription('The command to reload')
-				.setRequired(true)
+			option.setName('command').setDescription('The command to reload').setRequired(true)
 		),
 	async execute(interaction) {
 		if (!config.owners.includes(interaction.user.id)) {
@@ -25,13 +22,9 @@ export const command: Command = {
 		}
 		await interaction.deferReply({ ephemeral: true });
 		// @ts-ignore
-		const command = interaction.client.commandHandler.commands.get(
-			interaction.options.getString('command')
-		);
+		const command = interaction.client.commandHandler.commands.get(interaction.options.getString('command'));
 		if (!command) {
-			interaction.editReply(
-				'Did not find any command with that name. Please provide a valid command'
-			);
+			interaction.editReply('Did not find any command with that name. Please provide a valid command');
 			return;
 		}
 		const path = join(__dirname, '..', '..', 'commands');
@@ -43,30 +36,20 @@ export const command: Command = {
 			const commandFolders = readdirSync(path);
 			folder = commandFolders.find((subfolder) =>
 				readdirSync(`${path}/${subfolder}`).filter(
-					(x) =>
-						x == `${command.data.name}.js` ||
-						x == `${command.data.name}.ts`
+					(x) => x == `${command.data.name}.js` || x == `${command.data.name}.ts`
 				)
 			);
 			command.category = folder;
 		}
-		const filePath = resolve(
-			process.cwd(),
-			`${path}/${folder}/${command.data.name}`
-		);
+		const filePath = resolve(process.cwd(), `${path}/${folder}/${command.data.name}`);
 		delete require.cache[require.resolve(filePath)];
 		try {
 			const { command: reloaded } = require(filePath) as {
 				command: Command;
 			};
 			// @ts-ignore
-			interaction.client.commandHandler.commands.set(
-				reloaded.data.name,
-				reloaded
-			);
-			return await interaction.editReply(
-				`Command ${reloaded.data.name} was successfully reloaded`
-			);
+			interaction.client.commandHandler.commands.set(reloaded.data.name, reloaded);
+			return await interaction.editReply(`Command ${reloaded.data.name} was successfully reloaded`);
 		} catch (error) {
 			log(error);
 			return await interaction.editReply('Something went wrong');

@@ -11,11 +11,7 @@ export const command: Command = {
 				.setName('channel')
 				.setDescription('The channel to tell users to move to')
 				.setRequired(true)
-				.addChannelTypes(
-					CT.GuildText,
-					CT.PublicThread,
-					CT.PrivateThread
-				)
+				.addChannelTypes(CT.GuildText, CT.PublicThread, CT.PrivateThread)
 		),
 	async execute(interaction) {
 		const c = interaction.options.getChannel('channel');

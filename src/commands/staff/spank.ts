@@ -8,20 +8,11 @@ export const command: Command = {
 	data: new SlashCommandBuilder()
 		.setName('spank')
 		.setDescription('Mutes a user for 1 minute')
-		.addUserOption((option) =>
-			option
-				.setName('user')
-				.setDescription('The user to mute')
-				.setRequired(true)
-		),
+		.addUserOption((option) => option.setName('user').setDescription('The user to mute').setRequired(true)),
 	async execute(interaction) {
 		await interaction.deferReply();
-		if (
-			!interaction.guild?.members.me?.permissions.has('ModerateMembers')
-		) {
-			interaction.editReply(
-				'I do not have the required permissions to mute or unmute users.'
-			);
+		if (!interaction.guild?.members.me?.permissions.has('ModerateMembers')) {
+			interaction.editReply('I do not have the required permissions to mute or unmute users.');
 			return;
 		}
 		const target = await interaction.guild.members.fetch(
@@ -30,17 +21,12 @@ export const command: Command = {
 
 		// Haha rig against sathya
 		if (interaction.user.id === sathya_id && isStaff(target)) {
-			interaction.editReply(
-				"Sathya, don't try to spank ur fellow mods." +
-					'\nRegards:\nYakiyo'
-			);
+			interaction.editReply("Sathya, don't try to spank ur fellow mods." + '\nRegards:\nYakiyo');
 			return;
 		}
 
 		if (!target.moderatable) {
-			interaction.editReply(
-				'This user is higher then me in hierarchy. Cannot timeout them'
-			);
+			interaction.editReply('This user is higher then me in hierarchy. Cannot timeout them');
 			return;
 		}
 		// Timeout for 1 min -> 1 min * 60 seconds * 1000 ms -> 6 * 10^4 ms (??)

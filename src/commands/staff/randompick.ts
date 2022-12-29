@@ -4,29 +4,17 @@ import type { Command } from '../../struct/types';
 export const command: Command = {
 	data: new SlashCommandBuilder()
 		.setName('randompick')
-		.setDescription(
-			"Picks a number 'n' of random users from a specified role."
-		)
-		.addRoleOption((option) =>
-			option
-				.setName('role')
-				.setDescription('The role to choose from')
-				.setRequired(true)
-		)
+		.setDescription("Picks a number 'n' of random users from a specified role.")
+		.addRoleOption((option) => option.setName('role').setDescription('The role to choose from').setRequired(true))
 		.addIntegerOption((option) =>
-			option
-				.setName('number')
-				.setDescription('The number of users to pick')
-				.setMinValue(1)
+			option.setName('number').setDescription('The number of users to pick').setMinValue(1)
 		),
 	async execute(interaction) {
 		await interaction.deferReply();
 		const n = interaction.options.getInteger('number') || 1;
 		const role = interaction.options.getRole('role') as Role;
 
-		const members = await interaction.guild?.members
-			.fetch()
-			.then((v) => v.values());
+		const members = await interaction.guild?.members.fetch().then((v) => v.values());
 		const m = Array.from(members as IterableIterator<GuildMember>)
 			.filter((g) => g.roles.cache.has(role.id))
 			.sort(() => 0.5 - Math.random())

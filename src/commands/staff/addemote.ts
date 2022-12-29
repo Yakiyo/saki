@@ -6,27 +6,15 @@ export const command: Command = {
 		.setName('addemote')
 		.setDescription('Add a new emote to the server.')
 		.addStringOption((option) =>
-			option
-				.setName('name')
-				.setDescription('The name of the emoji to be added')
-				.setRequired(true)
+			option.setName('name').setDescription('The name of the emoji to be added').setRequired(true)
 		)
 		.addStringOption((option) =>
-			option
-				.setName('image')
-				.setDescription('Link of the image to be used for the emoji')
-				.setRequired(true)
+			option.setName('image').setDescription('Link of the image to be used for the emoji').setRequired(true)
 		),
 	async execute(interaction) {
-		const name = interaction.options
-			.getString('name')
-			?.replace(/ +/, '_') as string;
+		const name = interaction.options.getString('name')?.replace(/ +/, '_') as string;
 		const attachment = interaction.options.getString('image') as string;
-		if (
-			!/^https?:\/\/.*\/.*\.(png|gif|webp|jpeg|jpg)\??.*$/gim.test(
-				attachment
-			)
-		)
+		if (!/^https?:\/\/.*\/.*\.(png|gif|webp|jpeg|jpg)\??.*$/gim.test(attachment))
 			return interaction.reply({
 				content:
 					'Second argument does not seem to be a valid image link. Please provide a link to a png/jpg/webp/gif file.',
@@ -38,9 +26,7 @@ export const command: Command = {
 				attachment,
 				name,
 			});
-			return interaction.editReply(
-				`Successfully created emoji with name **${emoji?.name}**`
-			);
+			return interaction.editReply(`Successfully created emoji with name **${emoji?.name}**`);
 		} catch (error) {
 			console.log(error);
 			return await interaction.editReply(

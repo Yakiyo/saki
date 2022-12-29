@@ -7,10 +7,7 @@ export const command: Command = {
 		.setName('affiliate')
 		.setDescription('Affiliate a new discord server.')
 		.addStringOption((option) =>
-			option
-				.setName('invite')
-				.setDescription('The invite link to the server')
-				.setRequired(true)
+			option.setName('invite').setDescription('The invite link to the server').setRequired(true)
 		)
 		.addStringOption((option) =>
 			option
@@ -26,16 +23,12 @@ export const command: Command = {
 			.fetchInvite(interaction.options.getString('invite') as string)
 			.catch(() => null);
 		if (!invite) {
-			interaction.editReply(
-				'Invalid invite link. Please provide a valid one'
-			);
+			interaction.editReply('Invalid invite link. Please provide a valid one');
 			return;
 		}
 
 		if (invite.expiresTimestamp) {
-			interaction.editReply(
-				"Not a permanent invite. Please provide one that doesn't expire"
-			);
+			interaction.editReply("Not a permanent invite. Please provide one that doesn't expire");
 			return;
 		}
 		const channel = await interaction.client.channels
@@ -43,9 +36,7 @@ export const command: Command = {
 			.then((c) => c)
 			.catch(() => null);
 		if (!channel) {
-			interaction.editReply(
-				'Internal error. Could not find affiliates channel'
-			);
+			interaction.editReply('Internal error. Could not find affiliates channel');
 			return;
 		}
 		await (channel as TextChannel).send({
@@ -57,15 +48,11 @@ export const command: Command = {
 					},
 					title: invite.guild?.name,
 					url: `https://discord.gg/${invite.code}`,
-					description: interaction.options.getString(
-						'description'
-					) as string | undefined,
+					description: interaction.options.getString('description') as string | undefined,
 				},
 			],
 		});
-		interaction.editReply(
-			`Successfully added server to <#${c.channels.affiliate}>`
-		);
+		interaction.editReply(`Successfully added server to <#${c.channels.affiliate}>`);
 		return;
 	},
 };
