@@ -11,7 +11,9 @@ export const command: Command = {
 		await interaction.editReply(
 			`:ping_pong: Pong!\nUptime: ${Math.round(
 				interaction.client.uptime / 60000
-			)} minutes\nWebsocket heartbeat: ${interaction.client.ws.ping}ms.\nRountrip Latency: ${
+			)} minutes\nWebsocket heartbeat: ${
+				interaction.client.ws.ping
+			}ms.\nRountrip Latency: ${
 				sent.createdTimestamp - interaction.createdTimestamp
 			}ms`
 		);

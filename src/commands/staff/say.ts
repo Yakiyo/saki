@@ -1,4 +1,9 @@
-import { SlashCommandBuilder, ChannelType as CT, type GuildTextBasedChannel, type GuildMember } from 'discord.js';
+import {
+	SlashCommandBuilder,
+	ChannelType as CT,
+	type GuildTextBasedChannel,
+	type GuildMember,
+} from 'discord.js';
 import type { Command } from '../../struct/types';
 import { sendLog } from '../../util';
 
@@ -6,7 +11,9 @@ export const command: Command = {
 	data: new SlashCommandBuilder()
 		.setName('say')
 		.setDescription('Make the bot say something')
-		.addStringOption((option) => option.setName('message').setDescription('string to send').setRequired(true))
+		.addStringOption((option) =>
+			option.setName('message').setDescription('string to send').setRequired(true)
+		)
 		.addChannelOption((option) =>
 			option
 				.setName('channel')
@@ -16,12 +23,14 @@ export const command: Command = {
 	async execute(interaction) {
 		await interaction.deferReply({ ephemeral: true });
 		const sentence = interaction.options.getString('message') as string;
-		const channel = (interaction.options.getChannel('channel') || interaction.channel) as GuildTextBasedChannel;
+		const channel = (interaction.options.getChannel('channel') ||
+			interaction.channel) as GuildTextBasedChannel;
 
 		const authorPerms = channel.permissionsFor(interaction.member as GuildMember);
 		if (!authorPerms || !authorPerms.has('SendMessages')) {
 			await interaction.reply({
-				content: 'You do not have permission to send message in the target channel',
+				content:
+					'You do not have permission to send message in the target channel',
 				ephemeral: true,
 			});
 			return;

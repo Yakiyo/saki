@@ -3,7 +3,9 @@ import { casify } from '../../util';
 import { type Command } from '../../struct/types';
 
 export const command: Command = {
-	data: new SlashCommandBuilder().setName('help').setDescription('Display the bot commands.'),
+	data: new SlashCommandBuilder()
+		.setName('help')
+		.setDescription('Display the bot commands.'),
 	async execute(interaction) {
 		await interaction.deferReply();
 		// @ts-ignore
@@ -31,7 +33,12 @@ export const command: Command = {
 					fields: categories.map((c) => {
 						return {
 							name: `__${casify(c.first()?.category as string)}__`,
-							value: c.map((com) => `\`${com.data.name}\`: ${com.data.description}`).join('\n'),
+							value: c
+								.map(
+									(com) =>
+										`\`${com.data.name}\`: ${com.data.description}`
+								)
+								.join('\n'),
 						};
 					}) as APIEmbedField[],
 					footer: {

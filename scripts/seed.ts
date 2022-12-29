@@ -41,7 +41,8 @@ async function main() {
 			data: {
 				// TODO: These need to be filled later on
 				id: 1,
-				chapter: 'https://cclawtranslations.home.blog/2022/12/26/gimai-seikatsu-volume-7-chapter-12/',
+				chapter:
+					'https://cclawtranslations.home.blog/2022/12/26/gimai-seikatsu-volume-7-chapter-12/',
 				reddit: '',
 				twitter: '',
 				youtube: '',

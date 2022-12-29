@@ -1,4 +1,10 @@
-import { type GuildMember, type Client, type GuildTextBasedChannel, EmbedBuilder, AttachmentBuilder } from 'discord.js';
+import {
+	type GuildMember,
+	type Client,
+	type GuildTextBasedChannel,
+	EmbedBuilder,
+	AttachmentBuilder,
+} from 'discord.js';
 import Canvas from '@napi-rs/canvas';
 import config from '../config';
 import { log, rand } from '../util';
@@ -17,7 +23,9 @@ export async function welcome(member: GuildMember, client: Client<true>) {
 
 	if (!channel) return; // dont go any further, some shit prolly happened
 
-	const backgroundFile = await readFile(resolve(process.cwd(), `./assets/welcome-img/welcome${rand(1, 6)}.png`));
+	const backgroundFile = await readFile(
+		resolve(process.cwd(), `./assets/welcome-img/welcome${rand(1, 6)}.png`)
+	);
 	const bg = new Canvas.Image();
 	bg.src = backgroundFile;
 	const canvas = Canvas.createCanvas(bg.width, bg.height);
@@ -28,7 +36,9 @@ export async function welcome(member: GuildMember, client: Client<true>) {
 	const name = member.user.tag;
 
 	// Fetch user avatar
-	const { body } = await request(member.user.avatarURL({ extension: 'png', size: 1024 }) as string);
+	const { body } = await request(
+		member.user.avatarURL({ extension: 'png', size: 1024 }) as string
+	);
 	const avatar = new Canvas.Image();
 	avatar.src = Buffer.from(await body.arrayBuffer());
 

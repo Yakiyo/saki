@@ -6,17 +6,24 @@ export const command: Command = {
 	data: new SlashCommandBuilder()
 		.setName('avatar')
 		.setDescription("Give's a user's default or server avatar")
-		.addUserOption((option) => option.setName('user').setDescription('Optional user whose avatar to show'))
+		.addUserOption((option) =>
+			option.setName('user').setDescription('Optional user whose avatar to show')
+		)
 		.addStringOption((option) =>
 			option
 				.setName('type')
 				.setDescription('Default or server avatar to show')
-				.addChoices({ name: 'Default', value: 'DEFAULT' }, { name: 'Server', value: 'SERVER' })
+				.addChoices(
+					{ name: 'Default', value: 'DEFAULT' },
+					{ name: 'Server', value: 'SERVER' }
+				)
 		),
 	async execute(interaction) {
 		const member = (
 			interaction.options.getUser('user')
-				? await interaction.guild?.members.fetch(interaction.options.getUser('user') as User)
+				? await interaction.guild?.members.fetch(
+						interaction.options.getUser('user') as User
+				  )
 				: interaction.member
 		) as GuildMember;
 		const type = interaction.options.getString('type') || 'DEFAULT';

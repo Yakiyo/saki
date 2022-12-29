@@ -1,4 +1,10 @@
-import { SlashCommandBuilder, ChannelType as CT, type GuildTextBasedChannel, User, type Message } from 'discord.js';
+import {
+	SlashCommandBuilder,
+	ChannelType as CT,
+	type GuildTextBasedChannel,
+	User,
+	type Message,
+} from 'discord.js';
 import type { Command } from '../../struct/types';
 import { log, sendLog } from '../../util';
 
@@ -7,7 +13,10 @@ export const command: Command = {
 		.setName('spoiler')
 		.setDescription('Re-sends the message with spoiler tags.')
 		.addStringOption((option) =>
-			option.setName('message').setDescription('Id of the message to spoiler').setRequired(true)
+			option
+				.setName('message')
+				.setDescription('Id of the message to spoiler')
+				.setRequired(true)
 		)
 		.addChannelOption((option) =>
 			option
@@ -17,7 +26,8 @@ export const command: Command = {
 		),
 	async execute(interaction) {
 		await interaction.deferReply({ ephemeral: true });
-		const channel = (interaction.options.getChannel('channel') || interaction.channel) as GuildTextBasedChannel;
+		const channel = (interaction.options.getChannel('channel') ||
+			interaction.channel) as GuildTextBasedChannel;
 		const message = await channel.messages
 			.fetch({
 				message: interaction.options.getString('message') as string,
@@ -26,7 +36,9 @@ export const command: Command = {
 			.catch(() => null);
 
 		if (!message) {
-			interaction.editReply('No message with that id found. Please use a valid message id or provide channel id');
+			interaction.editReply(
+				'No message with that id found. Please use a valid message id or provide channel id'
+			);
 			return;
 		}
 

@@ -1,4 +1,8 @@
-import { Client as DiscordClient, GatewayIntentBits as Intents, ActivityType } from 'discord.js';
+import {
+	Client as DiscordClient,
+	GatewayIntentBits as Intents,
+	ActivityType,
+} from 'discord.js';
 import { CommandHandler } from './struct/commandHandler';
 import { EventHandler } from './struct/eventHandler';
 import { PrismaClient } from '@prisma/client';

@@ -6,6 +6,8 @@ export const command: Command = {
 		.setName('epub')
 		.setDescription('Sends link to the Gimai Seikatsu Fan english TL ePUB/PDF'),
 	async execute(interaction) {
-		interaction.reply("Here's the download link for the **Light Novel EN TL** <https://bit.ly/gimaiseikatsu>.");
+		interaction.reply(
+			"Here's the download link for the **Light Novel EN TL** <https://bit.ly/gimaiseikatsu>."
+		);
 	},
 };
