@@ -17,11 +17,13 @@ export const command: Command = {
 		),
 	async execute(interaction) {
 		await interaction.deferReply({ ephemeral: true });
-        const channel = (interaction.options.getChannel('channel') || interaction.channel) as GuildTextBasedChannel;
-		const message = await channel.messages.fetch({
-			message: interaction.options.getString('message') as string,
-			force: true
-		}).catch(() => null);
+		const channel = (interaction.options.getChannel('channel') || interaction.channel) as GuildTextBasedChannel;
+		const message = await channel.messages
+			.fetch({
+				message: interaction.options.getString('message') as string,
+				force: true,
+			})
+			.catch(() => null);
 
 		if (!message) {
 			interaction.editReply('No message with that id found. Please use a valid message id or provide channel id');
@@ -34,28 +36,32 @@ export const command: Command = {
 			files.push(attachment);
 		}
 		if (!message.attachments.size && !files.length) {
-            interaction.editReply('The message does not have any attachment to spoiler');
-            return;
-        }
+			interaction.editReply('The message does not have any attachment to spoiler');
+			return;
+		}
 		let sent: Message<true>;
 		try {
 			sent = await channel.send({
 				files,
-				embeds: [{
-					description: message.content,
-					footer: {
-						text: `Message sent by ${message.member?.user.tag}`,
-						icon_url: (message.member?.user as User).avatarURL({
-							extension: 'png',
-							forceStatic: true,
-						}) as string | undefined,
-					}
-				}],
+				embeds: [
+					{
+						description: message.content,
+						footer: {
+							text: `Message sent by ${message.member?.user.tag}`,
+							icon_url: (message.member?.user as User).avatarURL({
+								extension: 'png',
+								forceStatic: true,
+							}) as string | undefined,
+						},
+					},
+				],
 			});
 		} catch (e) {
 			log(e);
-			interaction.editReply('Unexpected error while sending spoilered message.\n'+
-			'Possible reasons: too large files, too many attachments');
+			interaction.editReply(
+				'Unexpected error while sending spoilered message.\n' +
+					'Possible reasons: too large files, too many attachments'
+			);
 			return;
 		}
 
@@ -69,6 +75,6 @@ export const command: Command = {
 			description: `Sent in <#${sent?.channelId}> | [Jump Link](${sent?.url})`,
 			timestamp: sent?.createdAt.toISOString(),
 		});
-        interaction.editReply('done');
+		interaction.editReply('done');
 	},
 };

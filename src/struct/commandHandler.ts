@@ -18,7 +18,10 @@ export class CommandHandler {
 	public async registerInteractions(asGlobal: boolean = false) {
 		const rest = new REST({ version: '10' }).setToken(process.env.DISCORD_TOKEN as string);
 		const commands = this.commands.map((v) => v.data.toJSON());
-		const route = asGlobal !== true ? Routes.applicationGuildCommands(clientId, guildId) : Routes.applicationCommands(clientId);
+		const route =
+			asGlobal !== true
+				? Routes.applicationGuildCommands(clientId, guildId)
+				: Routes.applicationCommands(clientId);
 		try {
 			console.log(`Started refreshing ${commands.length} application (/) commands.`);
 
@@ -69,7 +72,9 @@ export class CommandHandler {
 					command: Command;
 				};
 				if (!('data' in command) || !('execute' in command)) {
-					console.warn(`[WARNING] The command at ${path}/${folder}/${file} is missing a required "data" or "execute" property.`);
+					console.warn(
+						`[WARNING] The command at ${path}/${folder}/${file} is missing a required "data" or "execute" property.`
+					);
 					continue;
 				}
 				command.category = folder;

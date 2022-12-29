@@ -21,13 +21,15 @@ export const command: Command = {
 			return;
 		}
 		await interaction.deferReply({ ephemeral: true });
-		const command = (interaction.client as Client).commandHandler.commands.get(interaction.options.getString('command') as string);
+		const command = (interaction.client as Client).commandHandler.commands.get(
+			interaction.options.getString('command') as string
+		);
 		if (!command) {
 			interaction.editReply('Did not find any command with that name. Please provide a valid command');
 			return;
 		}
 		const path = join(__dirname, '..', '..', 'commands');
-		
+
 		const filePath = resolve(process.cwd(), `${path}/${command.category}/${command.data.name}`);
 		delete require.cache[require.resolve(filePath)];
 		try {

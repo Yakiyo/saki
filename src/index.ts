@@ -18,11 +18,7 @@ const prisma = new PrismaClient();
 })();
 
 const client = new DiscordClient({
-	intents: [
-		Intents.Guilds, 
-		Intents.GuildMembers,
-		Intents.GuildMessages
-	],
+	intents: [Intents.Guilds, Intents.GuildMembers, Intents.GuildMessages],
 	presence: {
 		status: 'online',
 		activities: [
