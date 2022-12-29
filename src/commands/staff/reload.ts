@@ -1,6 +1,6 @@
 import { SlashCommandBuilder } from 'discord.js';
-import { Command } from '../../struct/types';
-import { readdirSync } from 'node:fs';
+import { Client, Command } from '../../struct/types';
+// import { readdirSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import config from '../../config';
 import { log } from '../../util';
@@ -21,34 +21,21 @@ export const command: Command = {
 			return;
 		}
 		await interaction.deferReply({ ephemeral: true });
-		// @ts-ignore
-		const command = interaction.client.commandHandler.commands.get(interaction.options.getString('command'));
+		const command = (interaction.client as Client).commandHandler.commands.get(interaction.options.getString('command') as string);
 		if (!command) {
 			interaction.editReply('Did not find any command with that name. Please provide a valid command');
 			return;
 		}
 		const path = join(__dirname, '..', '..', 'commands');
-
-		let folder: string | undefined;
-		if (command.category) {
-			folder = command.category;
-		} else {
-			const commandFolders = readdirSync(path);
-			folder = commandFolders.find((subfolder) =>
-				readdirSync(`${path}/${subfolder}`).filter(
-					(x) => x == `${command.data.name}.js` || x == `${command.data.name}.ts`
-				)
-			);
-			command.category = folder;
-		}
-		const filePath = resolve(process.cwd(), `${path}/${folder}/${command.data.name}`);
+		
+		const filePath = resolve(process.cwd(), `${path}/${command.category}/${command.data.name}`);
 		delete require.cache[require.resolve(filePath)];
 		try {
 			const { command: reloaded } = require(filePath) as {
 				command: Command;
 			};
-			// @ts-ignore
-			interaction.client.commandHandler.commands.set(reloaded.data.name, reloaded);
+			reloaded.category = command.category;
+			(interaction.client as Client).commandHandler.commands.set(reloaded.data.name, reloaded);
 			return await interaction.editReply(`Command ${reloaded.data.name} was successfully reloaded`);
 		} catch (error) {
 			log(error);
