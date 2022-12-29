@@ -9,7 +9,7 @@
     "start": "node .",
     "prestart": "rm -rf dist/ && tsc",
     "ts": "ts-node",
-    "deploy": "ts-node src/deploy.ts",
+    "deploy": "ts-node --transpile-only src/deploy.ts",
     "logs": "ts-node scripts/logs.ts",
     "pretty": "prettier --write '**/*.ts'",
     "prs:seed": "prisma db seed",
