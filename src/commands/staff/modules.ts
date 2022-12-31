@@ -1,4 +1,9 @@
-import { SlashCommandBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder } from 'discord.js';
+import {
+	SlashCommandBuilder,
+	ButtonBuilder,
+	ButtonStyle,
+	ActionRowBuilder,
+} from 'discord.js';
 import type { Command } from '../../struct/types';
 import { casify } from '../../util';
 
@@ -11,25 +16,28 @@ export const command: Command = {
 
 		const modules = await global.prisma.modules.findUnique({
 			where: {
-				id: 1
-			}
+				id: 1,
+			},
 		});
 
 		const buttons = [];
 		for (const k in modules) {
 			if (k === 'id') continue;
 
-			buttons.push(new ButtonBuilder()
-				.setCustomId(`MOD_${k}`)
-				.setLabel(casify(k))
-				// @ts-ignore
-				.setStyle(modules[k] ? ButtonStyle.Success : ButtonStyle.Danger));
+			buttons.push(
+				new ButtonBuilder()
+					.setCustomId(`MOD_${k}`)
+					.setLabel(casify(k))
+					// @ts-ignore
+					.setStyle(modules[k] ? ButtonStyle.Success : ButtonStyle.Danger)
+			);
 		}
 
 		const rows: ActionRowBuilder<ButtonBuilder>[] = [];
 		while (buttons.length !== 0) {
-			const row = new ActionRowBuilder<ButtonBuilder>()
-				.addComponents(buttons.splice(0, 5));
+			const row = new ActionRowBuilder<ButtonBuilder>().addComponents(
+				buttons.splice(0, 5)
+			);
 			rows.push(row);
 		}
 
@@ -41,7 +49,7 @@ export const command: Command = {
 					},
 				},
 			],
-			components: rows
+			components: rows,
 		});
 	},
 };
