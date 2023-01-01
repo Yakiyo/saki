@@ -15,5 +15,21 @@
                 "\t},",
             "}"
         ]
+    },
+    "event": {
+        "prefix": ["event"],
+        "description": "Creates boilerplate code for an event",
+        "body": [
+            "import type { Event } from '../struct/types';",
+            "import { Events, type Client } from 'discord.js';",
+            "",
+            "export const event: Event = {",
+            "\tname: Events.${1:event},",
+            "\tonce: false,",
+            "\tasync handle(client: Client<true>) {",
+            "\t\tconsole.log(`Ready and logged in as ${client.user.tag}`);",
+            "\t},",
+            "};"
+        ]
     }
 }
