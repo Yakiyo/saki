@@ -2,6 +2,7 @@ import {
 	Client as DiscordClient,
 	GatewayIntentBits as Intents,
 	ActivityType,
+	Partials,
 } from 'discord.js';
 import { CommandHandler } from './struct/commandHandler';
 import { EventHandler } from './struct/eventHandler';
@@ -22,7 +23,17 @@ const prisma = new PrismaClient();
 })();
 
 const client = new DiscordClient({
-	intents: [Intents.Guilds, Intents.GuildMembers, Intents.GuildMessages],
+	intents: [
+		Intents.Guilds, 
+		Intents.GuildMembers, 
+		Intents.GuildMessages,
+		Intents.GuildMessageReactions
+	],
+	partials: [
+		Partials.Message,
+		Partials.Reaction,
+		Partials.Channel,
+	],
 	presence: {
 		status: 'online',
 		activities: [
