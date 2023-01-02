@@ -30,7 +30,7 @@ export interface Command {
 
 export interface Job {
 	readonly name: string;
-	interval: number;
+	interval: number; // This should be in seconds, always!
 	id?: ReturnType<typeof setInterval>;
 	run(): void;
 	init(): void;
