@@ -16,6 +16,12 @@ export const event: Event = {
             }
         }
 
-        console.log(`Reaction ${reaction}, user: ${user}`)
+        const { prisma } = global;
+
+        const isRREnabled = await prisma.modules.findUnique({
+            where: {
+                id: 1
+            }
+        }).then(m => m?.Reaction_Roles);
 	},
 };

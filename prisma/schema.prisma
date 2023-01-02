@@ -31,7 +31,7 @@ model Modules {
 }
 
 // A data model representing a reaction role entry
-model Reaction_Roles {
+model Reactionroles {
   id       String @id @default(auto()) @map("_id") @db.ObjectId
   reaction String
   message  String
