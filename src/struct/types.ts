@@ -31,7 +31,7 @@ export interface Command {
 export interface Job {
 	readonly name: string;
 	interval: number;
-	id?: number;
+	id?: ReturnType<typeof setInterval>;
 	run(): void;
 	init(): void;
 }
