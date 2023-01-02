@@ -1,6 +1,7 @@
 import type { Event } from '../struct/types';
 import { Events, MessageReaction, User, type Client } from 'discord.js';
 import { log } from '../util';
+import { reactionRole } from '../modules/reactionrole';
 
 export const event: Event = {
 	name: Events.MessageReactionAdd,
@@ -23,5 +24,9 @@ export const event: Event = {
                 id: 1
             }
         }).then(m => m?.Reaction_Roles);
+
+        if (isRREnabled) {
+            reactionRole(reaction, user);
+        }
 	},
 };
