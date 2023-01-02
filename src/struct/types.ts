@@ -27,3 +27,11 @@ export interface Command {
 	category?: string;
 	execute(interaction: ChatInputCommandInteraction): unknown;
 }
+
+export interface Job {
+	readonly name: string;
+	interval: number;
+	id?: number;
+	run(): void;
+	init(): void;
+}
