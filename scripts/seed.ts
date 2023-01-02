@@ -39,13 +39,27 @@ async function main() {
 		console.info('Cache entry is missing. Proceeding to seed cache...');
 		cache = await prisma.cache.create({
 			data: {
-				// TODO: These need to be filled later on
 				id: 1,
-				chapter:
-					'https://cclawtranslations.home.blog/2022/12/26/gimai-seikatsu-volume-7-chapter-12/',
-				reddit: '',
-				twitter: '',
-				youtube: '',
+				chapter: {
+					set: {
+						link: 'https://cclawtranslations.home.blog/2022/12/26/gimai-seikatsu-volume-7-chapter-12/',
+					},
+				},
+				reddit: {
+					set: {
+						link: 'https://www.reddit.com/r/GimaiSeikatsu/comments/zwd55s/the_newlyweds_and_stepsiblings_collab_punishments/',
+					},
+				},
+				twitter: {
+					set: {
+						link: 'https://twitter.com/gimaiseikatsu/status/1609491485891887104',
+					},
+				},
+				youtube: {
+					set: {
+						link: 'https://youtu.be/g54j7B3S_fA',
+					},
+				},
 			},
 		});
 	}
