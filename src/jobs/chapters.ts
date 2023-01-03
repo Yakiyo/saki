@@ -5,7 +5,7 @@ import fetch from 'node-fetch';
 import { log } from '../util';
 
 export const job: Job = {
-	name: 'chapters',
+	name: 'Chapters',
 	interval: 60,
 	async run() {
 		const { client, prisma } = global;
