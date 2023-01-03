@@ -8,7 +8,7 @@ export const event: Event = {
 	name: Events.GuildMemberAdd,
 	async handle(member: GuildMember, client: Client<true>) {
 		/**
-		 * Assign Member role to users on join
+		 * Assign bot role to bot users on join
 		 */
 		if (member.user.bot) {
 			member.roles.add(config.roles.bot).catch(log);
