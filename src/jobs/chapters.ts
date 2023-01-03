@@ -28,7 +28,7 @@ export const job: Job = {
 
 		let str =
 			`<@!${config.roles.ln}> :green_book:\n` +
-			'New Gimai Seikatsu translation is up by CClaw Translations!' +
+			'New Gimai Seikatsu translation is up by CClaw Translations! ' +
 			'Discussion in <#803894436027301958> only.\n\n';
 
 		for (const [k, v] of chaps) {
