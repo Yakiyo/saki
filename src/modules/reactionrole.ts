@@ -35,7 +35,7 @@ export async function reactionRole(reaction: MessageReaction, user: User) {
 			await member.roles.add(role.id);
 			await user.send(`> Added role **${role.name}**!`).catch(log);
 		} else {
-			// user has the role, it type is verify, dont do anything. else remove the role
+			// user has the role, if type is verify, dont do anything. else remove the role
 			if (rr.type !== 'VERIFY') {
 				await member.roles.remove(role.id);
 				await user.send(`> Removed role **${role.name}**!`).catch(log);
