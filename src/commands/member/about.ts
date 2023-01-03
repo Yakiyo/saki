@@ -12,10 +12,9 @@ export const command: Command = {
 		const commits = await fetch(
 			'https://api.github.com/repos/Yakiyo/saki/commits?per_page=5'
 		)
-			.then((response) => {
-				return response.json().then(function (json) {
-					return response.ok ? json : Promise.reject(json);
-				});
+			.then(async (response) => {
+				const json = await response.json();
+                return response.ok ? json : Promise.reject(json);
 			})
 			.then((res) => res);
 
