@@ -13,6 +13,8 @@ interface Config {
 	roles: {
 		mod: string;
 		member: string;
+		ln: string;
+		manga: string;
 	};
 }
 
