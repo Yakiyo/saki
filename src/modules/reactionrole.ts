@@ -28,13 +28,18 @@ export async function reactionRole(reaction: MessageReaction, user: User) {
 
 	if (!member) return;
 
+	const hasRole = member.roles.cache.has(role.id);
 	try {
-		if (member.roles.cache.has(role.id)) {
-			await member.roles.remove(role.id);
-			await user.send(`> Removed role **${role.name}**!`).catch(log);
-		} else {
+		/// If user doesnt have role, add it
+		if (!hasRole) {
 			await member.roles.add(role.id);
 			await user.send(`> Added role **${role.name}**!`).catch(log);
+		} else {
+			// user has the role, it type is verify, dont do anything. else remove the role
+			if (rr.type !== 'VERIFY') {
+				await member.roles.remove(role.id);
+				await user.send(`> Removed role **${role.name}**!`).catch(log);
+			}
 		}
 	} catch (e) {
 		log(e);
