@@ -64,7 +64,24 @@ async function main() {
 		});
 	}
 
-	console.info('Retrieved values', module, cache);
+	/// Seed reaction roles
+	let rr: any = await prisma.reactionroles.findMany();
+
+	if (!rr.length) {
+		console.info('Reaction roles are missing. Proceeding to seed reaction roles');
+		rr = await prisma.reactionroles.createMany({
+			data: [
+				{
+					message: '808385401445548042',
+					reaction: '✅',
+					role: '803201479736819733',
+					type: 'VERIFY',
+				},
+			],
+		});
+	}
+
+	console.info('Retrieved values', module, cache, rr);
 }
 
 let exit = 0;
