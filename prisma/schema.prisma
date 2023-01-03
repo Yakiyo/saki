@@ -7,7 +7,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// A data model for the modules in the bot. All defaults are true
+// A data model for the modules in the bot. All defaults are true,  except radio
 // We only need one instance of this. So in prod, should only fetch 
 // the entry with id 1
 model Modules {
@@ -32,10 +32,12 @@ model Modules {
 
 // A data model representing a reaction role entry
 model Reactionroles {
-  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  id       String       @id @default(auto()) @map("_id") @db.ObjectId
+  // This must be the emoji id for custom emojis and name for standard emojis
   reaction String
   message  String
   role     String
+  type     ReactionType @default(NORMAL)
 
   @@map("Reaction_Roles")
 }
@@ -53,7 +55,7 @@ model Spotlights {
 // A cache to store misc contents like the last chapter url, youtube url, twitter post
 // or reddit post that was sent from the feeds.
 model Cache {
-  id      Int       @id @map("_id")
+  id      Int    @id @map("_id")
   chapter Feed[]
   youtube Feed[]
   twitter Feed[]
@@ -64,4 +66,11 @@ model Cache {
 
 type Feed {
   link String
+}
+
+enum ReactionType {
+  // Users can only pick up once, cannot remove it
+  VERIFY
+  // Regular reaction roles
+  NORMAL
 }
