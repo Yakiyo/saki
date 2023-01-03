@@ -10,8 +10,8 @@ export const event: Event = {
 		/**
 		 * Assign Member role to users on join
 		 */
-		if (!member.user.bot) {
-			member.roles.add(config.roles.member).catch(log);
+		if (member.user.bot) {
+			member.roles.add(config.roles.bot).catch(log);
 		}
 
 		const isEnabled = await global.prisma.modules
