@@ -24,16 +24,12 @@ const prisma = new PrismaClient();
 
 const client = new DiscordClient({
 	intents: [
-		Intents.Guilds, 
-		Intents.GuildMembers, 
+		Intents.Guilds,
+		Intents.GuildMembers,
 		Intents.GuildMessages,
-		Intents.GuildMessageReactions
+		Intents.GuildMessageReactions,
 	],
-	partials: [
-		Partials.Message,
-		Partials.Reaction,
-		Partials.Channel,
-	],
+	partials: [Partials.Message, Partials.Reaction, Partials.Channel],
 	presence: {
 		status: 'online',
 		activities: [
