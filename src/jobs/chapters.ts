@@ -36,9 +36,12 @@ export const job: Job = {
 		}
 		str += 'Do share some love with our Fan Translator!';
 
-		const channel = await client.channels.fetch(config.channels.updates).catch(() => null) as GuildTextBasedChannel | null;
-		channel?.send(str)
-			.then(message => message.crosspost())
+		const channel = (await client.channels
+			.fetch(config.channels.updates)
+			.catch(() => null)) as GuildTextBasedChannel | null;
+		channel
+			?.send(str)
+			.then((message) => message.crosspost())
 			.catch(log);
 	},
 	async init() {
