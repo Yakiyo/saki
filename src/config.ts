@@ -9,6 +9,11 @@ interface Config {
 		mod_log: string;
 		modmail: string;
 		welcome: string;
+		feeds: {
+			reddit: string;
+			twitter: string;
+			youtube: string;
+		}
 	};
 	roles: {
 		mod: string;
