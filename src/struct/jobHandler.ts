@@ -8,7 +8,25 @@ export class JobHandler {
 
 	constructor() {
 		this.jobs = new Collection();
-		this.loadJobs();
+		(async () => {
+			const { prisma } = global;
+			const jobs = await this.loadJobs().then((v) => v.jobs);
+			const modules = await prisma.modules.findUnique({
+				where: {
+					id: 1,
+				},
+			});
+
+			for (const k in modules) {
+				const job = jobs.get(k);
+				if (!job) continue;
+
+				// @ts-ignore
+				if (modules[k]) {
+					job.init();
+				}
+			}
+		})();
 	}
 
 	private async loadJobs() {
@@ -24,6 +42,28 @@ export class JobHandler {
 			this.jobs.set(job.name, job);
 		}
 
+		return this;
+	}
+	/**
+	 * A method to turn on or off jobs
+	 * @param name Name of the Job
+	 * @param state Wether to run or stop the job
+	 * @returns this
+	 */
+	public async switchJobs(name: string, state: boolean) {
+		const job = this.jobs.get(name);
+
+		if (!job) return this;
+
+		if (state) {
+			// if it isnt running, run it.
+			if (!job.id) job.init();
+			// otherwise we don't bother
+		} else {
+			// if it is running, we stop it.
+			if (job.id) job.stop();
+			// else we dont bother
+		}
 		return this;
 	}
 }
