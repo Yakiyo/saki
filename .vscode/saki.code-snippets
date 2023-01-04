@@ -41,7 +41,7 @@
             "export const job: Job = {",
             "\tname: '${1:job}',",
             "\tinterval: 60,",
-            "\trun() {",
+            "\tasync run() {",
             "\t\tconsole.log('Hello world');",
             "\t},",
             "\tinit() {",
