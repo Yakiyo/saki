@@ -13,7 +13,7 @@ interface Config {
 			reddit: string;
 			twitter: string;
 			youtube: string;
-		}
+		};
 	};
 	roles: {
 		mod: string;
