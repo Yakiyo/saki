@@ -10,6 +10,7 @@ import { PrismaClient } from '@prisma/client';
 import type { Client } from './struct/types';
 import 'dotenv/config';
 import { log } from './util';
+import { Module } from './struct/module';
 
 const prisma = new PrismaClient();
 (async () => {
@@ -51,9 +52,12 @@ if (process.env.DEPLOY === 'TRUE') {
 declare global {
 	var client: Client;
 	var prisma: PrismaClient;
+	var modules: Module;
 }
 
 global.client = client;
 global.prisma = prisma;
+
+global.modules = new Module();
 
 client.login(process.env.DISCORD_TOKEN);
