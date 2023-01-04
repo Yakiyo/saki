@@ -48,7 +48,7 @@ export const command: Command = {
 			fields: [
 				{
 					name: 'Language',
-					value: '[Typescript](typescriptlang.org/)',
+					value: '[Typescript](https://typescriptlang.org/)',
 					inline: true,
 				},
 				{
