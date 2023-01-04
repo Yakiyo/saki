@@ -14,7 +14,7 @@ export const command: Command = {
 		)
 			.then(async (response) => {
 				const json = await response.json();
-                return response.ok ? json : Promise.reject(json);
+				return response.ok ? json : Promise.reject(json);
 			})
 			.then((res) => res);
 
