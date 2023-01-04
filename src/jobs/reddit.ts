@@ -86,8 +86,8 @@ async function iterate(posts: Record<string, string>[]) {
 	const res = [],
 		links = [];
 	for (const post of posts) {
-        const link = `https://reddit.com${post.permalink}`;
-		if (feeds?.filter(v => v.link === link).length) continue;
+		const link = `https://reddit.com${post.permalink}`;
+		if (feeds?.filter((v) => v.link === link).length) continue;
 		links.push({
 			link,
 		});
