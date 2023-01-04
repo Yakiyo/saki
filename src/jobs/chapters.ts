@@ -6,20 +6,9 @@ import { log } from '../util';
 
 export const job: Job = {
 	name: 'Chapters',
-	interval: 60,
+	interval: 5,
 	async run() {
-		const { client, prisma } = global;
-
-		const isEnabled = await prisma.modules
-			.findUnique({
-				where: {
-					id: 1,
-				},
-			})
-			.then((m) => m?.Chapters);
-
-		// Do not run if job is not initiated
-		if (!isEnabled) return;
+		const { client } = global;
 
 		const chaps = await getChaps();
 
@@ -48,8 +37,9 @@ export const job: Job = {
 		this.id = setInterval(this.run, this.interval * 1000);
 	},
 	async stop() {
-		clearInterval(this.interval);
-	}
+		clearInterval(this.id);
+		this.id = undefined;
+	},
 };
 
 /**
