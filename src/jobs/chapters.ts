@@ -47,6 +47,9 @@ export const job: Job = {
 	async init() {
 		this.id = setInterval(this.run, this.interval * 1000);
 	},
+	async stop() {
+		clearInterval(this.interval);
+	}
 };
 
 /**
