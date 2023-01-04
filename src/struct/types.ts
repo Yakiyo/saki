@@ -34,4 +34,5 @@ export interface Job {
 	id?: ReturnType<typeof setInterval>;
 	run(): void;
 	init(): void;
+	stop(): void;
 }
