@@ -31,5 +31,27 @@
             "\t},",
             "};"
         ]
+    },
+    "job": {
+        "prefix": ["job", "jobs"],
+        "description": "Creates boilerplate code for a Job",
+        "body": [
+            "import { Job } from '../struct/types';",
+            "",
+            "export const job: Job = {",
+            "\tname: '${1:job}',",
+            "\tinterval: 60,",
+            "\trun() {",
+            "\t\tconsole.log('Hello world');",
+            "\t},",
+            "\tinit() {",
+            "\t\tthis.id = setInterval(this.run, this.interval * 1000);",
+            "\t},",
+            "\tstop() {",
+            "\t\tclearInterval(this.id);",
+            "\t\tthis.id = undefined;",
+            "\t},",
+            "}"
+        ]
     }
 }
