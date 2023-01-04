@@ -65,20 +65,138 @@ async function main() {
 	}
 
 	/// Seed reaction roles
-	let rr: any = await prisma.reactionroles.findMany();
+	let rr = await prisma.reactionroles.findMany();
 
 	if (!rr.length) {
 		console.info('Reaction roles are missing. Proceeding to seed reaction roles');
-		rr = await prisma.reactionroles.createMany({
+		await prisma.reactionroles.createMany({
 			data: [
+				// Verification role on server join
 				{
 					message: '808385401445548042',
 					reaction: '✅',
 					role: '803201479736819733',
 					type: 'VERIFY',
 				},
+				// Character roles
+				{
+					message: '808386799889547315',
+					reaction: '808149174095839233',
+					role: '803205913733234689',
+					type: 'NORMAL',
+				},
+				{
+					message: '808386799889547315',
+					reaction: '808149218727428126',
+					role: '803609345602486332',
+					type: 'NORMAL',
+				},
+				{
+					message: '808386799889547315',
+					reaction: '808149270044606464',
+					role: '803609470185766932',
+					type: 'NORMAL',
+				},
+				{
+					message: '808386799889547315',
+					reaction: '808149296561258517',
+					role: '803609560853381172',
+					type: 'NORMAL',
+				},
+				{
+					message: '808386799889547315',
+					reaction: '810324441145016320',
+					role: '803609645637042186',
+					type: 'NORMAL',
+				},
+				{
+					message: '808386799889547315',
+					reaction: '810324473974095890',
+					role: '803648727767580733',
+					type: 'NORMAL',
+				},
+				{
+					message: '808386799889547315',
+					reaction: '810324592501063691',
+					role: '803648788375011348',
+					type: 'NORMAL',
+				},
+				{
+					message: '808386799889547315',
+					reaction: '920717700752363560',
+					role: '920697541056659457',
+					type: 'NORMAL',
+				},
+				{
+					message: '808386799889547315',
+					reaction: '920717662571622522',
+					role: '920697555568980028',
+					type: 'NORMAL',
+				},
+				{
+					message: '808386799889547315',
+					reaction: '920717741634240592',
+					role: '920697548736454727',
+					type: 'NORMAL',
+				},
+				// Special roles
+				{
+					message: '808386867178897429',
+					reaction: '📣',
+					role: '808757008739336242',
+					type: 'NORMAL',
+				},
+				{
+					message: '808386867178897429',
+					reaction: '📰',
+					role: '808757083201339474',
+					type: 'NORMAL',
+				},
+				{
+					message: '808386867178897429',
+					reaction: '🎦',
+					role: '1000722297302286376',
+					type: 'NORMAL',
+				},
+				{
+					message: '808386867178897429',
+					reaction: '📗',
+					role: '808757166344503367',
+					type: 'NORMAL',
+				},
+				{
+					message: '808386867178897429',
+					reaction: '📙',
+					role: '819959872614563870',
+					type: 'NORMAL',
+				},
+				{
+					message: '808386867178897429',
+					reaction: '808148339694633010',
+					role: '808757223244300311',
+					type: 'NORMAL',
+				},
+				{
+					message: '808386867178897429',
+					reaction: '820269445012389888',
+					role: '807204566072426506',
+					type: 'NORMAL',
+				},
+				{
+					message: '808386867178897429',
+					reaction: '🎉',
+					role: '852924366739341383',
+					type: 'NORMAL',
+				},
+				{
+					message: '808386867178897429',
+					reaction: '👩‍❤️‍👨',
+					role: '817844054326247504',
+					type: 'NORMAL',
+				},
 			],
 		});
+		rr = await prisma.reactionroles.findMany();
 	}
 
 	console.info('Retrieved values', module, cache, rr);
