@@ -8,7 +8,9 @@ import {
 	ButtonStyle,
 	ActionRowBuilder,
 	ButtonBuilder,
+	GuildMember,
 } from 'discord.js';
+import { isStaff } from '../util';
 
 export const event: Event = {
 	name: Events.InteractionCreate,
@@ -26,6 +28,13 @@ export const event: Event = {
 			case InteractionType.MessageComponent: {
 				if (!interaction.isButton()) return; // For now, we only handle buttons
 
+				if (!isStaff(interaction.member as GuildMember)) {
+					interaction.reply({
+						content: 'Mod only usage',
+						ephemeral: true,
+					});
+					return;
+				}
 				if (!interaction.customId.startsWith('MOD')) return;
 
 				await interaction.deferUpdate();
@@ -83,6 +92,7 @@ export const event: Event = {
 					],
 					ephemeral: true,
 				});
+				jobHandler.switchJobs(cid, data[cid]);
 				break;
 			}
 		}
