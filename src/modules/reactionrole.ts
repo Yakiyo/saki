@@ -22,8 +22,8 @@ export async function reactionRole(reaction: MessageReaction, user: User) {
 	if (!role) return;
 
 	const member = await reaction.message.guild?.members.fetch(user).catch((e) => {
-		if (e.code !== 50007) log(e); // error code 50007 means user doesnt have dms open, so we ignore it
-		return;
+		log(e);
+		return null;
 	});
 
 	if (!member) return;
@@ -33,12 +33,18 @@ export async function reactionRole(reaction: MessageReaction, user: User) {
 		/// If user doesnt have role, add it
 		if (!hasRole) {
 			await member.roles.add(role.id);
-			await user.send(`> Added role **${role.name}**!`).catch(log);
+			await user.send(`> Added role **${role.name}**!`).catch((e) => {
+				if (e.code !== 50007) log(e); // error code 50007 means user doesnt have dms open, so we ignore it
+				return null;
+			});
 		} else {
 			// user has the role, if type is verify, dont do anything. else remove the role
 			if (rr.type !== 'VERIFY') {
 				await member.roles.remove(role.id);
-				await user.send(`> Removed role **${role.name}**!`).catch(log);
+				await user.send(`> Removed role **${role.name}**!`).catch((e) => {
+					if (e.code !== 50007) log(e);
+					return;
+				});
 			}
 		}
 	} catch (e) {
