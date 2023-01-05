@@ -9,6 +9,7 @@ interface Config {
 		mod_log: string;
 		modmail: string;
 		welcome: string;
+		server_updates: string;
 		feeds: {
 			reddit: string;
 			twitter: string;
