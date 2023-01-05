@@ -6,7 +6,7 @@ import { log } from '../util';
 
 export const job: Job = {
 	name: 'Reddit',
-	interval: 5,
+	interval: 60,
 	async run() {
 		const embeds = (await fetch(
 			'https://www.reddit.com/r/GimaiSeikatsu/new.json?sort=new&limit=10'
