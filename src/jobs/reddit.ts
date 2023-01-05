@@ -87,7 +87,7 @@ async function iterate(posts: Record<string, string>[]) {
 		links = [];
 	for (const post of posts) {
 		const link = `https://reddit.com${post.permalink}`;
-		if(post.over_18) continue; // we skip nsfw content
+		if (post.over_18) continue; // we skip nsfw content
 		if (feeds?.filter((v) => v.link === link).length) continue;
 		links.push({
 			link,
