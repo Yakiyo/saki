@@ -24,15 +24,6 @@
     "bot",
     "anime"
   ],
-  "prettier": {
-    "printWidth": 90,
-    "tabWidth": 4,
-    "useTabs": true,
-    "semi": true,
-    "singleQuote": true,
-    "bracketSpacing": true,
-    "endOfLine": "lf"
-  },
   "author": "Yakiyo#1206",
   "license": "MIT",
   "dependencies": {
@@ -50,7 +41,6 @@
   "devDependencies": {
     "@types/node": "^18.11.9",
     "@types/node-fetch": "^2.6.2",
-    "prettier": "^2.8.1",
     "prisma": "^4.8.0",
     "rome": "^11.0.0",
     "ts-node": "^10.9.1",

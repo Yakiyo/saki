@@ -10,7 +10,6 @@ specifiers:
   dotenv: ^16.0.3
   node-fetch: 2.6.7
   pino: ^7.0.0-rc.9
-  prettier: ^2.8.1
   prisma: ^4.8.0
   rome: ^11.0.0
   sourcebin: ^5.0.0
@@ -34,7 +33,6 @@ dependencies:
 devDependencies:
   '@types/node': 18.11.9
   '@types/node-fetch': 2.6.2
-  prettier: 2.8.1
   prisma: 4.8.0
   rome: 11.0.0
   ts-node: 10.9.1_wup25etrarvlqkprac7h35hj7u
@@ -562,12 +560,6 @@ packages:
       sonic-boom: 2.8.0
       thread-stream: 0.15.2
     dev: false
-
-  /prettier/2.8.1:
-    resolution: {integrity: sha512-lqGoSJBQNJidqCHE80vqZJHWHRFoNYsSpP9AjFhlhi9ODCJA541svILes/+/1GM3VaL/abZi7cpFzOpdR9UPKg==}
-    engines: {node: '>=10.13.0'}
-    hasBin: true
-    dev: true
 
   /prisma/4.8.0:
     resolution: {integrity: sha512-DWIhxvxt8f4h6MDd35mz7BJff+fu7HItW3WPDIEpCR3RzcOWyiHBbLQW5/DOgmf+pRLTjwXQob7kuTZVYUAw5w==}
