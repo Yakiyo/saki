@@ -21,9 +21,7 @@ export const command: Command = {
 			interaction.editReply('Memes are disabled at the moment, sorry.');
 			return;
 		}
-		const memes = await fetch(
-			`https://reddit.com/r/${subs[rand(0, 1)]}.json?limit=100&sort=new`
-		)
+		const memes = await fetch(`https://reddit.com/r/${subs[rand(0, 1)]}.json?limit=100&sort=new`)
 			.then((v) => v.json())
 			.then((v) => v.data.children)
 			.then((v) => v.map((d: Record<string, string>) => d.data))
@@ -34,9 +32,7 @@ export const command: Command = {
 			});
 
 		if (!memes) {
-			interaction.editReply(
-				'Unexpected error when making api requests. Please try again later'
-			);
+			interaction.editReply('Unexpected error when making api requests. Please try again later');
 			return;
 		}
 		const meme = memes[rand(0, memes.length)];

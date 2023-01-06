@@ -13,16 +13,13 @@ export const command: Command = {
 		.setName('spoiler')
 		.setDescription('Re-sends the message with spoiler tags.')
 		.addStringOption((option) =>
-			option
-				.setName('message')
-				.setDescription('Id of the message to spoiler')
-				.setRequired(true)
+			option.setName('message').setDescription('Id of the message to spoiler').setRequired(true),
 		)
 		.addChannelOption((option) =>
 			option
 				.setName('channel')
 				.setDescription('The channel where the message is from')
-				.addChannelTypes(CT.GuildText, CT.PublicThread, CT.PrivateThread)
+				.addChannelTypes(CT.GuildText, CT.PublicThread, CT.PrivateThread),
 		),
 	async execute(interaction) {
 		await interaction.deferReply({ ephemeral: true });
@@ -37,7 +34,7 @@ export const command: Command = {
 
 		if (!message) {
 			interaction.editReply(
-				'No message with that id found. Please use a valid message id or provide channel id'
+				'No message with that id found. Please use a valid message id or provide channel id',
 			);
 			return;
 		}
@@ -72,7 +69,7 @@ export const command: Command = {
 			log(e);
 			interaction.editReply(
 				'Unexpected error while sending spoilered message.\n' +
-					'Possible reasons: too large files, too many attachments'
+					'Possible reasons: too large files, too many attachments',
 			);
 			return;
 		}

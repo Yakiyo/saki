@@ -18,9 +18,7 @@ export const event: Event = {
 		switch (interaction.type) {
 			// Handle slash commands
 			case InteractionType.ApplicationCommand: {
-				await client.commandHandler.handleCommand(
-					interaction as ChatInputCommandInteraction
-				);
+				await client.commandHandler.handleCommand(interaction as ChatInputCommandInteraction);
 				break;
 			}
 
@@ -65,15 +63,11 @@ export const event: Event = {
 
 						const butt = ButtonBuilder.from(button);
 						if (button.customId === `MOD_${cid}`) {
-							butt.setStyle(
-								data[cid] ? ButtonStyle.Success : ButtonStyle.Danger
-							);
+							butt.setStyle(data[cid] ? ButtonStyle.Success : ButtonStyle.Danger);
 						}
 						row.push(butt);
 					}
-					rows.push(
-						new ActionRowBuilder<ButtonBuilder>().addComponents(...row)
-					);
+					rows.push(new ActionRowBuilder<ButtonBuilder>().addComponents(...row));
 				}
 				await interaction.editReply({
 					content: interaction.message.content,
@@ -84,9 +78,7 @@ export const event: Event = {
 				interaction.followUp({
 					embeds: [
 						{
-							description: `Module \`${cid}\` has been ${
-								data[cid] ? 'enabled' : 'disabled'
-							}`,
+							description: `Module \`${cid}\` has been ${data[cid] ? 'enabled' : 'disabled'}`,
 							color: data[cid] ? 4388007 : 16025922,
 						},
 					],

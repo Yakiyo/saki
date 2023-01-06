@@ -43,7 +43,7 @@ export const command: Command = {
 				.setDescription('The rule number to display')
 				.setMinValue(0)
 				.setMaxValue(6)
-				.setRequired(true)
+				.setRequired(true),
 		),
 	async execute(interaction) {
 		const int = interaction.options.getNumber('number') as number;

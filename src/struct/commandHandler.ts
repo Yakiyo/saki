@@ -1,8 +1,4 @@
-import {
-	Collection,
-	type GuildMember,
-	type ChatInputCommandInteraction,
-} from 'discord.js';
+import { Collection, type GuildMember, type ChatInputCommandInteraction } from 'discord.js';
 import { join, resolve } from 'node:path';
 import { readdirSync } from 'node:fs';
 import { REST, Routes } from 'discord.js';
@@ -20,18 +16,14 @@ export class CommandHandler {
 	}
 
 	public async registerInteractions(asGlobal: boolean = false) {
-		const rest = new REST({ version: '10' }).setToken(
-			process.env.DISCORD_TOKEN as string
-		);
+		const rest = new REST({ version: '10' }).setToken(process.env.DISCORD_TOKEN as string);
 		const commands = this.commands.map((v) => v.data.toJSON());
 		const route =
 			asGlobal !== true
 				? Routes.applicationGuildCommands(clientId, guildId)
 				: Routes.applicationCommands(clientId);
 		try {
-			console.log(
-				`Started refreshing ${commands.length} application (/) commands.`
-			);
+			console.log(`Started refreshing ${commands.length} application (/) commands.`);
 
 			await rest.put(route, {
 				body: commands,
@@ -47,10 +39,7 @@ export class CommandHandler {
 		const command = this.commands.get(interaction.commandName);
 		if (!command) return;
 		try {
-			if (
-				command.category === 'staff' &&
-				!isStaff(interaction.member as GuildMember)
-			) {
+			if (command.category === 'staff' && !isStaff(interaction.member as GuildMember)) {
 				interaction.reply({
 					content: 'Staff only command. Inaccessible for you.',
 					ephemeral: true,
@@ -78,18 +67,15 @@ export class CommandHandler {
 		const folders = readdirSync(path);
 		for (const folder of folders) {
 			const files = readdirSync(`${path}/${folder}`).filter(
-				(f) => f.endsWith('.js') || f.endsWith('.ts')
+				(f) => f.endsWith('.js') || f.endsWith('.ts'),
 			);
 			for (const file of files) {
-				const { command } = require(resolve(
-					process.cwd(),
-					`${path}/${folder}/${file}`
-				)) as {
+				const { command } = require(resolve(process.cwd(), `${path}/${folder}/${file}`)) as {
 					command: Command;
 				};
 				if (!('data' in command) || !('execute' in command)) {
 					console.warn(
-						`[WARNING] The command at ${path}/${folder}/${file} is missing a required "data" or "execute" property.`
+						`[WARNING] The command at ${path}/${folder}/${file} is missing a required "data" or "execute" property.`,
 					);
 					continue;
 				}

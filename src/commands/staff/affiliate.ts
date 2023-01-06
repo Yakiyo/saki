@@ -7,17 +7,14 @@ export const command: Command = {
 		.setName('affiliate')
 		.setDescription('Affiliate a new discord server.')
 		.addStringOption((option) =>
-			option
-				.setName('invite')
-				.setDescription('The invite link to the server')
-				.setRequired(true)
+			option.setName('invite').setDescription('The invite link to the server').setRequired(true),
 		)
 		.addStringOption((option) =>
 			option
 				.setName('description')
 				.setDescription('A description of the server')
 				.setRequired(true)
-				.setMaxLength(2000)
+				.setMaxLength(2000),
 		),
 	async execute(interaction) {
 		await interaction.deferReply();
@@ -31,9 +28,7 @@ export const command: Command = {
 		}
 
 		if (invite.expiresTimestamp) {
-			interaction.editReply(
-				"Not a permanent invite. Please provide one that doesn't expire"
-			);
+			interaction.editReply("Not a permanent invite. Please provide one that doesn't expire");
 			return;
 		}
 		const channel = await interaction.client.channels
@@ -53,9 +48,7 @@ export const command: Command = {
 					},
 					title: invite.guild?.name,
 					url: `https://discord.gg/${invite.code}`,
-					description: interaction.options.getString('description') as
-						| string
-						| undefined,
+					description: interaction.options.getString('description') as string | undefined,
 				},
 			],
 		});

@@ -8,16 +8,10 @@ export const command: Command = {
 		.setName('release_yt')
 		.setDescription('Sends YouTube VN Release ping on updates channel.')
 		.addStringOption((option) =>
-			option
-				.setName('link')
-				.setDescription('The link to the video to send')
-				.setRequired(true)
+			option.setName('link').setDescription('The link to the video to send').setRequired(true),
 		)
 		.addStringOption((option) =>
-			option
-				.setName('title')
-				.setDescription('The title of the video')
-				.setRequired(true)
+			option.setName('title').setDescription('The title of the video').setRequired(true),
 		),
 	async execute(interaction) {
 		await interaction.deferReply();
@@ -32,8 +26,7 @@ export const command: Command = {
 			return;
 		}
 
-		const message = await (channel as GuildTextBasedChannel)
-			.send(`<@&808757223244300311>
+		const message = await (channel as GuildTextBasedChannel).send(`<@&808757223244300311>
 Gimai Seikatsu's new YouTube VN with English subtitle is up! Discussion in <#806366264457035786> only.
 
 

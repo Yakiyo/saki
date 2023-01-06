@@ -1,16 +1,9 @@
-import {
-	SlashCommandBuilder,
-	ButtonBuilder,
-	ButtonStyle,
-	ActionRowBuilder,
-} from 'discord.js';
+import { SlashCommandBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder } from 'discord.js';
 import type { Command } from '../../struct/types';
 import { casify } from '../../util';
 
 export const command: Command = {
-	data: new SlashCommandBuilder()
-		.setName('modules')
-		.setDescription('Display the bot modules.'),
+	data: new SlashCommandBuilder().setName('modules').setDescription('Display the bot modules.'),
 	async execute(interaction) {
 		await interaction.deferReply();
 
@@ -29,15 +22,13 @@ export const command: Command = {
 					.setCustomId(`MOD_${k}`)
 					.setLabel(casify(k))
 					// @ts-ignore
-					.setStyle(modules[k] ? ButtonStyle.Success : ButtonStyle.Danger)
+					.setStyle(modules[k] ? ButtonStyle.Success : ButtonStyle.Danger),
 			);
 		}
 
 		const rows: ActionRowBuilder<ButtonBuilder>[] = [];
 		while (buttons.length !== 0) {
-			const row = new ActionRowBuilder<ButtonBuilder>().addComponents(
-				buttons.splice(0, 5)
-			);
+			const row = new ActionRowBuilder<ButtonBuilder>().addComponents(buttons.splice(0, 5));
 			rows.push(row);
 		}
 

@@ -4,14 +4,10 @@ const { version } = require('../../../package.json') as { version: string };
 import fetch from 'node-fetch';
 
 export const command: Command = {
-	data: new SlashCommandBuilder()
-		.setName('about')
-		.setDescription('Information about the bot'),
+	data: new SlashCommandBuilder().setName('about').setDescription('Information about the bot'),
 	async execute(interaction) {
 		await interaction.deferReply();
-		const commits = await fetch(
-			'https://api.github.com/repos/Yakiyo/saki/commits?per_page=5'
-		)
+		const commits = await fetch('https://api.github.com/repos/Yakiyo/saki/commits?per_page=5')
 			.then(async (response) => {
 				const json = await response.json();
 				return response.ok ? json : Promise.reject(json);
@@ -22,10 +18,7 @@ export const command: Command = {
 		for (const commit of commits) {
 			const message =
 				commit.commit.message.indexOf('\n') !== -1
-					? commit.commit.message.substring(
-							0,
-							commit.commit.message.indexOf('\n')
-					  )
+					? commit.commit.message.substring(0, commit.commit.message.indexOf('\n'))
 					: commit.commit.message;
 
 			const string =

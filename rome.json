@@ -12,10 +12,12 @@
     "indentStyle": "tab",
     "indentSize": 4,
     "lineWidth": 100,
-    "ignore": [],
-    "quoteStyle": "single",
-    "trailingComma": "all",
-    "semicolons": "always"
+    "ignore": []
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "single"
+    }
   },
   "files": {
     "ignore": ["dist/"]

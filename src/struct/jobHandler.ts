@@ -31,9 +31,7 @@ export class JobHandler {
 
 	private async loadJobs() {
 		const path = join(__dirname, '..', 'jobs');
-		const files = readdirSync(path).filter(
-			(f) => f.endsWith('.js') || f.endsWith('.ts')
-		);
+		const files = readdirSync(path).filter((f) => f.endsWith('.js') || f.endsWith('.ts'));
 
 		for (const file of files) {
 			const { job } = require(resolve(process.cwd(), `${path}/${file}`)) as {
