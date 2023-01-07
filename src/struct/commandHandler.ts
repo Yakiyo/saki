@@ -29,7 +29,7 @@ export class CommandHandler {
 				body: commands,
 			});
 
-			console.log("Successfully reloaded application (/) commands.");
+			console.log('Successfully reloaded application (/) commands.');
 		} catch (error) {
 			log(error);
 		}
@@ -73,7 +73,7 @@ export class CommandHandler {
 				const { command } = require(resolve(process.cwd(), `${path}/${folder}/${file}`)) as {
 					command: Command;
 				};
-				if (!(('data' in command) && ('execute' in command))) {
+				if (!('data' in command && 'execute' in command)) {
 					console.warn(
 						`[WARNING] The command at ${path}/${folder}/${file} is missing a required "data" or "execute" property.`,
 					);

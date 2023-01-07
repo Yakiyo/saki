@@ -38,7 +38,8 @@ export const command: Command = {
 			.send({
 				embeds: [
 					{
-						description: "You have been muted in **Gimai Seikatsu** server for 1 minute.\n**Reason:** Spanks",
+						description:
+							'You have been muted in **Gimai Seikatsu** server for 1 minute.\n**Reason:** Spanks',
 						color: 16025922,
 					},
 				],

@@ -33,11 +33,11 @@ export const command: Command = {
 					},
 					fields: [
 						{
-							name: "__Role__",
+							name: '__Role__',
 							value: `<@&${role.id}>`,
 						},
 						{
-							name: "__Users picked__",
+							name: '__Users picked__',
 							value: m.join('\n'),
 						},
 					],

@@ -43,7 +43,9 @@ export async function sendLog(
 	// @ts-ignore
 	const client = globalThis.client;
 	const cid =
-		destination === LogDestination.activity ? config.channels.activity_log : config.channels.mod_log;
+		destination === LogDestination.activity
+			? config.channels.activity_log
+			: config.channels.mod_log;
 	const channel = (await client.channels.fetch(cid).catch(() => null)) as TextChannel | null;
 	if (!channel) {
 		log(`Error when fetching ${LogDestination[destination]} logs`);
