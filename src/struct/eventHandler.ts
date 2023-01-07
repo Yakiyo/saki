@@ -9,9 +9,7 @@ export class EventHandler {
 
 	private init(client: Client) {
 		const path = join(__dirname, '..', 'events');
-		const files = readdirSync(path).filter(
-			(f) => f.endsWith('.js') || f.endsWith('.ts')
-		);
+		const files = readdirSync(path).filter((f) => f.endsWith('.js') || f.endsWith('.ts'));
 
 		for (const file of files) {
 			const { event } = require(resolve(process.cwd(), `${path}/${file}`)) as {

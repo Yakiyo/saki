@@ -8,9 +8,7 @@ export const job: Job = {
 	name: 'Reddit',
 	interval: 60,
 	async run() {
-		const embeds = (await fetch(
-			'https://www.reddit.com/r/GimaiSeikatsu/new.json?sort=new&limit=10'
-		)
+		const embeds = (await fetch('https://www.reddit.com/r/GimaiSeikatsu/new.json?sort=new&limit=10')
 			.then((v) => v.json())
 			.then((v) => v.data.children.reverse())
 			.then((v) => v.map((d: Record<string, string>) => d.data))
@@ -21,12 +19,10 @@ export const job: Job = {
 			})) as APIEmbed[] | null;
 
 		if (!embeds) return;
-		const channel = (await client.channels
-			.fetch(config.channels.feeds.reddit)
-			.catch((e) => {
-				log(e);
-				return null;
-			})) as GuildTextBasedChannel | null;
+		const channel = (await client.channels.fetch(config.channels.feeds.reddit).catch((e) => {
+			log(e);
+			return null;
+		})) as GuildTextBasedChannel | null;
 		if (!channel) return;
 
 		for (const embed of embeds) {

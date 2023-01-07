@@ -21,23 +21,21 @@ export const command: Command = {
 					option
 						.setName('message')
 						.setDescription('The id of the message whose embed to fetch')
-						.setRequired(true)
+						.setRequired(true),
 				)
 				.addChannelOption((option) =>
 					option
 						.setName('channel')
 						.setDescription('Channel where the message is situated')
-						.addChannelTypes(CT.GuildText, CT.PublicThread, CT.PrivateThread)
+						.addChannelTypes(CT.GuildText, CT.PublicThread, CT.PrivateThread),
 				)
 				.addIntegerOption((option) =>
 					option
 						.setName('number')
-						.setDescription(
-							'The number of the embed to fetch from the message'
-						)
+						.setDescription('The number of the embed to fetch from the message')
 						.setMaxValue(10)
-						.setMinValue(1)
-				)
+						.setMinValue(1),
+				),
 		)
 		.addSubcommand((sub) =>
 			sub
@@ -47,13 +45,13 @@ export const command: Command = {
 					option
 						.setName('description')
 						.setDescription("the embed's description section")
-						.setRequired(true)
+						.setRequired(true),
 				)
 				.addStringOption((option) =>
-					option.setName('title').setDescription("the embed's title section")
+					option.setName('title').setDescription("the embed's title section"),
 				)
 				.addStringOption((option) =>
-					option.setName('color').setDescription("the embed's color section")
+					option.setName('color').setDescription("the embed's color section"),
 				)
 				.addChannelOption((option) =>
 					option
@@ -64,9 +62,9 @@ export const command: Command = {
 							CT.GuildNews,
 							CT.GuildNewsThread,
 							CT.GuildPublicThread,
-							CT.GuildPrivateThread
-						)
-				)
+							CT.GuildPrivateThread,
+						),
+				),
 		)
 		.addSubcommand((sub) =>
 			sub
@@ -76,7 +74,7 @@ export const command: Command = {
 					option
 						.setName('json')
 						.setDescription('the raw json or a sourcebin link to a json file')
-						.setRequired(true)
+						.setRequired(true),
 				)
 				.addChannelOption((option) =>
 					option
@@ -87,27 +85,25 @@ export const command: Command = {
 							CT.GuildNews,
 							CT.GuildNewsThread,
 							CT.GuildPublicThread,
-							CT.GuildPrivateThread
-						)
-				)
+							CT.GuildPrivateThread,
+						),
+				),
 		)
 		.addSubcommand((sub) =>
 			sub
 				.setName('edit')
-				.setDescription(
-					'edits an already sent embed by the bot using provided JSON'
-				)
+				.setDescription('edits an already sent embed by the bot using provided JSON')
 				.addStringOption((option) =>
 					option
 						.setName('message')
 						.setDescription('the message id of the message to edit')
-						.setRequired(true)
+						.setRequired(true),
 				)
 				.addStringOption((option) =>
 					option
 						.setName('json')
 						.setDescription('the raw json or a sourcebin link to a json file')
-						.setRequired(true)
+						.setRequired(true),
 				)
 				.addChannelOption((option) =>
 					option
@@ -118,17 +114,16 @@ export const command: Command = {
 							CT.GuildNews,
 							CT.GuildNewsThread,
 							CT.GuildPublicThread,
-							CT.GuildPrivateThread
-						)
-				)
+							CT.GuildPrivateThread,
+						),
+				),
 		),
 	async execute(interaction) {
 		const subCommand = interaction.options.getSubcommand();
 		if (subCommand === 'source') {
 			await interaction.deferReply();
 			const msgid = interaction.options.getString('message');
-			const channel =
-				interaction.options.getChannel('channel') || interaction.channel;
+			const channel = interaction.options.getChannel('channel') || interaction.channel;
 			let num = interaction.options.getInteger('number') || 1;
 
 			const message = await (channel as GuildTextBasedChannel).messages
@@ -136,9 +131,7 @@ export const command: Command = {
 				.then((res) => res)
 				.catch(() => undefined);
 			if (!message) {
-				interaction.editReply(
-					`Could not find any message with that id in <#${channel?.id}>`
-				);
+				interaction.editReply(`Could not find any message with that id in <#${channel?.id}>`);
 				return;
 			}
 
@@ -152,9 +145,7 @@ export const command: Command = {
 			}
 			let source: any = message.embeds[num - 1];
 			if (!source) {
-				interaction.editReply(
-					'Did not find any embed in that message with that number'
-				);
+				interaction.editReply('Did not find any embed in that message with that number');
 				return;
 			}
 			// @ts-ignore
@@ -192,8 +183,7 @@ export const command: Command = {
 			const description = interaction.options.getString('description');
 			const title = interaction.options.getString('title') || null;
 			const color = interaction.options.getString('color') || 'RANDOM';
-			const channel =
-				interaction.options.getChannel('channel') || interaction.channel;
+			const channel = interaction.options.getChannel('channel') || interaction.channel;
 
 			const embed = {
 				title: title,
@@ -209,8 +199,7 @@ export const command: Command = {
 		} else if (subCommand === 'custom') {
 			await interaction.deferReply({ ephemeral: true });
 			const json = interaction.options.getString('json') as string;
-			const channel =
-				interaction.options.getChannel('channel') || interaction.channel;
+			const channel = interaction.options.getChannel('channel') || interaction.channel;
 
 			let embed;
 			if (json.match(/https:\/\/sourceb\.in\/.*|https:\/\/srcb\.in\/.*/g)) {
@@ -220,7 +209,7 @@ export const command: Command = {
 					.catch(() => null);
 				if (!result) {
 					interaction.editReply(
-						"Could not fetch the provided sourcebin URL. Please make sure it's a valid link and has some JSON content in it"
+						"Could not fetch the provided sourcebin URL. Please make sure it's a valid link and has some JSON content in it",
 					);
 					return;
 				}
@@ -228,10 +217,7 @@ export const command: Command = {
 					embed = JSON.parse(JSON.stringify(result));
 				} catch (error) {
 					interaction.editReply(
-						`Invalid JSON expression.\n \`\`\`${shorten(
-							`${error}`,
-							1000
-						)}\`\`\``
+						`Invalid JSON expression.\n \`\`\`${shorten(`${error}`, 1000)}\`\`\``,
 					);
 					return;
 				}
@@ -250,15 +236,14 @@ export const command: Command = {
 				return;
 			} catch (error) {
 				interaction.editReply(
-					"Could not send embed due to unexpected errors. Possible erros: Invalid JSON expression or breaking [discord embed limitations](https://discord.com/developers/docs/resources/channel#embed-limits 'Discord Embed Limits')"
+					"Could not send embed due to unexpected errors. Possible erros: Invalid JSON expression or breaking [discord embed limitations](https://discord.com/developers/docs/resources/channel#embed-limits 'Discord Embed Limits')",
 				);
 				return;
 			}
 		} else if (subCommand === 'edit') {
 			await interaction.deferReply({ ephemeral: true });
 			const json = interaction.options.getString('json') as string;
-			const channel =
-				interaction.options.getChannel('channel') || interaction.channel;
+			const channel = interaction.options.getChannel('channel') || interaction.channel;
 			const messageId = interaction.options.getString('message');
 			const message = await (channel as GuildTextBasedChannel).messages
 				.fetch(messageId as string)
@@ -266,15 +251,11 @@ export const command: Command = {
 				.catch(() => null);
 
 			if (!message) {
-				interaction.editReply(
-					'Could not find any message with that id in the channel'
-				);
+				interaction.editReply('Could not find any message with that id in the channel');
 				return;
 			}
 			if (!message.embeds.length) {
-				interaction.editReply(
-					'The specified message does not have any embeds to edit'
-				);
+				interaction.editReply('The specified message does not have any embeds to edit');
 				return;
 			}
 
@@ -291,7 +272,7 @@ export const command: Command = {
 					.catch(() => null);
 				if (!result) {
 					interaction.editReply(
-						"Could not fetch the provided sourcebin URL. Please make sure it's a valid link and has some JSON content in it"
+						"Could not fetch the provided sourcebin URL. Please make sure it's a valid link and has some JSON content in it",
 					);
 					return;
 				}
@@ -322,7 +303,7 @@ export const command: Command = {
 			} catch (error) {
 				log(error);
 				interaction.editReply(
-					'Unexpected error while editing message. Possible causes: Bot doesnt have permission to view channel, invalid JSON value, internal discord error'
+					'Unexpected error while editing message. Possible causes: Bot doesnt have permission to view channel, invalid JSON value, internal discord error',
 				);
 				return;
 			}

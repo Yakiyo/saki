@@ -12,52 +12,40 @@ export const command: Command = {
 				.setName('add')
 				.setDescription('Mutes a user')
 				.addUserOption((option) =>
-					option
-						.setName('user')
-						.setDescription('The user to mute')
-						.setRequired(true)
+					option.setName('user').setDescription('The user to mute').setRequired(true),
 				)
 				.addStringOption((option) =>
 					option
 						.setName('duration')
 						.setDescription('The duration to mute the user')
-						.setRequired(true)
+						.setRequired(true),
 				)
 				.addStringOption((option) =>
-					option.setName('reason').setDescription('Reason for muting the user')
-				)
+					option.setName('reason').setDescription('Reason for muting the user'),
+				),
 		)
 		.addSubcommand((sub) =>
 			sub
 				.setName('remove')
 				.setDescription('Unmutes a user')
 				.addUserOption((option) =>
-					option
-						.setName('user')
-						.setDescription('The user to unmute')
-						.setRequired(true)
+					option.setName('user').setDescription('The user to unmute').setRequired(true),
 				)
 				.addStringOption((option) =>
-					option
-						.setName('reason')
-						.setDescription('The reason for unmuting the user')
-				)
+					option.setName('reason').setDescription('The reason for unmuting the user'),
+				),
 		),
 	async execute(interaction) {
 		await interaction.deferReply();
 		if (!interaction.guild?.members.me?.permissions.has('ModerateMembers')) {
-			interaction.editReply(
-				'I do not have the required permissions to mute or unmute users.'
-			);
+			interaction.editReply('I do not have the required permissions to mute or unmute users.');
 			return;
 		}
 		const target = await interaction.guild.members.fetch(
-			interaction.options.getUser('user') as unknown as FetchMemberOptions
+			interaction.options.getUser('user') as unknown as FetchMemberOptions,
 		);
 		if (!target.moderatable) {
-			interaction.editReply(
-				'This user is higher then me in hierarchy. Cannot timeout them'
-			);
+			interaction.editReply('This user is higher then me in hierarchy. Cannot timeout them');
 			return;
 		}
 		const reason = interaction.options.getString('reason') as string | undefined;
@@ -70,9 +58,7 @@ export const command: Command = {
 					time = null;
 				}
 				if (!time) {
-					interaction.editReply(
-						'Invalid time format. Please provide a valid duration.'
-					);
+					interaction.editReply('Invalid time format. Please provide a valid duration.');
 					return;
 				}
 				await target.timeout(time, reason);
@@ -94,27 +80,20 @@ export const command: Command = {
 					{
 						title: 'Mute Case',
 						color: 16025922,
-						description: `**Offender:** ${target.user.id} | <@!${
-							target.user.id
-						}>\n**Moderator:** ${interaction.user.tag}\n**Reason:** ${
-							reason || 'No reason provided'
-						}\n**Duration:** ${ms(time, true)}`,
+						description: `**Offender:** ${target.user.id} | <@!${target.user.id}>\n**Moderator:** ${
+							interaction.user.tag
+						}\n**Reason:** ${reason || 'No reason provided'}\n**Duration:** ${ms(time, true)}`,
 					},
-					LogDestination.mod
+					LogDestination.mod,
 				);
 				interaction.editReply(
-					`Successfully timed out **${target.user.tag}** for ${ms(
-						time,
-						true
-					)} duration`
+					`Successfully timed out **${target.user.tag}** for ${ms(time, true)} duration`,
 				);
 				break;
 			}
 			case 'remove': {
 				if (!target.isCommunicationDisabled()) {
-					interaction.editReply(
-						'Target user is not timed out. Cannot untimeout.'
-					);
+					interaction.editReply('Target user is not timed out. Cannot untimeout.');
 					return;
 				}
 				await target.timeout(null, reason);
@@ -123,8 +102,7 @@ export const command: Command = {
 					.send({
 						embeds: [
 							{
-								description:
-									'You have been unmuted in **Gimai Seikatsu** server.',
+								description: 'You have been unmuted in **Gimai Seikatsu** server.',
 								color: 243000,
 							},
 						],
@@ -135,13 +113,11 @@ export const command: Command = {
 					{
 						title: 'Unmute Case',
 						color: 4388007,
-						description: `**Offender:** ${target.user.id} | <@!${
-							target.user.id
-						}>\n**Moderator:** ${interaction.user.tag}\n**Reason:** ${
-							reason || 'No reason provided'
-						}\n`,
+						description: `**Offender:** ${target.user.id} | <@!${target.user.id}>\n**Moderator:** ${
+							interaction.user.tag
+						}\n**Reason:** ${reason || 'No reason provided'}\n`,
 					},
-					LogDestination.mod
+					LogDestination.mod,
 				);
 				interaction.editReply(`Successfully untimed out **${target.user.tag}**`);
 				break;

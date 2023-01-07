@@ -7,7 +7,7 @@ export const command: Command = {
 		.setDescription('Sends link to Gimai Seikatsu subreddit.'),
 	async execute(interaction) {
 		interaction.reply(
-			"Here's the link to the **Subreddit** <https://www.reddit.com/r/GimaiSeikatsu/>."
+			"Here's the link to the **Subreddit** <https://www.reddit.com/r/GimaiSeikatsu/>.",
 		);
 	},
 };

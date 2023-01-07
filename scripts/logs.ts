@@ -26,7 +26,8 @@ if (isNaN(n) || n > json.length) {
 	n = json.length;
 }
 
-json.reverse()
+json
+	.reverse()
 	.slice(0, n)
 	.forEach((v: string) => {
 		const r = JSON.parse(v);

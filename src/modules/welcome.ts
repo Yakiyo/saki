@@ -24,7 +24,7 @@ export async function welcome(member: GuildMember, client: Client<true>) {
 	if (!channel) return; // dont go any further, some shit prolly happened
 
 	const backgroundFile = await readFile(
-		resolve(process.cwd(), `./assets/welcome-img/welcome${rand(1, 6)}.png`)
+		resolve(process.cwd(), `./assets/welcome-img/welcome${rand(1, 6)}.png`),
 	);
 	const bg = new Canvas.Image();
 	bg.src = backgroundFile;
@@ -36,9 +36,7 @@ export async function welcome(member: GuildMember, client: Client<true>) {
 	const name = member.user.tag;
 
 	// Fetch user avatar
-	const { body } = await request(
-		member.user.avatarURL({ extension: 'png', size: 1024 }) as string
-	);
+	const { body } = await request(member.user.avatarURL({ extension: 'png', size: 1024 }) as string);
 	const avatar = new Canvas.Image();
 	avatar.src = Buffer.from(await body.arrayBuffer());
 
@@ -87,7 +85,7 @@ export async function welcome(member: GuildMember, client: Client<true>) {
 		.setThumbnail('https://i.imgur.com/5pavrlP.jpeg')
 		.setTitle('Welcome to 『Gimai Seikatsu』 Discord Server!')
 		.setDescription(
-			'Also known as **"Days with my Step Sister"**, it\'s a story by **Mikawa Ghost** and illustrated by **Hiten**. If you can\'t see other channels, then accept server rules by reacting with :white_check_mark: in <#808067819118919750>. After this, visit <#804733433724272651> to know more about this series, or grab roles. **Have fun!**'
+			'Also known as **"Days with my Step Sister"**, it\'s a story by **Mikawa Ghost** and illustrated by **Hiten**. If you can\'t see other channels, then accept server rules by reacting with :white_check_mark: in <#808067819118919750>. After this, visit <#804733433724272651> to know more about this series, or grab roles. **Have fun!**',
 		)
 		.setColor(16102651);
 

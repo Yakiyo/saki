@@ -37,7 +37,7 @@ export const command: Command = {
 				.setDescription('The Faq number to display')
 				.setMinValue(1)
 				.setMaxValue(5)
-				.setRequired(true)
+				.setRequired(true),
 		),
 	async execute(interaction) {
 		const int = interaction.options.getNumber('number') as number;

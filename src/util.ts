@@ -38,17 +38,13 @@ export function casify(string: string) {
  */
 export async function sendLog(
 	payload: string | APIEmbed | JSONEncodable<APIEmbed>,
-	destination: LogDestination = LogDestination.activity
+	destination: LogDestination = LogDestination.activity,
 ) {
 	// @ts-ignore
 	const client = globalThis.client;
 	const cid =
-		destination == LogDestination.activity
-			? config.channels.activity_log
-			: config.channels.mod_log;
-	const channel = (await client.channels
-		.fetch(cid)
-		.catch(() => null)) as TextChannel | null;
+		destination == LogDestination.activity ? config.channels.activity_log : config.channels.mod_log;
+	const channel = (await client.channels.fetch(cid).catch(() => null)) as TextChannel | null;
 	if (!channel) {
 		log(`Error when fetching ${LogDestination[destination]} logs`);
 		return;
@@ -77,7 +73,7 @@ const logger = pino(
 			destination: './error.log',
 			mkdir: true,
 		},
-	})
+	}),
 );
 
 /**
@@ -95,5 +91,4 @@ export function log(p: any) {
 /**
  * Generate a random number between max and min (both inclusive)
  */
-export const rand = (min: number, max: number) =>
-	Math.floor(Math.random() * (max - min + 1) + min);
+export const rand = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1) + min);

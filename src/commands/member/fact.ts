@@ -4,9 +4,7 @@ import fetch from 'node-fetch';
 import { log } from '../../util';
 
 export const command: Command = {
-	data: new SlashCommandBuilder()
-		.setName('fact')
-		.setDescription('Sends a random Maaya fact'),
+	data: new SlashCommandBuilder().setName('fact').setDescription('Sends a random Maaya fact'),
 	async execute(interaction) {
 		await interaction.deferReply();
 		const fact: string | null = await fetch('https://nekos.life/api/v2/fact')

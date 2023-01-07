@@ -12,13 +12,13 @@ export const command: Command = {
 		.setName('say')
 		.setDescription('Make the bot say something')
 		.addStringOption((option) =>
-			option.setName('message').setDescription('string to send').setRequired(true)
+			option.setName('message').setDescription('string to send').setRequired(true),
 		)
 		.addChannelOption((option) =>
 			option
 				.setName('channel')
 				.setDescription('Select a channel to send the message in (optional)')
-				.addChannelTypes(CT.GuildText, CT.PublicThread, CT.PrivateThread)
+				.addChannelTypes(CT.GuildText, CT.PublicThread, CT.PrivateThread),
 		),
 	async execute(interaction) {
 		await interaction.deferReply({ ephemeral: true });
@@ -29,8 +29,7 @@ export const command: Command = {
 		const authorPerms = channel.permissionsFor(interaction.member as GuildMember);
 		if (!authorPerms || !authorPerms.has('SendMessages')) {
 			await interaction.reply({
-				content:
-					'You do not have permission to send message in the target channel',
+				content: 'You do not have permission to send message in the target channel',
 				ephemeral: true,
 			});
 			return;

@@ -7,29 +7,24 @@ export const command: Command = {
 		.setName('kick')
 		.setDescription('Kicks a user from the server')
 		.addUserOption((option) =>
-			option
-				.setName('user')
-				.setDescription('The user to kick from the server')
-				.setRequired(true)
+			option.setName('user').setDescription('The user to kick from the server').setRequired(true),
 		)
 		.addStringOption((option) =>
-			option.setName('reason').setDescription('The reason for banning the user')
+			option.setName('reason').setDescription('The reason for banning the user'),
 		),
 	async execute(interaction) {
 		await interaction.deferReply();
 		const target = (await interaction.guild?.members.fetch(
-			interaction.options.getUser('user')?.id as string
+			interaction.options.getUser('user')?.id as string,
 		)) as GuildMember;
 		const reason = interaction.options.getString('reason') as string | undefined;
 		if (!interaction.guild?.members.me?.permissions.has('KickMembers')) {
-			interaction.editReply(
-				'I do not have the required permissions to kick users.'
-			);
+			interaction.editReply('I do not have the required permissions to kick users.');
 			return;
 		}
 		if (!target.kickable) {
 			interaction.editReply(
-				'Target user is higher than me in hierarchy. Cannot kick them. Please give me a higher role'
+				'Target user is higher than me in hierarchy. Cannot kick them. Please give me a higher role',
 			);
 			return;
 		}
@@ -57,13 +52,11 @@ export const command: Command = {
 			{
 				title: 'Kick Case',
 				color: 16025922,
-				description: `**Offender:** ${target.user.id} | <@!${
-					target.user.id
-				}>\n**Moderator:** ${interaction.user.tag}\n**Reason:** ${
-					reason || 'No reason provided'
-				}`,
+				description: `**Offender:** ${target.user.id} | <@!${target.user.id}>\n**Moderator:** ${
+					interaction.user.tag
+				}\n**Reason:** ${reason || 'No reason provided'}`,
 			},
-			LogDestination.mod
+			LogDestination.mod,
 		);
 
 		interaction.editReply('Successfully kicked user from server');

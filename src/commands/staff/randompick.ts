@@ -6,16 +6,10 @@ export const command: Command = {
 		.setName('randompick')
 		.setDescription("Picks a number 'n' of random users from a specified role.")
 		.addRoleOption((option) =>
-			option
-				.setName('role')
-				.setDescription('The role to choose from')
-				.setRequired(true)
+			option.setName('role').setDescription('The role to choose from').setRequired(true),
 		)
 		.addIntegerOption((option) =>
-			option
-				.setName('number')
-				.setDescription('The number of users to pick')
-				.setMinValue(1)
+			option.setName('number').setDescription('The number of users to pick').setMinValue(1),
 		),
 	async execute(interaction) {
 		await interaction.deferReply();
