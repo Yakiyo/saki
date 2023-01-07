@@ -1,9 +1,12 @@
 {
   "$schema": "./node_modules/rome/configuration_schema.json",
   "linter": {
-    "enabled": false,
+    "enabled": true,
     "rules": {
-      "recommended": true
+      "recommended": true,
+      "style": {
+        "useTemplate": "off"
+      }
     }
   },
   "formatter": {
