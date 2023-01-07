@@ -13,7 +13,8 @@
     "logs": "ts-node scripts/logs.ts",
     "pretty": "prettier --write '**/*.ts'",
     "prs:seed": "prisma db seed",
-    "prs:gen": "prisma generate"
+    "prs:gen": "prisma generate",
+    "fix": "rome format --write . && rome check ."
   },
   "prisma": {
     "seed": "ts-node scripts/seed.ts"
