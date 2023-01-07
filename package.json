@@ -41,6 +41,7 @@
   "devDependencies": {
     "@types/node": "^18.11.9",
     "@types/node-fetch": "^2.6.2",
+    "husky": "^8.0.3",
     "prisma": "^4.8.0",
     "rome": "^11.0.0",
     "ts-node": "^10.9.1",
