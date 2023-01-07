@@ -27,7 +27,7 @@ export const command: Command = {
 			interaction.channel) as GuildTextBasedChannel;
 
 		const authorPerms = channel.permissionsFor(interaction.member as GuildMember);
-		if (!authorPerms || !authorPerms.has('SendMessages')) {
+		if (!(authorPerms?.has('SendMessages'))) {
 			await interaction.reply({
 				content: 'You do not have permission to send message in the target channel',
 				ephemeral: true,

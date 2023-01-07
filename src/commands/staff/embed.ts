@@ -1,9 +1,10 @@
 import {
 	SlashCommandBuilder,
 	ChannelType as CT,
-	GuildTextBasedChannel,
+	type GuildTextBasedChannel,
 	Colors,
-	APIEmbed,
+	type APIEmbed,
+	type Embed,
 } from 'discord.js';
 import type { Command } from '../../struct/types';
 import * as sourcebin from 'sourcebin';
@@ -143,12 +144,13 @@ export const command: Command = {
 			if (num > message.embeds.length) {
 				num = 1;
 			}
-			let source: any = message.embeds[num - 1];
+			let source: Embed | string = message.embeds[num - 1];
 			if (!source) {
 				interaction.editReply('Did not find any embed in that message with that number');
 				return;
 			}
 			// @ts-ignore
+			// rome-ignore lint/performance/noDelete: <explanation>
 			Object.keys(source).forEach((k) => source[k] == null && delete source[k]);
 
 			source = JSON.stringify(source, null, 4);
@@ -191,6 +193,7 @@ export const command: Command = {
 				description: description,
 			} as APIEmbed;
 			// @ts-ignore
+			// rome-ignore lint/performance/noDelete: <explanation>
 			Object.keys(embed).forEach((k) => embed[k] == null && delete embed[k]);
 
 			await (channel as GuildTextBasedChannel).send({ embeds: [embed] });

@@ -33,7 +33,8 @@ export const command: Command = {
 		const path = join(__dirname, '..', '..', 'commands');
 
 		const filePath = resolve(process.cwd(), `${path}/${command.category}/${command.data.name}`);
-		delete require.cache[require.resolve(filePath)];
+		// rome-ignore lint/performance/noDelete: <explanation>
+		delete  require.cache[require.resolve(filePath)];
 		try {
 			const { command: reloaded } = require(filePath) as {
 				command: Command;

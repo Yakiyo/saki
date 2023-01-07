@@ -79,8 +79,8 @@ async function iterate(posts: Record<string, string>[]) {
 			},
 		})
 		.then((c) => c?.reddit);
-	const res = [],
-		links = [];
+	const res = [];
+	const links = [];
 	for (const post of posts) {
 		const link = `https://reddit.com${post.permalink}`;
 		if (post.over_18) continue; // we skip nsfw content

@@ -15,7 +15,7 @@ export function isStaff(member: GuildMember) {
 export function shorten(str: string, num = 1000): string | undefined {
 	if (typeof str !== 'string') return undefined;
 	if (str.length > num) {
-		return str.substring(0, num + 1) + '...';
+		return `${str.substring(0, num + 1)}...`;
 	} else {
 		return str;
 	}
@@ -43,13 +43,13 @@ export async function sendLog(
 	// @ts-ignore
 	const client = globalThis.client;
 	const cid =
-		destination == LogDestination.activity ? config.channels.activity_log : config.channels.mod_log;
+		destination === LogDestination.activity ? config.channels.activity_log : config.channels.mod_log;
 	const channel = (await client.channels.fetch(cid).catch(() => null)) as TextChannel | null;
 	if (!channel) {
 		log(`Error when fetching ${LogDestination[destination]} logs`);
 		return;
 	}
-	if (typeof payload == 'string') {
+	if (typeof payload === 'string') {
 		channel.send(payload);
 	} else {
 		channel.send({
@@ -79,7 +79,7 @@ const logger = pino(
 /**
  * Function to log errors to a log file.
  */
-export function log(p: any) {
+export function log(p: unknown) {
 	// Set DEBUG env to any value to log stuff
 	// in development
 	if (process.env.DEBUG) {

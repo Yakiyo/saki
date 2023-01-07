@@ -44,7 +44,7 @@ export const command: Command = {
 			attachment.name = 'SPOILER_' + attachment.name;
 			files.push(attachment);
 		}
-		if (!message.attachments.size && !files.length) {
+		if (!(message.attachments.size || files.length)) {
 			interaction.editReply('The message does not have any attachment to spoiler');
 			return;
 		}

@@ -23,7 +23,8 @@ export const command: Command = {
 		) as GuildMember;
 		const type = interaction.options.getString('type') || 'DEFAULT';
 
-		let links, url: string | null;
+		let links;
+		let url: string | null;
 		if (type === 'SERVER') {
 			url = member.displayAvatarURL({
 				extension: 'png',
