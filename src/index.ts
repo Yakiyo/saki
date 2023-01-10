@@ -29,6 +29,7 @@ const client = new DiscordClient({
 		Intents.GuildMembers,
 		Intents.GuildMessages,
 		Intents.GuildMessageReactions,
+		Intents.MessageContent,
 	],
 	partials: [Partials.Message, Partials.Reaction, Partials.Channel],
 	presence: {
