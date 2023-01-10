@@ -59,4 +59,6 @@ global.client = client;
 global.prisma = prisma;
 global.jobHandler = new JobHandler();
 
+process.on('unhandledRejection', log);
+
 client.login(process.env.DISCORD_TOKEN);
