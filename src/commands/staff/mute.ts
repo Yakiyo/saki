@@ -1,4 +1,4 @@
-import { FetchMemberOptions, SlashCommandBuilder } from 'discord.js';
+import { FetchMemberOptions, SlashCommandBuilder, Colors } from 'discord.js';
 import type { Command } from '../../struct/types';
 import ms from '@naval-base/ms';
 import { LogDestination, sendLog, log } from '../../util';
@@ -79,7 +79,7 @@ export const command: Command = {
 				sendLog(
 					{
 						title: 'Mute Case',
-						color: 16025922,
+						color: Colors.Red,
 						description: `**Offender:** ${target.user.id} | <@!${target.user.id}>\n**Moderator:** ${
 							interaction.user.tag
 						}\n**Reason:** ${reason || 'No reason provided'}\n**Duration:** ${ms(time, true)}`,
@@ -112,7 +112,7 @@ export const command: Command = {
 				sendLog(
 					{
 						title: 'Unmute Case',
-						color: 4388007,
+						color: Colors.Green,
 						description: `**Offender:** ${target.user.id} | <@!${target.user.id}>\n**Moderator:** ${
 							interaction.user.tag
 						}\n**Reason:** ${reason || 'No reason provided'}\n`,

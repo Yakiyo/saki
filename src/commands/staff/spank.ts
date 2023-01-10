@@ -1,4 +1,4 @@
-import { SlashCommandBuilder, type FetchMemberOptions } from 'discord.js';
+import { SlashCommandBuilder, type FetchMemberOptions, Colors } from 'discord.js';
 import type { Command } from '../../struct/types';
 import { isStaff, log, sendLog, LogDestination } from '../../util';
 
@@ -49,7 +49,7 @@ export const command: Command = {
 		sendLog(
 			{
 				title: 'Spank Case',
-				color: 16025922,
+				color: Colors.Green,
 				description: `**Offender:** ${target.user.id} | <@!${target.user.id}>\n**Moderator:** ${interaction.user.tag}\n**Reason:** Spanks\n**Duration:** 1 minute`,
 			},
 			LogDestination.mod,

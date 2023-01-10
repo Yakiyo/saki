@@ -1,4 +1,4 @@
-import { type GuildMember, SlashCommandBuilder } from 'discord.js';
+import { type GuildMember, SlashCommandBuilder, Colors } from 'discord.js';
 import type { Command } from '../../struct/types';
 import { log, sendLog, LogDestination } from '../../util';
 
@@ -51,7 +51,7 @@ export const command: Command = {
 		sendLog(
 			{
 				title: 'Kick Case',
-				color: 16025922,
+				color: Colors.Red,
 				description: `**Offender:** ${target.user.id} | <@!${target.user.id}>\n**Moderator:** ${
 					interaction.user.tag
 				}\n**Reason:** ${reason || 'No reason provided'}`,
