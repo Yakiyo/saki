@@ -23,6 +23,6 @@
     }
   },
   "files": {
-    "ignore": ["dist/"]
+    "ignore": ["*.js"]
   }
 }
