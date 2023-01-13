@@ -5,6 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "setup": "npx husky install",
     "build": "tsc",
     "start": "node .",
     "prestart": "rm -rf dist/ && tsc",
