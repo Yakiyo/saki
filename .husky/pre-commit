@@ -3,11 +3,15 @@
 
 if ! [ -x "$(command -v pnpm)" ];
 then
-    exe="npx"
+    exe="npm"
 else
     exe="pnpm"
 fi
 
-$exe rome ci .
+# format and maybe lint files
+$exe run fix
+
+# Add only the edited staged files again to staged, ignore modified but unstaged files
+git update-index --again
 
 exit 0
