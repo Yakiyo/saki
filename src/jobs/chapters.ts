@@ -6,7 +6,7 @@ import { log } from '../util';
 
 export const job: Job = {
 	name: 'Chapters',
-	interval: 5,
+	interval: 5 * 60,
 	async run() {
 		const { client } = global;
 
