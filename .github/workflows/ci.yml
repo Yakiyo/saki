@@ -1,8 +1,8 @@
-name: Build
+name: ci
 on: [push, pull_request]
 
 jobs:
-    build:
+    ci:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2
@@ -11,5 +11,9 @@ jobs:
                   node-version: '16.x'
             - name: Install Packages
               run: npm install
+
+            - name: Code Quality
+              run: npx rome ci .
+
             - name: Build Files
               run: npm run build
