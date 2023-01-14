@@ -16,7 +16,7 @@ const IGNORED_CHANNELS = [
 	'863805630241177640',
 ];
 
-const MIN_REACTIONS = 2;
+const MIN_REACTIONS = 7;
 
 export async function spotlight(reaction: MessageReaction) {
 	if (!reaction.message.guild) return;
