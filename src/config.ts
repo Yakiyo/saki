@@ -10,6 +10,7 @@ interface Config {
 		modmail: string;
 		welcome: string;
 		server_updates: string;
+		spotlight: string;
 		feeds: {
 			reddit: string;
 			twitter: string;
