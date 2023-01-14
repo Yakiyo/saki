@@ -8,6 +8,7 @@ specifiers:
   '@types/node-fetch': ^2.6.2
   discord.js: ^14.6.0
   dotenv: ^16.0.3
+  husky: ^8.0.3
   node-fetch: 2.6.7
   pino: ^7.0.0-rc.9
   prisma: ^4.8.0
@@ -33,6 +34,7 @@ dependencies:
 devDependencies:
   '@types/node': 18.11.9
   '@types/node-fetch': 2.6.2
+  husky: 8.0.3
   prisma: 4.8.0
   rome: 11.0.0
   ts-node: 10.9.1_wup25etrarvlqkprac7h35hj7u
@@ -475,6 +477,12 @@ packages:
       combined-stream: 1.0.8
       mime-types: 2.1.35
     dev: false
+
+  /husky/8.0.3:
+    resolution: {integrity: sha512-+dQSyqPh4x1hlO1swXBiNb2HzTDN1I2IGLQx1GrBuiqFJfoMrnZWwVmatvSiO+Iz8fBUnf+lekwNo4c2LlXItg==}
+    engines: {node: '>=14'}
+    hasBin: true
+    dev: true
 
   /ieee754/1.2.1:
     resolution: {integrity: sha512-dcyqhDvX1C46lXZcVqCpK+FtMRQVdIMN6/Df5js2zouUsqG7I6sFxitIC+7KYK29KdXOLHdu9zL4sFnoVQnqaA==}
