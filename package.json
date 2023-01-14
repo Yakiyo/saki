@@ -4,7 +4,6 @@
   "description": "Saki bot for Gimai Seikatsu Discord Server",
   "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "prepare": "npx husky install",
     "build": "tsc",
     "start": "node .",
@@ -12,7 +11,6 @@
     "start:ts": "ts-node src",
     "deploy": "ts-node --transpile-only src/deploy.ts",
     "logs": "ts-node scripts/logs.ts",
-    "pretty": "prettier --write '**/*.ts'",
     "prs:seed": "prisma db seed",
     "prs:gen": "prisma generate",
     "fix": "rome format --write . && rome check ."
