@@ -2,7 +2,7 @@ import type { APIEmbed, GuildTextBasedChannel, MessageReaction } from 'discord.j
 import config from '../config';
 import { log } from '../util';
 
-const MIN_REACTIONS = 2;
+const MIN_REACTIONS = 7;
 
 export async function spotlight(reaction: MessageReaction) {
 	if (!reaction.message.guild) return;
