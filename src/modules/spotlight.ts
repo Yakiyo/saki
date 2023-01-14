@@ -1,11 +1,30 @@
-import type { APIEmbed, GuildTextBasedChannel, MessageReaction } from 'discord.js';
+import type { APIEmbed, GuildTextBasedChannel, TextChannel, MessageReaction } from 'discord.js';
 import config from '../config';
 import { log } from '../util';
 
-const MIN_REACTIONS = 7;
+const IGNORED_CHANNELS = [
+	'804733433724272651',
+	'805753936048685096',
+	'808156905771630622',
+	'803178764153389068',
+	'834105875999752212',
+	'803178486943711263',
+	'806107156780548107',
+	'803683562225139714',
+	'805487789855997962',
+	'803686892612354149',
+	'863805630241177640',
+];
+
+const MIN_REACTIONS = 2;
 
 export async function spotlight(reaction: MessageReaction) {
 	if (!reaction.message.guild) return;
+	if (
+		IGNORED_CHANNELS.includes(reaction.message.channelId) ||
+		(reaction.message.channel as TextChannel).nsfw
+	)
+		return;
 	const reactions = reaction.message.reactions.cache;
 
 	const users = new Set<string>();
