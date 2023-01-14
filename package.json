@@ -9,7 +9,7 @@
     "build": "tsc",
     "start": "node .",
     "prestart": "rm -rf dist/ && tsc",
-    "ts": "ts-node",
+    "start:ts": "ts-node src",
     "deploy": "ts-node --transpile-only src/deploy.ts",
     "logs": "ts-node scripts/logs.ts",
     "pretty": "prettier --write '**/*.ts'",
