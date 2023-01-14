@@ -2,6 +2,7 @@ import type { Event } from '../struct/types';
 import { Events, MessageReaction, User, type Client } from 'discord.js';
 import { log } from '../util';
 import { reactionRole } from '../modules/reactionrole';
+import { spotlight } from '../modules/spotlight';
 
 export const event: Event = {
 	name: Events.MessageReactionAdd,
@@ -17,18 +18,14 @@ export const event: Event = {
 			}
 		}
 
-		const { prisma } = global;
+		const mod = await prisma.modules.findUnique({
+			where: {
+				id: 1,
+			},
+		});
 
-		const isRREnabled = await prisma.modules
-			.findUnique({
-				where: {
-					id: 1,
-				},
-			})
-			.then((m) => m?.Reaction_Roles);
+		if (mod?.Reaction_Roles) reactionRole(reaction, user);
 
-		if (isRREnabled) {
-			reactionRole(reaction, user);
-		}
+		if (mod?.Starboard) spotlight(reaction);
 	},
 };
