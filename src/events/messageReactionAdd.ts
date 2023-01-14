@@ -1,5 +1,5 @@
 import type { Event } from '../struct/types';
-import { Events, MessageReaction, User, type Client } from 'discord.js';
+import { Events, MessageReaction, User } from 'discord.js';
 import { log } from '../util';
 import { reactionRole } from '../modules/reactionrole';
 import { spotlight } from '../modules/spotlight';
@@ -7,7 +7,7 @@ import { spotlight } from '../modules/spotlight';
 export const event: Event = {
 	name: Events.MessageReactionAdd,
 	once: false,
-	async handle(reaction: MessageReaction, user: User, _client: Client<true>) {
+	async handle(reaction: MessageReaction, user: User) {
 		// if the message isnt cached, fetch it first.
 		if (reaction.partial) {
 			try {
