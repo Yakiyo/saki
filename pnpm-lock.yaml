@@ -3,7 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   '@napi-rs/canvas': ^0.1.30
   '@naval-base/ms': ^3.1.0
-  '@prisma/client': ^4.8.0
+  '@prisma/client': ^4.8.1
   '@types/node': ^18.11.9
   '@types/node-fetch': ^2.6.2
   discord.js: ^14.6.0
@@ -11,7 +11,7 @@ specifiers:
   husky: ^8.0.3
   node-fetch: 2.6.7
   pino: ^7.0.0-rc.9
-  prisma: ^4.8.0
+  prisma: ^4.8.1
   rome: ^11.0.0
   sourcebin: ^5.0.0
   ts-node: ^10.9.1
@@ -22,7 +22,7 @@ specifiers:
 dependencies:
   '@napi-rs/canvas': 0.1.30
   '@naval-base/ms': 3.1.0
-  '@prisma/client': 4.8.0_prisma@4.8.0
+  '@prisma/client': 4.8.1_prisma@4.8.1
   discord.js: 14.6.0
   dotenv: 16.0.3
   node-fetch: 2.6.7
@@ -35,7 +35,7 @@ devDependencies:
   '@types/node': 18.11.9
   '@types/node-fetch': 2.6.2
   husky: 8.0.3
-  prisma: 4.8.0
+  prisma: 4.8.1
   rome: 11.0.0
   ts-node: 10.9.1_wup25etrarvlqkprac7h35hj7u
   typescript: 4.9.3
@@ -201,8 +201,8 @@ packages:
     resolution: {integrity: sha512-3xSG3J2f9xSEgni7liDFBNnlhOf6/sLedCMaEtWv3iaJkeaWvyfdWBYhd2bTko3BLMcQfY4MgICoUGRla1bXiQ==}
     dev: false
 
-  /@prisma/client/4.8.0_prisma@4.8.0:
-    resolution: {integrity: sha512-Y1riB0p2W52kh3zgssP/YAhln3RjBFcJy3uwEiyjmU+TQYh6QTZDRFBo3JtBWuq2FyMOl1Rye8jxzUP+n0l5Cg==}
+  /@prisma/client/4.8.1_prisma@4.8.1:
+    resolution: {integrity: sha512-d4xhZhETmeXK/yZ7K0KcVOzEfI5YKGGEr4F5SBV04/MU4ncN/HcE28sy3e4Yt8UFW0ZuImKFQJE+9rWt9WbGSQ==}
     engines: {node: '>=14.17'}
     requiresBuild: true
     peerDependencies:
@@ -212,15 +212,15 @@ packages:
         optional: true
     dependencies:
       '@prisma/engines-version': 4.8.0-61.d6e67a83f971b175a593ccc12e15c4a757f93ffe
-      prisma: 4.8.0
+      prisma: 4.8.1
     dev: false
 
   /@prisma/engines-version/4.8.0-61.d6e67a83f971b175a593ccc12e15c4a757f93ffe:
     resolution: {integrity: sha512-MHSOSexomRMom8QN4t7bu87wPPD+pa+hW9+71JnVcF3DqyyO/ycCLhRL1we3EojRpZxKvuyGho2REQsMCvxcJw==}
     dev: false
 
-  /@prisma/engines/4.8.0:
-    resolution: {integrity: sha512-A1Asn2rxZMlLAj1HTyfaCv0VQrLUv034jVay05QlqZg1qiHPeA3/pGTfNMijbsMYCsGVxfWEJuaZZuNxXGMCrA==}
+  /@prisma/engines/4.8.1:
+    resolution: {integrity: sha512-93tctjNXcIS+i/e552IO6tqw17sX8liivv8WX9lDMCpEEe3ci+nT9F+1oHtAafqruXLepKF80i/D20Mm+ESlOw==}
     requiresBuild: true
 
   /@rometools/cli-darwin-arm64/11.0.0:
@@ -569,13 +569,13 @@ packages:
       thread-stream: 0.15.2
     dev: false
 
-  /prisma/4.8.0:
-    resolution: {integrity: sha512-DWIhxvxt8f4h6MDd35mz7BJff+fu7HItW3WPDIEpCR3RzcOWyiHBbLQW5/DOgmf+pRLTjwXQob7kuTZVYUAw5w==}
+  /prisma/4.8.1:
+    resolution: {integrity: sha512-ZMLnSjwulIeYfaU1O6/LF6PEJzxN5par5weykxMykS9Z6ara/j76JH3Yo2AH3bgJbPN4Z6NeCK9s5fDkzf33cg==}
     engines: {node: '>=14.17'}
     hasBin: true
     requiresBuild: true
     dependencies:
-      '@prisma/engines': 4.8.0
+      '@prisma/engines': 4.8.1
 
   /process-warning/1.0.0:
     resolution: {integrity: sha512-du4wfLyj4yCZq1VupnVSZmRsPJsNuxoDQFdCFHLaYiEbFBD7QE0a+I4D7hOxrVnh78QE/YipFAj9lXHiXocV+Q==}
