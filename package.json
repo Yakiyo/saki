@@ -27,13 +27,18 @@
   "author": "Yakiyo#1206",
   "license": "MIT",
   "dependencies": {
+    "@discordjs/opus": "^0.8.0",
+    "@discordjs/voice": "^0.14.0",
     "@napi-rs/canvas": "^0.1.30",
     "@naval-base/ms": "^3.1.0",
     "@prisma/client": "^4.8.1",
     "discord.js": "^14.6.0",
+    "distube": "^4.0.4",
     "dotenv": "^16.0.3",
+    "ffmpeg-static": "^4.2.7",
     "node-fetch": "2.6.7",
     "pino": "^7.0.0-rc.9",
+    "sodium": "^3.0.2",
     "sourcebin": "^5.0.0",
     "tslib": "^2.4.1",
     "undici": "^5.14.0"
