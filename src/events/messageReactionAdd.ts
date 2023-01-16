@@ -8,7 +8,7 @@ export const event: Event = {
 	name: Events.MessageReactionAdd,
 	once: false,
 	async handle(reaction: MessageReaction, user: User) {
-		// if the message isnt cached, fetch it first.
+		// if the reaction isnt cached, fetch it first.
 		if (reaction.partial) {
 			try {
 				await reaction.fetch();
