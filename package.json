@@ -4,7 +4,7 @@
   "description": "Saki bot for Gimai Seikatsu Discord Server",
   "main": "dist/index.js",
   "scripts": {
-    "prepare": "husky install",
+    "prepare": "husky install && tsc",
     "build": "tsc",
     "start": "node .",
     "prestart": "rm -rf dist/ && tsc",
