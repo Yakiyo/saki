@@ -30,6 +30,14 @@ export const command: Command = {
 		}
 
 		await distube.play(vc, song);
-		interaction.editReply(`Added music [${song.name}](${song.url})`);
+		interaction.editReply({
+			embeds: [
+				{
+					color: 16105148,
+					title: 'Added Music',
+					description: `Added [${song.name}](${song.url}) to queue`,
+				},
+			],
+		});
 	},
 };

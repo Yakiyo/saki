@@ -6,6 +6,13 @@ export const command: Command = {
 	async execute(interaction) {
 		await interaction.deferReply();
 		distube.resume(interaction.guildId as string);
-		interaction.editReply('Resumed stream');
+		interaction.editReply({
+			embeds: [
+				{
+					color: 16105148,
+					description: 'Resumed Music',
+				},
+			],
+		});
 	},
 };

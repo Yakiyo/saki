@@ -9,6 +9,14 @@ export const command: Command = {
 		await interaction.deferReply();
 		await distube.stop(interaction.guild as Guild);
 		distube.voices.get(interaction.guildId as string)?.leave();
-		interaction.editReply('Stopped the music player');
+		interaction.editReply({
+			embeds: [
+				{
+					color: 16105148,
+					title: 'Stopped Stream',
+					description: 'Closed connection and left voice channel.',
+				},
+			],
+		});
 	},
 };

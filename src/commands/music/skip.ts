@@ -13,6 +13,13 @@ export const command: Command = {
 			interaction.editReply('No song to skip. This is the last song playing');
 			return;
 		}
-		interaction.editReply('Skipped current song');
+		interaction.editReply({
+			embeds: [
+				{
+					color: 16105148,
+					description: 'Skipped Current Song',
+				},
+			],
+		});
 	},
 };
