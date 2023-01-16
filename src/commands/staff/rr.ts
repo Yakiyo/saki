@@ -1,5 +1,6 @@
 import { ChannelType as CT, GuildTextBasedChannel, Role, SlashCommandBuilder } from 'discord.js';
 import type { Command } from '../../struct/types';
+import { log } from '../../util';
 
 export const command: Command = {
 	data: new SlashCommandBuilder()
@@ -56,12 +57,34 @@ export const command: Command = {
 						.setDescription('The role used in the reaction role')
 						.setRequired(true),
 				),
+		)
+		.addSubcommand((sub) =>
+			sub.setName('show').setDescription('Show all reaction roles registered'),
 		),
 	async execute(interaction) {
 		await interaction.deferReply();
 		switch (interaction.options.getSubcommand()) {
 			case 'add': {
 				const role = interaction.options.getRole('role') as Role;
+
+				if (role.id === interaction.guildId) {
+					interaction.editReply(
+						'Provided role is the everyone role. Everyone role cannot be used in reaction roles',
+					);
+					return;
+				}
+				if (role.managed) {
+					interaction.editReply(
+						'Provided role is a role managed by an external bot or integration or discord. Cannot use those in reaction roles.',
+					);
+					return;
+				}
+				if (role.comparePositionTo(interaction.guild?.members.me?.roles.highest as Role) > 0) {
+					interaction.editReply(
+						'Provided role is higher than me. Either give me a higher role or make the role lower',
+					);
+					return;
+				}
 				const emoji =
 					(await interaction.guild?.emojis.fetch(
 						interaction.options.getString('emoji') as string,
@@ -98,22 +121,53 @@ export const command: Command = {
 					return;
 				}
 				message.react(emoji);
-				await prisma.reactionroles
-					.create({
-						data: {
-							message: message.id,
-							channel: channel.id,
-							role: role.id,
-							reaction: emoji.id ?? emoji.name,
-						},
-					})
-					.then(console.log);
+				await prisma.reactionroles.create({
+					data: {
+						message: message.id,
+						channel: channel.id,
+						role: role.id,
+						reaction: emoji.id ?? emoji.name,
+					},
+				});
 				interaction.editReply('Successfully created reaction role!');
 				return;
 			}
 
 			case 'remove': {
-				interaction.editReply('Unimplemented!');
+				const role = interaction.options.getRole('role') as Role;
+				const msgId = interaction.options.getString('message') as string;
+				const prev = await prisma.reactionroles.findFirst({
+					where: {
+						message: msgId,
+						role: role.id,
+					},
+				});
+				if (!prev) {
+					interaction.editReply('No reaction role with that role in the message exists');
+					return;
+				}
+				const channel = (await interaction.guild?.channels.fetch(prev.channel).catch((e) => {
+					log(e);
+					return null;
+				})) as GuildTextBasedChannel | null;
+
+				// If channel exists, we attempt to remove the reaction. Otherwise just skip it and
+				// remove the reaction role entry from the database
+				if (channel) {
+					const message = await channel.messages.fetch(prev.message);
+					const reaction = message.reactions.resolve(prev.reaction);
+					if (!reaction) break;
+					reaction.users.remove(interaction.client.user.id).catch(log);
+				}
+				await prisma.reactionroles
+					.delete({
+						where: {
+							id: prev.id,
+						},
+					})
+					.catch(log);
+
+				interaction.editReply('Successfully removed reaction role from database');
 				return;
 			}
 
