@@ -1,13 +1,12 @@
 import { Collection, SlashCommandBuilder, type APIEmbedField } from 'discord.js';
 import { casify } from '../../util';
-import { type Command } from '../../struct/types';
+import type { Client, Command } from '../../struct/types';
 
 export const command: Command = {
 	data: new SlashCommandBuilder().setName('help').setDescription('Display the bot commands.'),
 	async execute(interaction) {
 		await interaction.deferReply();
-		// @ts-ignore
-		const { commands } = interaction.client.commandHandler as {
+		const { commands } = (interaction.client as Client).commandHandler as {
 			commands: Collection<string, Command>;
 		};
 		const categories = new Collection<string, Collection<string, Command>>();

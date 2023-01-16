@@ -11,6 +11,7 @@ import type { Client } from './struct/types';
 import 'dotenv/config';
 import { log } from './util';
 import { JobHandler } from './struct/jobHandler';
+import { DisTube } from 'distube';
 
 const prisma = new PrismaClient();
 (async () => {
@@ -30,6 +31,7 @@ const client = new DiscordClient({
 		Intents.GuildMessages,
 		Intents.GuildMessageReactions,
 		Intents.MessageContent,
+		Intents.GuildVoiceStates,
 	],
 	partials: [Partials.Message, Partials.Reaction, Partials.Channel],
 	presence: {
@@ -43,6 +45,14 @@ const client = new DiscordClient({
 	},
 }) as Client;
 
+const distube = new DisTube(client, {
+	searchSongs: 5,
+	searchCooldown: 15,
+	leaveOnEmpty: true,
+	leaveOnFinish: true,
+	leaveOnStop: false,
+});
+
 client.commandHandler = new CommandHandler();
 new EventHandler(client);
 
@@ -53,11 +63,13 @@ if (process.env.DEPLOY === 'TRUE') {
 declare global {
 	var client: Client;
 	var prisma: PrismaClient;
+	var distube: DisTube;
 	var jobHandler: JobHandler;
 }
 
 global.client = client;
 global.prisma = prisma;
+global.distube = distube;
 global.jobHandler = new JobHandler();
 
 process.on('unhandledRejection', log);
