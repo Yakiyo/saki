@@ -80,6 +80,8 @@ export class CommandHandler {
 					continue;
 				}
 				command.category = folder;
+				// Disable dms on all commands unless explicitly provided
+				command.data.dm_permission ?? command.data.setDMPermission(false);
 				this.commands.set(command.data.name, command);
 			}
 		}
