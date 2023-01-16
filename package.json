@@ -6,9 +6,9 @@
   "scripts": {
     "prepare": "husky install && tsc",
     "build": "tsc",
+    "dev": "ts-node src",
     "start": "node .",
     "prestart": "rm -rf dist/ && tsc",
-    "sts": "ts-node src",
     "deploy": "ts-node --transpile-only src/deploy.ts",
     "logs": "ts-node scripts/logs.ts",
     "prs:seed": "prisma db seed",
