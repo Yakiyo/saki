@@ -14,7 +14,13 @@ export const command: Command = {
 
 		const vc = (interaction.member as GuildMember)?.voice?.channel;
 		if (!vc) {
-			interaction.editReply('Please join a vc before playing a song.');
+			interaction.editReply({
+				embeds: [
+					{
+						description: 'Please join a Voice Channel first.',
+					},
+				],
+			});
 			return;
 		}
 		const song = await distube
@@ -25,7 +31,13 @@ export const command: Command = {
 			.catch(() => null);
 
 		if (!song) {
-			interaction.editReply(`No song with the query **${query}** found`);
+			interaction.editReply({
+				embeds: [
+					{
+						description: `No song with the query **${query}** found`,
+					},
+				],
+			});
 			return;
 		}
 

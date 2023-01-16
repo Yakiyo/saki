@@ -1,5 +1,6 @@
 import { SlashCommandBuilder } from 'discord.js';
 import type { Command } from '../../struct/types';
+import { log } from '../../util';
 
 export const command: Command = {
 	data: new SlashCommandBuilder().setName('skip').setDescription('Skip the current song'),
@@ -8,9 +9,21 @@ export const command: Command = {
 		const e = await distube
 			.skip(interaction.guildId as string)
 			.then(() => null)
-			.catch((e) => (e.errorCode === 'NO_UP_NEXT' ? 1 : null));
-		if (e === 1) {
-			interaction.editReply('No song to skip. This is the last song playing');
+			.catch((e) => {
+				if (e.errorCode === 'NO_UP_NEXT') return 1;
+				else {
+					log(e);
+					return null;
+				}
+			});
+		if (e) {
+			interaction.editReply({
+				embeds: [
+					{
+						description: 'No song to skip. This is the last song playing',
+					},
+				],
+			});
 			return;
 		}
 		interaction.editReply({
