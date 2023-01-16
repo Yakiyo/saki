@@ -1,4 +1,9 @@
-import { Collection, type GuildMember, type ChatInputCommandInteraction } from 'discord.js';
+import {
+	Collection,
+	type GuildMember,
+	type ChatInputCommandInteraction,
+	PermissionFlagsBits,
+} from 'discord.js';
 import { join, resolve } from 'node:path';
 import { readdirSync } from 'node:fs';
 import { REST, Routes } from 'discord.js';
@@ -80,6 +85,11 @@ export class CommandHandler {
 					continue;
 				}
 				command.category = folder;
+
+				if (folder === 'staff' && !command.data.default_member_permissions) {
+					// Limit staff commands to users with at least kick member perms
+					command.data.setDefaultMemberPermissions(PermissionFlagsBits.KickMembers);
+				}
 				// Disable dms on all commands unless explicitly provided
 				command.data.dm_permission ?? command.data.setDMPermission(false);
 				this.commands.set(command.data.name, command);
