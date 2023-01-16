@@ -1,5 +1,6 @@
 import { SlashCommandBuilder } from 'discord.js';
 import type { Command } from '../../struct/types';
+import { log } from '../../util';
 
 export const command: Command = {
 	data: new SlashCommandBuilder()
@@ -31,7 +32,7 @@ export const command: Command = {
 			});
 			return interaction.editReply(`Successfully created emoji with name **${emoji?.name}**`);
 		} catch (error) {
-			console.log(error);
+			log(error);
 			return await interaction.editReply(
 				'Error while creating emoji. \nPossible Reasons: Image file too big, invalid file type, maximum emoji limit for the server or invalid characters in emoji name.',
 			);

@@ -8,7 +8,6 @@ export const job: Job = {
 	name: 'Twitter',
 	interval: 15 * 60,
 	async run() {
-		console.log('running');
 		const gimai_id = '1250594468262113280';
 		const res: string[] | null = await fetch(
 			`https://api.twitter.com/2/users/${gimai_id}/tweets?max_results=5`,
@@ -28,7 +27,6 @@ export const job: Job = {
 				return null;
 			});
 
-		console.log(res);
 		if (!res?.length) return;
 		const feeds = await prisma.cache
 			.findUnique({
@@ -45,7 +43,6 @@ export const job: Job = {
 				link,
 			});
 		}
-		console.log(links);
 		if (!links.length) return;
 		await prisma.cache.update({
 			where: {

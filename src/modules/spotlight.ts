@@ -79,14 +79,12 @@ export async function spotlight(reaction: MessageReaction) {
 		})
 		.catch(log);
 	if (!message) return;
-	await prisma.spotlights
-		.create({
-			data: {
-				message: message.id,
-				source: reaction.message.id,
-				channel: reaction.message.channelId,
-			},
-		})
-		.then(console.log);
+	await prisma.spotlights.create({
+		data: {
+			message: message.id,
+			source: reaction.message.id,
+			channel: reaction.message.channelId,
+		},
+	});
 	return;
 }
