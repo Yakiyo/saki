@@ -8,7 +8,7 @@
     "build": "tsc",
     "start": "node .",
     "prestart": "rm -rf dist/ && tsc",
-    "start:ts": "ts-node src",
+    "sts": "ts-node src",
     "deploy": "ts-node --transpile-only src/deploy.ts",
     "logs": "ts-node scripts/logs.ts",
     "prs:seed": "prisma db seed",
