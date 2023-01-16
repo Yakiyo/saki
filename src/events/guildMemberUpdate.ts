@@ -7,7 +7,6 @@ export const event: Event = {
 	name: Events.GuildMemberUpdate,
 	once: false,
 	async handle(oldMember: GuildMember, newMember: GuildMember) {
-		console.log('Running guildmeme update');
 		const isEnabled = await prisma.modules
 			.findUnique({
 				where: {
