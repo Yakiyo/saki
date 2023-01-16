@@ -36,6 +36,7 @@ model Reactionroles {
   // This must be the emoji id for custom emojis and name for standard emojis
   reaction String
   message  String
+  channel  String
   role     String
   type     ReactionType @default(NORMAL)
 
