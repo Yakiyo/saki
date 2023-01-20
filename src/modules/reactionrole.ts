@@ -2,7 +2,7 @@ import { type MessageReaction, type User } from 'discord.js';
 import { log } from '../util';
 
 export async function reactionRole(reaction: MessageReaction, user: User) {
-	const { prisma } = global;
+	if (user.bot) return;
 
 	const rr = await prisma.reactionroles.findFirst({
 		where: {
