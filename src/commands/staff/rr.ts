@@ -49,8 +49,8 @@ export const command: Command = {
 						.addChoices({ name: 'NORMAL', value: 'NORMAL' }, { name: 'VERIFY', value: 'VERIFY' }),
 				),
 		)
-		.addSubcommand((option) =>
-			option
+		.addSubcommand((sub) =>
+			sub
 				.setName('remove')
 				.setDescription('Remove a reaction role')
 				.addStringOption((option) =>
