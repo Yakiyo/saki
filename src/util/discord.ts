@@ -1,24 +1,11 @@
 import type { GuildMember, APIEmbed, JSONEncodable, TextChannel } from 'discord.js';
-import config from './config';
-import pino from 'pino';
-
+import config from '../config';
+import { log } from './logger';
 /**
  * If a member is staff or not
  */
 export function isStaff(member: GuildMember) {
 	return member.roles.cache.has(config.roles.mod);
-}
-
-/**
- * Shorten a string upto num length
- */
-export function shorten(str: string, num = 1000): string | undefined {
-	if (typeof str !== 'string') return undefined;
-	if (str.length > num) {
-		return `${str.substring(0, num + 1)}...`;
-	} else {
-		return str;
-	}
 }
 
 /**
@@ -67,30 +54,3 @@ export enum LogDestination {
 	activity,
 	mod,
 }
-
-const logger = pino(
-	pino.transport({
-		target: 'pino/file',
-		options: {
-			destination: './error.log',
-			mkdir: true,
-		},
-	}),
-);
-
-/**
- * Function to log errors to a log file.
- */
-export function log(p: unknown) {
-	// Set DEBUG env to any value to log stuff
-	// in development
-	if (process.env.DEBUG) {
-		console.error(p);
-	}
-	logger.error(p);
-}
-
-/**
- * Generate a random number between max and min (both inclusive)
- */
-export const rand = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1) + min);
