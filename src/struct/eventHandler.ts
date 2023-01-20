@@ -1,6 +1,7 @@
 import type { Client, Event } from './types';
 import { join, resolve } from 'node:path';
 import { readdirSync } from 'node:fs';
+import { log } from '../util';
 
 export class EventHandler {
 	constructor(client: Client) {
@@ -16,11 +17,21 @@ export class EventHandler {
 				event: Event;
 			};
 			if (event.once) {
-				// @ts-expect-error
-				client.once(event.name, (...args) => event.handle(...args, client));
+				client.once(event.name, (...args) => {
+					try {
+						event.handle(...args, client);
+					} catch (e) {
+						log(e);
+					}
+				});
 			} else {
-				// @ts-expect-error
-				client.on(event.name, (...args) => event.handle(...args, client));
+				client.on(event.name, (...args) => {
+					try {
+						event.handle(...args, client);
+					} catch (e) {
+						log(e);
+					}
+				});
 			}
 		}
 	}
