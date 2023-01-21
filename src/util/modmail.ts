@@ -1,4 +1,4 @@
-import type { Message, BaseGuildTextChannel, APIEmbed } from 'discord.js';
+import type { BaseGuildTextChannel, APIEmbed, User } from 'discord.js';
 import config from '../config';
 import { dateTimestamp } from './discord';
 import { log } from './logger';
@@ -6,7 +6,7 @@ import { log } from './logger';
 /**
  * Utility function to create a new modmail
  */
-export async function createMail(message: Message) {
+export async function createMail(author: User, createrId?: string) {
 	const channel = (await client.channels
 		.fetch(config.channels.modmail)
 		.catch(log)) as BaseGuildTextChannel | null;
@@ -16,7 +16,7 @@ export async function createMail(message: Message) {
 	}
 	const userMails = await prisma.modmail.findMany({
 		where: {
-			userId: message.author.id,
+			userId: author.id,
 		},
 	});
 	const startMessage = await channel.send({
@@ -24,16 +24,16 @@ export async function createMail(message: Message) {
 			{
 				title: 'New Modmail',
 				color: 16105148,
-				description: `${message.author.tag} <@${message.author.id}>`,
+				description: `${author.tag} <@${author.id}>`,
 				fields: [
 					{
 						name: 'Created',
-						value: dateTimestamp(message.author.createdAt),
+						value: dateTimestamp(author.createdAt),
 						inline: true,
 					},
 					{
 						name: 'ID',
-						value: message.author.id,
+						value: author.id,
 						inline: true,
 					},
 				],
@@ -42,8 +42,8 @@ export async function createMail(message: Message) {
 	});
 	const thread = await channel.threads
 		.create({
-			name: `${message.author.tag} - ${userMails.length + 1}`,
-			reason: `Modmail by ${message.author.tag}`,
+			name: `${author.tag} - ${userMails.length + 1}`,
+			reason: `Modmail by ${author.tag}`,
 			startMessage,
 		})
 		.catch(log);
@@ -55,8 +55,8 @@ export async function createMail(message: Message) {
 		.create({
 			data: {
 				threadId: thread.id,
-				createdById: message.author.id,
-				userId: message.author.id,
+				createdById: createrId ?? author.id,
+				userId: author.id,
 			},
 		})
 		.catch(log);
