@@ -7,11 +7,10 @@ import {
 	ButtonStyle,
 	ComponentType,
 	type BaseGuildTextChannel,
-	time,
 } from 'discord.js';
 import type { Event } from '../struct/types';
 import config from '../config';
-import { log } from '../util';
+import { dateTimestamp, log } from '../util';
 
 export const event: Event = {
 	name: Events.MessageCreate,
@@ -107,12 +106,17 @@ export const event: Event = {
 							{
 								title: 'New Modmail',
 								color: 16105148,
+								description: `${message.author.tag} <@${message.author.id}>`,
 								fields: [
 									{
-										name: 'User Info',
-										value: `**Name**: ${message.author.tag}\n**Created at**: ${time(
-											message.author.createdTimestamp,
-										)}\n**Sent on:** ${time(message.createdTimestamp)}`,
+										name: 'Created',
+										value: dateTimestamp(message.author.createdAt),
+										inline: true,
+									},
+									{
+										name: 'ID',
+										value: message.author.id,
+										inline: true,
 									},
 								],
 							},
@@ -120,7 +124,7 @@ export const event: Event = {
 					});
 					const thread = await channel.threads
 						.create({
-							name: `${message.author.tag} ${userMails.length + 1}`,
+							name: `${message.author.tag} - ${userMails.length + 1}`,
 							reason: `Modmail by ${message.author.tag}`,
 							startMessage,
 						})
@@ -157,24 +161,73 @@ export const event: Event = {
 					message.edit('Unexpected error while finding modmail. Please report to dev');
 					return;
 				}
-				thread.send({
-					embeds: [
-						{
-							color: 5793266,
-							description: message.content,
-							author: {
-								name: message.author.tag,
-								icon_url: message.author.displayAvatarURL(),
+				await thread
+					.send({
+						embeds: [
+							{
+								color: 5793266,
+								description: message.content,
+								author: {
+									name: message.author.tag,
+									icon_url: message.author.displayAvatarURL(),
+								},
+								footer: {
+									text: 'Created on',
+								},
+								timestamp: new Date().toISOString(),
 							},
-						},
-					],
-				});
+						],
+					})
+					.then(() => message.react('✅'))
+					.catch((e) => {
+						log(e);
+						message.react('❌');
+					});
 
 				return;
 			}
 
-			case CT.GuildText: {
-				if (message.channelId !== config.channels.modmail) return;
+			case CT.PrivateThread:
+			case CT.PublicThread: {
+				if (message.channel.parentId !== config.channels.modmail) return;
+				if (message.content.startsWith(';')) return;
+				const mail = await prisma.modmail.findUnique({
+					where: {
+						threadId: message.channelId,
+					},
+				});
+				if (!mail?.isOpen) return;
+				const member = await message.guild?.members.fetch(mail.userId).catch(log);
+				if (!member) {
+					message.channel.send(
+						'Could not find member in server. Member probably left. Please close this modmail',
+					);
+					return;
+				}
+				await member.user
+					.send({
+						embeds: [
+							{
+								color: 5763719,
+								author: {
+									name: message.author.tag,
+									icon_url: message.author.displayAvatarURL(),
+								},
+								description: message.content,
+							},
+						],
+					})
+					.catch((e) => {
+						if (e.code === 50007) {
+							message.channel.send(
+								'Unable the send modmail reply. The user has their dms disabled for this server. Please tell them to enable it first!',
+							);
+							return;
+						}
+						message.channel.send('Unexpected error while sending message. Please check logs');
+						return log(e);
+					});
+
 				return;
 			}
 
@@ -183,28 +236,3 @@ export const event: Event = {
 		}
 	},
 };
-
-// const collector = response.createMessageComponentCollector({
-//     componentType: ComponentType.Button,
-//     time: 10 * 1000,
-//     max: 1,
-// });
-// collector.on('collect', async button => {
-//     if (button.customId === 'mail_no') {
-
-//     }
-// });
-// collector.on('end', async (c) => {
-//     if (!c.size) {
-//         response.edit({
-//             embeds: [
-//                 {
-//                     title: 'Process Cancelled',
-//                     color: 16105148,
-//                 },
-//             ],
-//             components: []
-//         });
-//         leave = true;
-//     }
-// });
