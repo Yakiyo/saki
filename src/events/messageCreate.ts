@@ -131,7 +131,7 @@ export const event: Event = {
 						.catch(log);
 
 					if (!thread) {
-						message.edit('Unexpected error while creating modmail thread. Please report to dev');
+						response.edit('Unexpected error while creating modmail thread. Please report to dev');
 						return;
 					}
 					mail = await prisma.modmail
