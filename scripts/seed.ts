@@ -4,7 +4,7 @@
  * This populates the database with the basic required entries, which are the
  * module entry and the cache. Run the following command to seed it:
  *
- *   $ npm run seed
+ *   $ npm run prs:seed
  *
  * More details at: https://www.prisma.io/docs/guides/database/seed-database
  */
