@@ -20,4 +20,5 @@ export function log(p: unknown) {
 		console.error(p);
 	}
 	logger.error(p);
+	return null;
 }
