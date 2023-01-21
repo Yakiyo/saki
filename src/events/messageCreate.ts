@@ -10,7 +10,8 @@ import {
 } from 'discord.js';
 import type { Event } from '../struct/types';
 import config from '../config';
-import { dateTimestamp, log } from '../util';
+import { log } from '../util';
+import { createMail } from '../util/modmail';
 
 export const event: Event = {
 	name: Events.MessageCreate,
@@ -95,58 +96,14 @@ export const event: Event = {
 						],
 						components: [],
 					});
-					const userMails = await prisma.modmail.findMany({
-						where: {
-							userId: message.author.id,
-						},
-					});
 
-					const startMessage = await channel.send({
-						embeds: [
-							{
-								title: 'New Modmail',
-								color: 16105148,
-								description: `${message.author.tag} <@${message.author.id}>`,
-								fields: [
-									{
-										name: 'Created',
-										value: dateTimestamp(message.author.createdAt),
-										inline: true,
-									},
-									{
-										name: 'ID',
-										value: message.author.id,
-										inline: true,
-									},
-								],
-							},
-						],
-					});
-					const thread = await channel.threads
-						.create({
-							name: `${message.author.tag} - ${userMails.length + 1}`,
-							reason: `Modmail by ${message.author.tag}`,
-							startMessage,
-						})
-						.catch(log);
-
-					if (!thread) {
-						response.edit('Unexpected error while creating modmail thread. Please report to dev');
+					try {
+						mail = await createMail(message);
+					} catch (e) {
+						response.edit(e as string);
 						return;
 					}
-					mail = await prisma.modmail
-						.create({
-							data: {
-								threadId: thread.id,
-								createdById: message.author.id,
-								userId: message.author.id,
-							},
-						})
-						.catch(log);
-					if (!mail) {
-						message.edit('Unexpected error while creating modmail entry. Please report to dev');
-						return;
-					}
+
 					response.edit({
 						embeds: [
 							{
@@ -217,6 +174,7 @@ export const event: Event = {
 							},
 						],
 					})
+					.then(() => message.react('✅'))
 					.catch((e) => {
 						if (e.code === 50007) {
 							message.channel.send(
@@ -225,6 +183,7 @@ export const event: Event = {
 							return;
 						}
 						message.channel.send('Unexpected error while sending message. Please check logs');
+						message.react('❌');
 						return log(e);
 					});
 
