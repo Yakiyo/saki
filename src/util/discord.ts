@@ -1,4 +1,10 @@
-import type { GuildMember, APIEmbed, JSONEncodable, TextChannel } from 'discord.js';
+import type {
+	GuildMember,
+	APIEmbed,
+	JSONEncodable,
+	TextChannel,
+	TimestampStylesString,
+} from 'discord.js';
 import config from '../config';
 import { log } from './logger';
 /**
@@ -52,7 +58,8 @@ export async function sendLog(
  *
  * More at: https://discord.com/developers/docs/reference#message-formatting
  */
-export const dateTimestamp = (d: Date) => `<t:${Math.ceil(d.getTime() / 1000)}:R>`;
+export const dateTimestamp = (d: Date, type: TimestampStylesString = 'R') =>
+	`<t:${Math.ceil(d.getTime() / 1000)}:${type}>`;
 
 /**
  * Enums for log channels
