@@ -1,4 +1,10 @@
-import type { GuildMember, APIEmbed, JSONEncodable, TextChannel } from 'discord.js';
+import type {
+	GuildMember,
+	APIEmbed,
+	JSONEncodable,
+	TextChannel,
+	TimestampStylesString,
+} from 'discord.js';
 import config from '../config';
 import { log } from './logger';
 /**
@@ -46,6 +52,14 @@ export async function sendLog(
 		});
 	}
 }
+
+/**
+ * Simple function that converts a date object to discord timestamp
+ *
+ * More at: https://discord.com/developers/docs/reference#message-formatting
+ */
+export const dateTimestamp = (d: Date, type: TimestampStylesString = 'R') =>
+	`<t:${Math.ceil(d.getTime() / 1000)}:${type}>`;
 
 /**
  * Enums for log channels

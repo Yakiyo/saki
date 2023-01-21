@@ -26,6 +26,8 @@ export const event: Event = {
 			case InteractionType.MessageComponent: {
 				if (!interaction.isButton()) return; // For now, we only handle buttons
 
+				if (!interaction.customId.startsWith('MOD')) return;
+
 				if (!isStaff(interaction.member as GuildMember)) {
 					interaction.reply({
 						content: 'Mod only usage',
@@ -33,8 +35,6 @@ export const event: Event = {
 					});
 					return;
 				}
-				if (!interaction.customId.startsWith('MOD')) return;
-
 				await interaction.deferUpdate();
 
 				const cid = interaction.customId.replace('MOD_', '');

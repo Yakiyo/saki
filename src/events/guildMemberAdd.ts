@@ -1,7 +1,7 @@
 import type { Event } from '../struct/types';
 import { Events, type GuildMember, type Client, GuildTextBasedChannel } from 'discord.js';
 import config from '../config';
-import { log } from '../util';
+import { dateTimestamp, log } from '../util';
 import { welcome } from '../modules/welcome';
 
 export const event: Event = {
@@ -45,7 +45,7 @@ export const event: Event = {
 					fields: [
 						{
 							name: 'Account Age',
-							value: `<t:${Math.ceil(member.user.createdAt.getTime() / 1000)}:R>`,
+							value: dateTimestamp(member.user.createdAt),
 						},
 					],
 				},
