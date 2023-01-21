@@ -48,6 +48,13 @@ export async function sendLog(
 }
 
 /**
+ * Simple function that converts a date object to discord timestamp
+ *
+ * More at: https://discord.com/developers/docs/reference#message-formatting
+ */
+export const dateTimestamp = (d: Date) => `<t:${Math.ceil(d.getTime() / 1000)}:R>`;
+
+/**
  * Enums for log channels
  */
 export enum LogDestination {
