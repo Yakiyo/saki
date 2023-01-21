@@ -70,7 +70,7 @@ export async function createMail(author: User, createrId?: string) {
 /**
  * Utility function to close modmails
  */
-export async function closeMail(threadId: string) {
+export async function closeMail(threadId: string, closer: User) {
 	const mail = await prisma.modmail.findUnique({
 		where: {
 			threadId,
@@ -91,7 +91,7 @@ export async function closeMail(threadId: string) {
 	};
 	const thread = channel.threads.cache.find((x) => x.id === mail.threadId);
 	if (thread && !thread.archived) {
-		thread.send({
+		await thread.send({
 			embeds: [
 				{
 					...embed,
@@ -110,9 +110,14 @@ export async function closeMail(threadId: string) {
 		.catch(log);
 
 	await prisma.modmail
-		.delete({
+		.update({
 			where: {
 				threadId: mail.threadId,
+			},
+			data: {
+				isOpen: false,
+				closedAt: new Date(),
+				closedById: closer.id,
 			},
 		})
 		.catch(log);
