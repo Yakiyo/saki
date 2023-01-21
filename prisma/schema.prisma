@@ -65,6 +65,19 @@ model Cache {
   @@map("Cache")
 }
 
+// A model for modmail entries
+model Modmail {
+  threadId    String    @id @map("_id")
+  isOpen      Boolean   @default(true)
+  userId      String
+  createdById String
+  createdAt   DateTime  @default(now())
+  closedById  String?
+  closedAt    DateTime?
+
+  @@map("Modmail")
+}
+
 type Feed {
   link String
 }
