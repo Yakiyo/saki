@@ -98,7 +98,7 @@ export const event: Event = {
 					});
 
 					try {
-						mail = await createMail(message);
+						mail = await createMail(message.author);
 					} catch (e) {
 						response.edit(e as string);
 						return;
