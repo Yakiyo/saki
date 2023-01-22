@@ -19,7 +19,7 @@ export class EventHandler {
 			if (event.once) {
 				client.once(event.name, (...args) => {
 					try {
-						event.handle(...args, client);
+						event.handle(...args);
 					} catch (e) {
 						log(e);
 					}
@@ -27,7 +27,7 @@ export class EventHandler {
 			} else {
 				client.on(event.name, (...args) => {
 					try {
-						event.handle(...args, client);
+						event.handle(...args);
 					} catch (e) {
 						log(e);
 					}

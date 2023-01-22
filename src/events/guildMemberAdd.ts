@@ -1,12 +1,12 @@
 import type { Event } from '../struct/types';
-import { Events, type GuildMember, type Client, GuildTextBasedChannel } from 'discord.js';
+import { Events, type GuildMember, GuildTextBasedChannel } from 'discord.js';
 import config from '../config';
 import { dateTimestamp, log } from '../util';
 import { welcome } from '../modules/welcome';
 
 export const event: Event = {
 	name: Events.GuildMemberAdd,
-	async handle(member: GuildMember, client: Client<true>) {
+	async handle(member: GuildMember) {
 		/**
 		 * Assign bot role to bot users on join
 		 */

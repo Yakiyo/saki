@@ -1,4 +1,4 @@
-import type { Event, Client } from '../struct/types';
+import type { Event } from '../struct/types';
 import {
 	Events,
 	type Interaction,
@@ -14,7 +14,7 @@ import { isStaff } from '../util';
 
 export const event: Event = {
 	name: Events.InteractionCreate,
-	async handle(interaction: Interaction, client: Client) {
+	async handle(interaction: Interaction) {
 		switch (interaction.type) {
 			// Handle slash commands
 			case InteractionType.ApplicationCommand: {
