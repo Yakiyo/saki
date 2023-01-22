@@ -32,7 +32,7 @@ export interface Job {
 	readonly name: string;
 	interval: number; // This should be in seconds, always!
 	id?: ReturnType<typeof setInterval>;
-	run(): void;
+	run(): Promise<void>;
 	init(): void;
 	stop(): void;
 }
