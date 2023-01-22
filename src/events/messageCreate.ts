@@ -10,8 +10,7 @@ import {
 } from 'discord.js';
 import type { Event } from '../struct/types';
 import config from '../config';
-import { log } from '../util';
-import { createMail } from '../util/modmail';
+import { log, createMail } from '../util';
 
 export const event: Event = {
 	name: Events.MessageCreate,

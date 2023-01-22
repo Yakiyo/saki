@@ -1,7 +1,6 @@
 import { SlashCommandBuilder, type User } from 'discord.js';
 import type { Command } from '../../struct/types';
-import { log } from '../../util';
-import { closeMail, createMail } from '../../util/modmail';
+import { log, closeMail, createMail } from '../../util';
 
 export const command: Command = {
 	data: new SlashCommandBuilder()
