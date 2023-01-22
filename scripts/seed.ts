@@ -41,24 +41,101 @@ async function main() {
 			data: {
 				id: 1,
 				chapter: {
-					set: {
-						link: 'https://cclawtranslations.home.blog/2022/12/26/gimai-seikatsu-volume-7-chapter-12/',
-					},
+					set: [
+						{
+							link: 'https://cclawtranslations.home.blog/2022/12/26/gimai-seikatsu-volume-7-chapter-12/',
+						},
+						{
+							link: 'https://cclawtranslations.home.blog/2022/12/26/gimai-seikatsu-volume-7-chapter-11/',
+						},
+						{
+							link: 'https://cclawtranslations.home.blog/2022/12/26/gimai-seikatsu-volume-7-chapter-10/',
+						},
+						{
+							link: 'https://cclawtranslations.home.blog/2022/12/26/gimai-seikatsu-volume-7-chapter-9/',
+						},
+						{
+							link: 'https://cclawtranslations.home.blog/2022/12/25/gimai-seikatsu-volume-7-chapter-8/',
+						},
+						{
+							link: 'https://cclawtranslations.home.blog/2022/12/25/gimai-seikatsu-volume-7-chapter-7/',
+						},
+						{
+							link: 'https://cclawtranslations.home.blog/2022/12/24/gimai-seikatsu-volume-7-chapter-6/',
+						},
+					],
 				},
 				reddit: {
-					set: {
-						link: 'https://www.reddit.com/r/GimaiSeikatsu/comments/zwd55s/the_newlyweds_and_stepsiblings_collab_punishments/',
-					},
+					set: [
+						{
+							link: 'https://reddit.com/r/GimaiSeikatsu/comments/zui487/gimai_seikatsu_volume_7_chapter_6/',
+						},
+						{
+							link: 'https://reddit.com/r/GimaiSeikatsu/comments/zupulh/gimai_seikatsu_volume_7_chapter_7/',
+						},
+						{
+							link: 'https://reddit.com/r/GimaiSeikatsu/comments/zv20ac/gimai_seikatsu_volume_7_chapter_8/',
+						},
+						{
+							link: 'https://reddit.com/r/GimaiSeikatsu/comments/zvdc8n/gimai_seikatsu_volume_7_chapters_9_10_11_12_final/',
+						},
+						{
+							link: 'https://reddit.com/r/GimaiSeikatsu/comments/zwd55s/the_newlyweds_and_stepsiblings_collab_punishments/',
+						},
+						{
+							link: 'https://reddit.com/r/GimaiSeikatsu/comments/102y3l9/a_jealous_stepsister_leads_to_a_battlefield_with/',
+						},
+						{
+							link: 'https://reddit.com/r/GimaiSeikatsu/comments/107gutv/about_vol_8/',
+						},
+						{
+							link: 'https://reddit.com/r/GimaiSeikatsu/comments/107ho7t/nursing_goes_south_as_the_older_brother_is/',
+						},
+						{
+							link: 'https://reddit.com/r/GimaiSeikatsu/comments/10dxdr0/absolute_positivity_asamurakun_withstands_any/',
+						},
+						{
+							link: 'https://reddit.com/r/GimaiSeikatsu/comments/10fo5y4/disc_gimai_seikatsu_chapter_121/',
+						},
+					],
 				},
 				twitter: {
-					set: {
-						link: 'https://twitter.com/gimaiseikatsu/status/1609491485891887104',
-					},
+					set: [
+						{
+							link: 'https://twitter.com/gimaiseikatsu/status/1616752597808959488',
+						},
+						{
+							link: 'https://twitter.com/gimaiseikatsu/status/1616651165223223296',
+						},
+						{
+							link: 'https://twitter.com/gimaiseikatsu/status/1616651145300283392',
+						},
+						{
+							link: 'https://twitter.com/gimaiseikatsu/status/1616390436725346304',
+						},
+						{
+							link: 'https://twitter.com/gimaiseikatsu/status/1616390324313804800',
+						},
+					],
 				},
 				youtube: {
-					set: {
-						link: 'https://youtu.be/g54j7B3S_fA',
-					},
+					set: [
+						{
+							link: 'https://youtu.be/t80H1eFds8A',
+						},
+						{
+							link: 'https://youtu.be/v07qXubo9ns',
+						},
+						{
+							link: 'https://youtu.be/ZS8ZwKl7PpI',
+						},
+						{
+							link: 'https://youtu.be/2gT0t1k4w04',
+						},
+						{
+							link: 'https://youtu.be/4s6EXSBf8ks',
+						},
+					],
 				},
 			},
 		});
