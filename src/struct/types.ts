@@ -10,7 +10,7 @@ import { type CommandHandler } from './commandHandler';
 export interface Event<Name extends keyof ClientEvents = keyof ClientEvents> {
 	readonly name: Name;
 	readonly once?: boolean;
-	handle(...args: ClientEvents[Name]): unknown;
+	handle(...args: unknown[]): unknown;
 }
 
 export interface Client extends DiscordClient<true> {
