@@ -56,11 +56,12 @@ model Spotlights {
 // A cache to store misc contents like the last chapter url, youtube url, twitter post
 // or reddit post that was sent from the feeds.
 model Cache {
-  id      Int    @id @map("_id")
-  chapter Feed[]
-  youtube Feed[]
-  twitter Feed[]
-  reddit  Feed[]
+  id       Int    @id @map("_id")
+  chapter  Feed[]
+  youtube  Feed[]
+  twitter  Feed[]
+  reddit   Feed[]
+  mangadex Feed[]
 
   @@map("Cache")
 }
