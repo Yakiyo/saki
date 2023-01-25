@@ -14,9 +14,8 @@ const logger = pino(
  * Function to log errors to a log file.
  */
 export function log(p: unknown) {
-	// Set DEBUG env to any value to log stuff
-	// in development
-	if (process.env.DEBUG) {
+	// Log stuff to console when not in prod
+	if (process.env.NODE_ENV !== 'production') {
 		console.error(p);
 	}
 	logger.error(p);
