@@ -90,7 +90,7 @@ export async function welcome(member: GuildMember, client: Client<true>) {
 		.setColor(16102651);
 
 	channel.send({
-		content: `Hey there <@${member.id}>`,
+		content: `Hey <@${member.id}>!`,
 		embeds: [embed],
 		files: [attachment],
 	});
