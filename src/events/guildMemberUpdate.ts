@@ -19,7 +19,7 @@ export const event: Event = {
 			boost(newMember);
 		}
 
-		const av = newMember.user.avatarURL({
+		const av = newMember.user.displayAvatarURL({
 			extension: 'png',
 			forceStatic: false,
 			size: 1024,
