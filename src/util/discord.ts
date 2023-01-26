@@ -33,8 +33,6 @@ export async function sendLog(
 	payload: string | APIEmbed | JSONEncodable<APIEmbed>,
 	destination: LogDestination = LogDestination.activity,
 ) {
-	// @ts-ignore
-	const client = globalThis.client;
 	const cid =
 		destination === LogDestination.activity
 			? config.channels.activity_log

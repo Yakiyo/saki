@@ -9,7 +9,6 @@ export class JobHandler {
 	constructor() {
 		this.jobs = new Collection();
 		(async () => {
-			const { prisma } = global;
 			const jobs = await this.loadJobs().then((v) => v.jobs);
 			const modules = await prisma.modules.findUnique({
 				where: {
