@@ -1,6 +1,5 @@
 import type { Event } from '../struct/types';
 import { Events, type User } from 'discord.js';
-import { boost } from '../modules/boost';
 import { LogDestination, sendLog } from '../util';
 
 export const event: Event = {
