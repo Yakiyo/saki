@@ -1,4 +1,4 @@
-interface Config {
+export interface Config {
 	clientId: string;
 	guildId: string;
 	owners: string[];
@@ -15,6 +15,12 @@ interface Config {
 			reddit: string;
 			twitter: string;
 			youtube: string;
+		};
+		stats: {
+			member: string;
+			bot: string;
+			channel: string;
+			role: string;
 		};
 	};
 	roles: {

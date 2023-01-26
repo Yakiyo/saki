@@ -89,6 +89,20 @@ export async function closeMail(threadId: string, closer: User) {
 		description:
 			'Thank you for reaching out to the moderator team. Feel free to open another modmail if you need in the future.\nHappy to help!',
 	};
+
+	await prisma.modmail
+		.update({
+			where: {
+				threadId: mail.threadId,
+			},
+			data: {
+				isOpen: false,
+				closedAt: new Date(),
+				closedById: closer.id,
+			},
+		})
+		.catch(log);
+
 	const thread = channel.threads.cache.find((x) => x.id === mail.threadId);
 	if (thread && !thread.archived) {
 		await thread.send({
@@ -102,23 +116,10 @@ export async function closeMail(threadId: string, closer: User) {
 		});
 		thread.setArchived(true).catch(log);
 	}
-	const user = await client.users.fetch(mail.createdById).catch(log);
+	const user = await client.users.fetch(mail.userId).catch(log);
 	user
 		?.send({
 			embeds: [embed],
-		})
-		.catch(log);
-
-	await prisma.modmail
-		.update({
-			where: {
-				threadId: mail.threadId,
-			},
-			data: {
-				isOpen: false,
-				closedAt: new Date(),
-				closedById: closer.id,
-			},
 		})
 		.catch(log);
 	return;

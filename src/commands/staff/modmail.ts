@@ -41,6 +41,10 @@ export const command: Command = {
 		});
 		switch (interaction.options.getSubcommand()) {
 			case 'open': {
+				if (user.bot) {
+					interaction.editReply('You cannot open a modmail with a bot user');
+					return;
+				}
 				if (mail) {
 					interaction.editReply(
 						`A modmail for that user is already opened at <#${mail.threadId}>. Please use it or close that before opening a new one`,

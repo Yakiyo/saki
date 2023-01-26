@@ -12,9 +12,12 @@ export const event: Event = {
 		 */
 		if (member.user.bot) {
 			member.roles.add(config.roles.bot).catch(log);
+			// statsUpdate('bot');
+		} else {
+			// statsUpdate('member');
 		}
 
-		const isEnabled = await global.prisma.modules
+		const isEnabled = await prisma.modules
 			.findUnique({
 				where: {
 					id: 1,
@@ -23,7 +26,7 @@ export const event: Event = {
 			.then((m) => m?.Welcome);
 
 		if (!member.user.bot && isEnabled === true) {
-			welcome(member, client);
+			welcome(member);
 		}
 		const channel = await client.channels.fetch(config.channels.activity_log).catch((e) => {
 			log(e);

@@ -7,7 +7,7 @@ export const command: Command = {
 	async execute(interaction) {
 		await interaction.deferReply();
 
-		const modules = await global.prisma.modules.findUnique({
+		const modules = await prisma.modules.findUnique({
 			where: {
 				id: 1,
 			},

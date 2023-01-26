@@ -6,7 +6,7 @@ export const event: Event = {
 	name: Events.ThreadCreate,
 	once: false,
 	async handle(thread: ThreadChannel) {
-		if (!thread.joined) thread.join().catch(log);
+		if (!thread.joined && thread.joinable) thread.join().catch(log);
 		return;
 	},
 };

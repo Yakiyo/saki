@@ -8,8 +8,6 @@ export const job: Job = {
 	name: 'Chapters',
 	interval: 5 * 60,
 	async run() {
-		const { client } = global;
-
 		const chaps = await getChaps();
 
 		// Theres no chaps to publish, so we skip
@@ -47,8 +45,6 @@ export const job: Job = {
  * from the feeds.
  */
 async function getChaps() {
-	const { prisma } = global;
-
 	const chaps = await prisma.cache
 		.findUnique({
 			where: {

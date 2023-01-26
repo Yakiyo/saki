@@ -35,5 +35,6 @@ export const event: Event = {
 				text: `ID: ${member.id}`,
 			},
 		});
+		// statsUpdate(member.user.bot ? 'bot' : 'member');
 	},
 };

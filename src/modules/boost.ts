@@ -36,6 +36,20 @@ export async function boost(member: GuildMember) {
 	const avatar = new Canvas.Image();
 	avatar.src = Buffer.from(await body.arrayBuffer());
 
+	// Draw avatar
+	ctx.save();
+	ctx.lineWidth = 20;
+	ctx.fillStyle = '#000000';
+	ctx.beginPath();
+	const radius = 205;
+	const center = { x: 1380, y: 704 };
+	ctx.arc(center.x, center.y, radius, 0, Math.PI * 2, true);
+	ctx.closePath();
+	ctx.clip();
+	ctx.drawImage(avatar, center.x - radius, center.y - radius, radius * 2, radius * 2);
+	ctx.stroke();
+	ctx.restore();
+
 	// Write username
 	let font = 80;
 	ctx.font = `${font}px sans-serif`;
@@ -47,26 +61,7 @@ export async function boost(member: GuildMember) {
 		ctx.font = `${font}px sans-serif`;
 		tw = ctx.measureText(name).width;
 	}
-	// Position the mid of the text to a distance of (3/4th of width - 120px) of width
-	// from the left side and (3/4th of height + 120px) from the top.
-	const tx = canvas.width * (3 / 4) - 120;
-	const ty = canvas.height * (3 / 4) + 180;
-
-	ctx.fillText(name, tx - tw / 2, ty, 1050);
-
-	ctx.save();
-	// Draw avatar. First draw an arc, clip it, paste body and stroke it.
-	ctx.lineWidth = 20;
-	ctx.fillStyle = '#000000';
-	ctx.beginPath();
-	const radius = 205;
-	ctx.arc(tx, ty - 320, radius, 0, Math.PI * 2, true);
-	ctx.closePath();
-	ctx.clip();
-	ctx.drawImage(avatar, tx - radius, ty - 320 - radius);
-	ctx.stroke();
-
-	ctx.restore();
+	ctx.fillText(name, center.x - tw / 2, center.y + radius + 100);
 
 	const attachment = new AttachmentBuilder(canvas.toBuffer('image/png'), {
 		name: 'boost-image.png',
@@ -77,7 +72,7 @@ export async function boost(member: GuildMember) {
 		.setTitle('Thank you for boosting the 『Gimai Seikatsu』 Discord Server!')
 		.setDescription(
 			"Boosting the server gets us a bunch of cool stuff, so we'd like to thank and reward you with a custom role for it." +
-				'\nFeel free to message any <@!921695160407052320> with a name and color for your custom role.',
+				`\nFeel free to message any <@&921695160407052320> or modmail our bot <@${config.clientId}> with a name and color for your custom role.`,
 		)
 		.setColor(16102651);
 

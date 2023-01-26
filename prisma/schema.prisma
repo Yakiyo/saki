@@ -7,7 +7,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// A data model for the modules in the bot. All defaults are true,  except radio
+// A data model for the modules in the bot. All defaults are true,
 // We only need one instance of this. So in prod, should only fetch 
 // the entry with id 1
 model Modules {
@@ -55,6 +55,8 @@ model Spotlights {
 
 // A cache to store misc contents like the last chapter url, youtube url, twitter post
 // or reddit post that was sent from the feeds.
+// We only need one instance of this. So in prod, should only fetch 
+// the entry with id 1
 model Cache {
   id       Int    @id @map("_id")
   chapter  Feed[]
