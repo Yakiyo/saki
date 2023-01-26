@@ -36,7 +36,9 @@ export async function welcome(member: GuildMember, client: Client<true>) {
 	const name = member.user.tag;
 
 	// Fetch user avatar
-	const { body } = await request(member.user.displayAvatarURL({ extension: 'png', size: 1024 }) as string);
+	const { body } = await request(
+		member.user.displayAvatarURL({ extension: 'png', size: 1024 }) as string,
+	);
 	const avatar = new Canvas.Image();
 	avatar.src = Buffer.from(await body.arrayBuffer());
 
