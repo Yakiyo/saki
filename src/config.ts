@@ -16,6 +16,12 @@ interface Config {
 			twitter: string;
 			youtube: string;
 		};
+		stats: {
+			member: string;
+			bot: string;
+			channel: string;
+			role: string;
+		};
 	};
 	roles: {
 		mod: string;
