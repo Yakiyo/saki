@@ -1,17 +1,17 @@
+import 'dotenv/config';
 import {
 	Client as DiscordClient,
 	GatewayIntentBits as Intents,
 	ActivityType,
 	Partials,
 } from 'discord.js';
+import { DisTube } from 'distube';
+import { PrismaClient } from '@prisma/client';
 import { CommandHandler } from './struct/commandHandler';
 import { EventHandler } from './struct/eventHandler';
-import { PrismaClient } from '@prisma/client';
 import type { Client } from './struct/types';
-import 'dotenv/config';
 import { log } from './util';
 import { JobHandler } from './struct/jobHandler';
-import { DisTube } from 'distube';
 
 const prisma = new PrismaClient();
 (async () => {
