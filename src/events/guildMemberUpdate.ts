@@ -19,14 +19,14 @@ export const event: Event = {
 			boost(newMember);
 		}
 
-		const av = newMember.user.displayAvatarURL({
+		const av = newMember.displayAvatarURL({
 			extension: 'png',
 			forceStatic: false,
 			size: 1024,
 		}) as string;
 
 		// Audit logs
-		if (oldMember.user.avatar !== newMember.user.avatar) {
+		if (oldMember.avatar !== newMember.avatar) {
 			sendLog(
 				{
 					thumbnail: {
@@ -37,7 +37,7 @@ export const event: Event = {
 					},
 					color: 4437377,
 					timestamp: new Date().toISOString(),
-					title: 'Avatar Update',
+					title: 'Server Avatar Update',
 					author: {
 						name: newMember.user.tag,
 						icon_url: av,
@@ -48,6 +48,7 @@ export const event: Event = {
 			);
 		}
 
+		// Might wanna move this to userUpdate.ts
 		if (oldMember.user.tag !== newMember.user.tag) {
 			sendLog(
 				{
