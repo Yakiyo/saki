@@ -7,7 +7,14 @@ export const event: Event = {
 	once: false,
 	async handle(oldMessage: Message, newMessage: Message) {
 		// We dont listen to edits in interaction responses or dm messages
-		if (newMessage.interaction || !newMessage.inGuild() || newMessage.author.bot) return;
+		// Additionally we don't listen to messages with same content
+		if (
+			newMessage.interaction ||
+			!newMessage.inGuild() ||
+			newMessage.author.bot ||
+			oldMessage.content === newMessage.content
+		)
+			return;
 
 		if (oldMessage.partial) {
 			try {
