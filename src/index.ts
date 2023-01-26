@@ -53,11 +53,7 @@ const distube = new DisTube(client, {
 	leaveOnEmpty: true,
 	leaveOnFinish: true,
 	leaveOnStop: false,
-	plugins: [
-		new YtDlpPlugin(
-			{ update: true }
-		)
-	]
+	plugins: [new YtDlpPlugin({ update: true })],
 });
 
 client.commandHandler = new CommandHandler();
