@@ -41,6 +41,20 @@ export async function welcome(member: GuildMember) {
 	const avatar = new Canvas.Image();
 	avatar.src = Buffer.from(await body.arrayBuffer());
 
+	// Draw avatar
+	ctx.save();
+	ctx.lineWidth = 20;
+	ctx.fillStyle = '#000000';
+	ctx.beginPath();
+	const radius = 205;
+	const center = { x: 1380, y: 704 };
+	ctx.arc(center.x, center.y, radius, 0, Math.PI * 2, true);
+	ctx.closePath();
+	ctx.clip();
+	ctx.drawImage(avatar, center.x - radius, center.y - radius, radius * 2, radius * 2);
+	ctx.stroke();
+	ctx.restore();
+
 	// Write username
 	let font = 80;
 	ctx.font = `${font}px sans-serif`;
@@ -52,26 +66,7 @@ export async function welcome(member: GuildMember) {
 		ctx.font = `${font}px sans-serif`;
 		tw = ctx.measureText(name).width;
 	}
-	// Position the mid of the text to a distance of (3/4th of width - 120px) of width
-	// from the left side and (3/4th of height + 120px) from the top.
-	const tx = canvas.width * (3 / 4) - 120;
-	const ty = canvas.height * (3 / 4) + 180;
-
-	ctx.fillText(name, tx - tw / 2, ty, 1050);
-
-	ctx.save();
-	// Draw avatar. First draw an arc, clip it, paste body and stroke it.
-	ctx.lineWidth = 20;
-	ctx.fillStyle = '#000000';
-	ctx.beginPath();
-	const radius = 205;
-	ctx.arc(tx, ty - 320, radius, 0, Math.PI * 2, true);
-	ctx.closePath();
-	ctx.clip();
-	ctx.drawImage(avatar, tx - radius, ty - 320 - radius);
-	ctx.stroke();
-
-	ctx.restore();
+	ctx.fillText(name, center.x - tw / 2, center.y + radius + 100);
 
 	// Final section, create embed, load attachment, send and stuff
 	const count = await member.guild.members.fetch().then((stuff) => stuff.size);
