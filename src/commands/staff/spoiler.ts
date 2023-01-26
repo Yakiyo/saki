@@ -57,7 +57,7 @@ export const command: Command = {
 						description: message.content,
 						footer: {
 							text: `Message sent by ${message.member?.user.tag}`,
-							icon_url: (message.member?.user as User).avatarURL({
+							icon_url: (message.member?.user as User).displayAvatarURL({
 								extension: 'png',
 								forceStatic: true,
 							}) as string | undefined,
@@ -77,7 +77,7 @@ export const command: Command = {
 		sendLog({
 			author: {
 				name: interaction.user.tag,
-				icon_url: interaction.user.avatarURL() as string | undefined,
+				icon_url: interaction.user.displayAvatarURL() as string | undefined,
 			},
 			color: 16762880,
 			title: 'Spoiler Command used',

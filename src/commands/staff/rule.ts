@@ -72,7 +72,7 @@ export const command: Command = {
 		sendLog({
 			author: {
 				name: interaction.user.tag,
-				icon_url: interaction.user.avatarURL() as string | undefined,
+				icon_url: interaction.user.displayAvatarURL() as string | undefined,
 			},
 			color: 16762880,
 			title: 'Rule Command used',

@@ -39,7 +39,7 @@ Requirements:
 
 - [Nodejs](https://nodejs.org) version 16.9.0 or higher
 - A Discord [Bot application](https://discordjs.guide/preparations/setting-up-a-bot-application.html)
-- A [mongodb](https://www.mongodb.com/) instance. The free tier on [Mongodb Atlas](https://www.mongodb.com/atlas) will work fine.
+- A [mongodb](https://www.mongodb.com/) instance with replica set. The free tier on [Mongodb Atlas](https://www.mongodb.com/atlas) will work fine.
 - A Twitter [bearer token](https://developer.twitter.com/en/docs/authentication/oauth-2-0/bearer-tokens)
 - A Youtube [api-key](https://developers.google.com/youtube/registering_an_application)
 

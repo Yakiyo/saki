@@ -47,18 +47,18 @@ export const command: Command = {
 		} else {
 			links = {
 				name: 'Links as',
-				value: `[png](${member.user.avatarURL({
+				value: `[png](${member.user.displayAvatarURL({
 					extension: 'png',
 					forceStatic: true,
-				})}) | [jpg](${member.user.avatarURL({
+				})}) | [jpg](${member.user.displayAvatarURL({
 					extension: 'jpg',
 					forceStatic: true,
-				})}) | [webp](${member.user.avatarURL({
+				})}) | [webp](${member.user.displayAvatarURL({
 					extension: 'webp',
 					forceStatic: true,
 				})})`,
 			};
-			url = member.user.avatarURL({
+			url = member.user.displayAvatarURL({
 				extension: 'png',
 				forceStatic: false,
 				size: 1024,

@@ -10,7 +10,7 @@ export const event: Event = {
 		const embed: APIEmbed = {
 			author: {
 				name: message.author.tag,
-				icon_url: message.author.avatarURL() as string | undefined,
+				icon_url: message.author.displayAvatarURL() as string | undefined,
 			},
 			color: 16729871,
 			description: `**Message sent by <@${message.author.id}> deleted in <#${message.channelId}>**\n${message.content}`,
