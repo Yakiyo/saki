@@ -1,4 +1,4 @@
-interface Config {
+export interface Config {
 	clientId: string;
 	guildId: string;
 	owners: string[];
