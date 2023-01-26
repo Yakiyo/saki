@@ -1,6 +1,5 @@
 import {
 	type GuildMember,
-	type Client,
 	type GuildTextBasedChannel,
 	EmbedBuilder,
 	AttachmentBuilder,
@@ -15,7 +14,7 @@ import { request } from 'undici';
 /**
  * Welcome message sending module
  */
-export async function welcome(member: GuildMember, client: Client<true>) {
+export async function welcome(member: GuildMember) {
 	const channel = (await client.channels.fetch(config.channels.welcome).catch((e) => {
 		log(e);
 		return null;
