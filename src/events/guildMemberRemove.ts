@@ -1,6 +1,6 @@
 import type { Event } from '../struct/types';
 import { Events, GuildMember } from 'discord.js';
-import { dateTimestamp, sendLog } from '../util';
+import { dateTimestamp, sendLog, statsUpdate } from '../util';
 
 export const event: Event = {
 	name: Events.GuildMemberRemove,
@@ -35,5 +35,6 @@ export const event: Event = {
 				text: `ID: ${member.id}`,
 			},
 		});
+		statsUpdate(member.user.bot ? 'bot' : 'member');
 	},
 };

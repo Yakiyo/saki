@@ -1,7 +1,7 @@
 import type { Event } from '../struct/types';
 import { Events, type GuildMember, GuildTextBasedChannel } from 'discord.js';
 import config from '../config';
-import { dateTimestamp, log } from '../util';
+import { dateTimestamp, log, statsUpdate } from '../util';
 import { welcome } from '../modules/welcome';
 
 export const event: Event = {
@@ -12,6 +12,9 @@ export const event: Event = {
 		 */
 		if (member.user.bot) {
 			member.roles.add(config.roles.bot).catch(log);
+			statsUpdate('bot');
+		} else {
+			statsUpdate('member');
 		}
 
 		const isEnabled = await prisma.modules
