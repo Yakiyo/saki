@@ -116,7 +116,7 @@ export async function closeMail(threadId: string, closer: User) {
 		});
 		thread.setArchived(true).catch(log);
 	}
-	const user = await client.users.fetch(mail.createdById).catch(log);
+	const user = await client.users.fetch(mail.userId).catch(log);
 	user
 		?.send({
 			embeds: [embed],
