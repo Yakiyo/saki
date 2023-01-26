@@ -6,6 +6,7 @@ import {
 	Partials,
 } from 'discord.js';
 import { DisTube } from 'distube';
+import { YtDlpPlugin } from '@distube/yt-dlp';
 import { PrismaClient } from '@prisma/client';
 import { CommandHandler } from './struct/commandHandler';
 import { EventHandler } from './struct/eventHandler';
@@ -52,6 +53,7 @@ const distube = new DisTube(client, {
 	leaveOnEmpty: true,
 	leaveOnFinish: true,
 	leaveOnStop: false,
+	plugins: [new YtDlpPlugin({ update: true })],
 });
 
 client.commandHandler = new CommandHandler();
