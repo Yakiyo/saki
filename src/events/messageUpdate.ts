@@ -6,6 +6,9 @@ export const event: Event = {
 	name: Events.MessageUpdate,
 	once: false,
 	async handle(oldMessage: Message, newMessage: Message) {
+		// We dont listen to edits in interaction responses or dm messages
+		if (newMessage.interaction || !newMessage.inGuild() || newMessage.author.bot) return;
+
 		if (oldMessage.partial) {
 			try {
 				await oldMessage.fetch();
@@ -14,6 +17,7 @@ export const event: Event = {
 				return;
 			}
 		}
+		await newMessage.fetch().catch(log);
 		sendLog({
 			color: 3375061,
 			author: {
@@ -24,12 +28,11 @@ export const event: Event = {
 			fields: [
 				{
 					name: 'Before',
-					value:
-						shorten(oldMessage.content, 1010) || '**Uncached message, could not receive content**',
+					value: shorten(oldMessage.content, 1010) || '*Uncached message*',
 				},
 				{
 					name: 'After',
-					value: shorten(newMessage.content, 1010) as string,
+					value: (shorten(newMessage.content, 1010) as string) || '*Unable to receive content*',
 				},
 			],
 			timestamp: new Date().toISOString(),
