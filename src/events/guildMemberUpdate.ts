@@ -67,5 +67,30 @@ export const event: Event = {
 				LogDestination.activity,
 			);
 		}
+
+		const addedRoles = newMember.roles.cache.filter((_, role) => !oldMember.roles.cache.has(role));
+		const removedRoles = oldMember.roles.cache.filter(
+			(_, role) => !newMember.roles.cache.has(role),
+		);
+
+		if (addedRoles.size || removedRoles.size) {
+			const action = addedRoles.size ? 'given' : 'removed from';
+			const role = addedRoles.size ? addedRoles?.first()?.id : removedRoles?.first()?.id;
+			sendLog(
+				{
+					footer: {
+						text: `ID: ${newMember.id}`,
+					},
+					color: 3375061,
+					timestamp: new Date().toISOString(),
+					author: {
+						name: newMember.user.tag,
+						icon_url: av,
+					},
+					description: `<@${newMember.id}> **was ${action} the <@&${role}> role.**`,
+				},
+				LogDestination.activity,
+			);
+		}
 	},
 };
