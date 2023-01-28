@@ -1,7 +1,7 @@
 import { Collection, GuildTextBasedChannel } from 'discord.js';
 import config from '../config';
 import { type Job } from '../struct/types';
-import fetch from 'node-fetch';
+import { fetch } from 'undici';
 import { log } from '../util';
 
 export const job: Job = {
@@ -55,10 +55,7 @@ async function getChaps() {
 
 	const v = await fetch('https://cclawtranslations.home.blog/feed/')
 		.then((v) => v.text())
-		.catch((e) => {
-			log(e);
-			return null;
-		});
+		.catch(log);
 
 	const map = new Collection<string, string>();
 	if (!v) return map;
