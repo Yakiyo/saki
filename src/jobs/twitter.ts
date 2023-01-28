@@ -1,5 +1,5 @@
 import { Job } from '../struct/types';
-import fetch from 'node-fetch';
+import { fetch } from 'undici';
 import { log } from '../util';
 import config from '../config';
 import { GuildTextBasedChannel } from 'discord.js';
@@ -18,14 +18,11 @@ export const job: Job = {
 			},
 		)
 			.then(async (v) => await v.json())
-			.then((v) => v.data)
+			.then((v) => (v as Record<string, Record<string, string>[]>).data)
 			.then((v) =>
 				v.map((r: Record<string, string>) => `https://twitter.com/gimaiseikatsu/status/${r.id}`),
 			)
-			.catch((e) => {
-				log(e);
-				return null;
-			});
+			.catch(log);
 
 		if (!res?.length) return;
 		const feeds = await prisma.cache
