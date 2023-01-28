@@ -2,7 +2,7 @@ import { GuildTextBasedChannel } from 'discord.js';
 import config from '../config';
 import type { Job } from '../struct/types';
 import { log } from '../util';
-import fetch from 'node-fetch';
+import { fetch } from 'undici';
 
 export const job: Job = {
 	name: 'Mangadex',

@@ -1,5 +1,5 @@
 import { Job } from '../struct/types';
-import fetch from 'node-fetch';
+import { fetch } from 'undici';
 import config from '../config';
 import { APIEmbed, GuildTextBasedChannel } from 'discord.js';
 import { log } from '../util';
@@ -10,7 +10,7 @@ export const job: Job = {
 	async run() {
 		const embeds = (await fetch('https://www.reddit.com/r/GimaiSeikatsu/new.json?sort=new&limit=10')
 			.then((v) => v.json())
-			.then((v) => v.data.children.reverse())
+			.then((v) => (v as Record<string, any>).data.children.reverse())
 			.then((v) => v.map((d: Record<string, string>) => d.data))
 			.then(iterate)
 			.catch((e) => {

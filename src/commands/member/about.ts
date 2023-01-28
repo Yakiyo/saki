@@ -1,7 +1,7 @@
 import { SlashCommandBuilder } from 'discord.js';
 import type { Command } from '../../struct/types';
 const { version } = require('../../../package.json') as { version: string };
-import fetch from 'node-fetch';
+import { fetch } from 'undici';
 
 export const command: Command = {
 	data: new SlashCommandBuilder().setName('about').setDescription('Information about the bot'),
@@ -12,7 +12,7 @@ export const command: Command = {
 				const json = await response.json();
 				return response.ok ? json : Promise.reject(json);
 			})
-			.then((res) => res);
+			.then((res) => res as Record<string, any>[]);
 
 		const arr = [];
 		for (const commit of commits) {
