@@ -1,5 +1,5 @@
 import { SlashCommandBuilder } from 'discord.js';
-import fetch from 'node-fetch';
+import { fetch } from 'undici';
 import type { Command } from '../../struct/types';
 import { log, rand } from '../../util';
 
@@ -23,7 +23,7 @@ export const command: Command = {
 		}
 		const memes = await fetch(`https://reddit.com/r/${subs[rand(0, 1)]}.json?limit=100&sort=new`)
 			.then((v) => v.json())
-			.then((v) => v.data.children)
+			.then((v) => (v as Record<string, any>).data.children)
 			.then((v) => v.map((d: Record<string, string>) => d.data))
 			.then((v) => v.filter((a: Record<string, string>) => a.post_hint === 'image'))
 			.catch((e) => {
