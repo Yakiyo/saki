@@ -31,8 +31,8 @@ export const command: Command = {
 				name,
 			});
 			return interaction.editReply(`Successfully created emoji with name **${emoji?.name}**`);
-		} catch (error) {
-			log(error);
+		} catch (e) {
+			log(e);
 			return await interaction.editReply(
 				'Error while creating emoji. \nPossible Reasons: Image file too big, invalid file type, maximum emoji limit for the server or invalid characters in emoji name.',
 			);

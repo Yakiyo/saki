@@ -21,10 +21,7 @@ export async function reactionRole(reaction: MessageReaction, user: User) {
 
 	if (!role) return;
 
-	const member = await reaction.message.guild?.members.fetch(user).catch((e) => {
-		log(e);
-		return null;
-	});
+	const member = await reaction.message.guild?.members.fetch(user).catch(log);
 
 	if (!member) return;
 

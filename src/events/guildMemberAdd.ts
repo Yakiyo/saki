@@ -28,10 +28,7 @@ export const event: Event = {
 		if (!member.user.bot && isEnabled === true) {
 			welcome(member);
 		}
-		const channel = await client.channels.fetch(config.channels.activity_log).catch((e) => {
-			log(e);
-			return null;
-		});
+		const channel = await client.channels.fetch(config.channels.activity_log).catch(log);
 		if (!channel) return;
 		(channel as GuildTextBasedChannel).send({
 			embeds: [

@@ -51,10 +51,9 @@ export async function spotlight(reaction: MessageReaction) {
 
 	if (prev) return; // A spotlight entry for that message already exists, so we don't bother with it
 
-	const channel = (await client.channels.fetch(config.channels.spotlight).catch((e) => {
-		log(e);
-		return null;
-	})) as GuildTextBasedChannel | null;
+	const channel = (await client.channels
+		.fetch(config.channels.spotlight)
+		.catch(log)) as GuildTextBasedChannel | null;
 	if (!channel) return;
 
 	const embed: APIEmbed = {

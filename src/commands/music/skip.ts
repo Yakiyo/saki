@@ -12,8 +12,7 @@ export const command: Command = {
 			.catch((e) => {
 				if (e.errorCode === 'NO_UP_NEXT') return 1;
 				else {
-					log(e);
-					return null;
+					return log(e);
 				}
 			});
 		if (e) {

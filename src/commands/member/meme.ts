@@ -26,10 +26,7 @@ export const command: Command = {
 			.then((v) => (v as Record<string, any>).data.children)
 			.then((v) => v.map((d: Record<string, string>) => d.data))
 			.then((v) => v.filter((a: Record<string, string>) => a.post_hint === 'image'))
-			.catch((e) => {
-				log(e);
-				return null;
-			});
+			.catch(log);
 
 		if (!memes) {
 			interaction.editReply('Unexpected error when making api requests. Please try again later');

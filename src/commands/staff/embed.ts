@@ -303,8 +303,8 @@ export const command: Command = {
 				await message.edit({ embeds: [embed] });
 				interaction.editReply('Successfully edited embed');
 				return;
-			} catch (error) {
-				log(error);
+			} catch (e) {
+				log(e);
 				interaction.editReply(
 					'Unexpected error while editing message. Possible causes: Bot doesnt have permission to view channel, invalid JSON value, internal discord error',
 				);

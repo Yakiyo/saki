@@ -51,10 +51,7 @@ export const job: Job = {
 				},
 			},
 		});
-		const channel = await client.channels.fetch(config.channels.feeds.twitter).catch((e) => {
-			log(e);
-			return null;
-		});
+		const channel = await client.channels.fetch(config.channels.feeds.twitter).catch(log);
 
 		if (!channel) return;
 		(channel as GuildTextBasedChannel).send(

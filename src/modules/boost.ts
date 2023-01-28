@@ -12,10 +12,9 @@ import { resolve } from 'path';
 import { request } from 'undici';
 
 export async function boost(member: GuildMember) {
-	const channel = (await client.channels.fetch(config.channels.server_updates).catch((e) => {
-		log(e);
-		return null;
-	})) as GuildTextBasedChannel | null;
+	const channel = (await client.channels
+		.fetch(config.channels.server_updates)
+		.catch(log)) as GuildTextBasedChannel | null;
 	if (!channel) return;
 	const backgroundFile = await readFile(
 		resolve(process.cwd(), `./assets/boost-img/boost${rand(1, 3)}.png`),

@@ -155,10 +155,9 @@ export const command: Command = {
 					interaction.editReply('No reaction role with that role in the message exists');
 					return;
 				}
-				const channel = (await interaction.guild?.channels.fetch(prev.channel).catch((e) => {
-					log(e);
-					return null;
-				})) as GuildTextBasedChannel | null;
+				const channel = (await interaction.guild?.channels
+					.fetch(prev.channel)
+					.catch(log)) as GuildTextBasedChannel | null;
 
 				// If channel exists, we attempt to remove the reaction. Otherwise just skip it and
 				// remove the reaction role entry from the database
