@@ -1,19 +1,19 @@
 import { Job } from '../struct/types';
 import { log } from '../util';
 import config from '../config';
-import { GuildTextBasedChannel } from 'discord.js';
-import fetch from 'node-fetch';
+import { type GuildTextBasedChannel } from 'discord.js';
+import { fetch } from 'undici';
 
 export const job: Job = {
 	name: 'Youtube',
 	// Once every 15 mins
 	interval: 15 * 60,
 	async run() {
-		const res: YoutubeResult = await fetch(
+		const res = await fetch(
 			`https://www.googleapis.com/youtube/v3/search?key=${process.env.YOUTUBE_API_KEY}&channelId=UCOQyW7GmCyTKwjCJEaTBWRw&part=snippet,id&order=date&maxResults=1`,
 		)
 			.then((r) => r.json())
-			.then((r) => r.items[0]);
+			.then((r) => (r as Record<string, YoutubeResult[]>).items[0]);
 
 		const link = `https://youtu.be/${res.id.videoId}`;
 		const feeds = await prisma.cache
