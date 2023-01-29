@@ -146,16 +146,18 @@ export const command: Command = {
 				await interaction.editReply({ embeds: [embed] });
 				return;
 			} else if (source.length > 2000) {
-				const bin = await sourcebin.create({
-					title: `Embed source for ${message.id}`,
-					description: 'Raw JSON for a discord embed',
-					files: [
-						{
-							content: source,
-							language: 'JSON',
-						},
-					],
-				});
+				const bin = await sourcebin
+					.create({
+						title: `Embed source for ${message.id}`,
+						description: 'Raw JSON for a discord embed',
+						files: [
+							{
+								content: source,
+								language: 'JSON',
+							},
+						],
+					})
+					.catch(log);
 				if (!bin) {
 					interaction.editReply('Error while creating file on sourcebin');
 					return;
@@ -210,7 +212,9 @@ export const command: Command = {
 				try {
 					embed = JSON.parse(json);
 				} catch (error) {
-					interaction.editReply('Invalid JSON expression.');
+					interaction.editReply(
+						`Invalid JSON expression.\n \`\`\`${shorten(`${error}`, 1000)}\`\`\``,
+					);
 					return;
 				}
 			}
@@ -221,7 +225,9 @@ export const command: Command = {
 				return;
 			} catch (error) {
 				interaction.editReply(
-					"Could not send embed due to unexpected errors. Possible erros: Invalid JSON expression or breaking [discord embed limitations](https://discord.com/developers/docs/resources/channel#embed-limits 'Discord Embed Limits')",
+					`Error when sending embed. Received following error:\n\`\`\`js\n ${shorten(
+						`${error}`,
+					)}\`\`\` `,
 				);
 				return;
 			}
