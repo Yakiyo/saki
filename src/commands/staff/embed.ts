@@ -58,13 +58,7 @@ export const command: Command = {
 					option
 						.setName('channel')
 						.setDescription('the channel to send the embed to')
-						.addChannelTypes(
-							CT.GuildText,
-							CT.GuildNews,
-							CT.GuildNewsThread,
-							CT.GuildPublicThread,
-							CT.GuildPrivateThread,
-						),
+						.addChannelTypes(CT.GuildText, CT.PublicThread, CT.PrivateThread),
 				),
 		)
 		.addSubcommand((sub) =>
@@ -81,13 +75,7 @@ export const command: Command = {
 					option
 						.setName('channel')
 						.setDescription('the channel to send the embed to')
-						.addChannelTypes(
-							CT.GuildText,
-							CT.GuildNews,
-							CT.GuildNewsThread,
-							CT.GuildPublicThread,
-							CT.GuildPrivateThread,
-						),
+						.addChannelTypes(CT.GuildText, CT.PublicThread, CT.PrivateThread),
 				),
 		)
 		.addSubcommand((sub) =>
@@ -110,13 +98,7 @@ export const command: Command = {
 					option
 						.setName('channel')
 						.setDescription('the channel where the message is situated in')
-						.addChannelTypes(
-							CT.GuildText,
-							CT.GuildNews,
-							CT.GuildNewsThread,
-							CT.GuildPublicThread,
-							CT.GuildPrivateThread,
-						),
+						.addChannelTypes(CT.GuildText, CT.PublicThread, CT.PrivateThread),
 				),
 		),
 	async execute(interaction) {
