@@ -22,7 +22,10 @@ export const command: Command = {
 		),
 	async execute(interaction) {
 		await interaction.deferReply({ ephemeral: true });
-		const sentence = interaction.options.getString('message')?.replace('\\n', '\n') as string;
+		const sentence = interaction.options
+			.getString('message')
+			?.replace('\\n', '\n')
+			.replace('\\n', '\n') as string;
 		const channel = (interaction.options.getChannel('channel') ||
 			interaction.channel) as GuildTextBasedChannel;
 
