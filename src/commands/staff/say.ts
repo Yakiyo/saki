@@ -2,7 +2,7 @@ import {
 	SlashCommandBuilder,
 	ChannelType as CT,
 	type GuildTextBasedChannel,
-	type GuildMember,
+	// type GuildMember,
 } from 'discord.js';
 import type { Command } from '../../struct/types';
 import { sendLog } from '../../util';
@@ -26,13 +26,13 @@ export const command: Command = {
 		const channel = (interaction.options.getChannel('channel') ||
 			interaction.channel) as GuildTextBasedChannel;
 
-		const authorPerms = channel.permissionsFor(interaction.member as GuildMember);
-		if (!authorPerms?.has('SendMessages')) {
-			await interaction.editReply({
-				content: 'You do not have permission to send message in the target channel',
-			});
-			return;
-		}
+		// const authorPerms = channel.permissionsFor(interaction.member as GuildMember);
+		// if (!authorPerms?.has('SendMessages')) {
+		// 	await interaction.editReply({
+		// 		content: 'You do not have permission to send message in the target channel',
+		// 	});
+		// 	return;
+		// }
 
 		const message = await channel.send(`${sentence}`);
 
