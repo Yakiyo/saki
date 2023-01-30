@@ -9,7 +9,7 @@ import { readdirSync } from 'node:fs';
 import { REST, Routes } from 'discord.js';
 import { type Command } from './types';
 import config from '../config';
-import { isStaff, log } from '../util';
+import { isStaff, log, shorten } from '../util';
 const { clientId, guildId } = config;
 
 export class CommandHandler {
@@ -54,13 +54,16 @@ export class CommandHandler {
 			await command.execute(interaction);
 		} catch (e) {
 			log(e);
+			const content = `Internal error when executing the command!\n\`\`\` ${shorten(
+				`${e}`,
+			)}\`\`\` `;
 			if (interaction.replied || interaction.deferred) {
 				await interaction.editReply({
-					content: 'Internal error when executing the command!',
+					content,
 				});
 			} else {
 				await interaction.reply({
-					content: 'Internal error when executing the command!',
+					content,
 					ephemeral: true,
 				});
 			}
