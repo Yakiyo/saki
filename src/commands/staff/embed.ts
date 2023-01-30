@@ -132,7 +132,7 @@ export const command: Command = {
 				return;
 			}
 			// @ts-ignore
-			// rome-ignore lint/performance/noDelete: <explanation>
+			// rome-ignore lint/performance/noDelete: We need this
 			Object.keys(source).forEach((k) => source[k] == null && delete source[k]);
 
 			source = JSON.stringify(source, null, 4);
@@ -168,12 +168,12 @@ export const command: Command = {
 		} else if (subCommand === 'create') {
 			const description = interaction.options.getString('description');
 			const title = interaction.options.getString('title') || null;
-			const color = interaction.options.getString('color') || 'RANDOM';
+			const color = interaction.options.getString('color');
 			const channel = interaction.options.getChannel('channel') || interaction.channel;
 
 			const embed = {
 				title: title,
-				color: color.toUpperCase() || Colors.Blue,
+				color: color?.toUpperCase() ?? undefined,
 				description: description,
 			} as APIEmbed;
 			// @ts-ignore
