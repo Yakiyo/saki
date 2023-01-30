@@ -1,4 +1,4 @@
-import { ChannelType, GuildTextBasedChannel, SlashCommandBuilder } from 'discord.js';
+import { GuildTextBasedChannel, SlashCommandBuilder } from 'discord.js';
 import { clean, log } from '../../util';
 import config from '../../config';
 import type { Command } from '../../struct/types';
