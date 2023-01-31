@@ -7,24 +7,11 @@ import type {
 } from 'discord.js';
 import config from '../config';
 import { log } from './logger';
+
 /**
  * If a member is staff or not
  */
-export function isStaff(member: GuildMember) {
-	return member.roles.cache.has(config.roles.mod);
-}
-
-/**
- * Coverts the first character of the string to uppercase and the rest to lowercase
- */
-export function casify(string: string) {
-	if (typeof string !== 'string') return 'null';
-
-	return string
-		.split(/_/g)
-		.map((word) => word.charAt(0).toUpperCase() + word.substring(1).toLowerCase())
-		.join(' ');
-}
+export const isStaff = (member: GuildMember) => member.roles.cache.has(config.roles.mod);
 
 /**
  * Log a message to activity/mod logs channel

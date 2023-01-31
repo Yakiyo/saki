@@ -1,6 +1,18 @@
 import { inspect } from 'util';
 
 /**
+ * Coverts the first character of the string to uppercase and the rest to lowercase
+ */
+export function casify(string: string) {
+	if (typeof string !== 'string') return 'null';
+
+	return string
+		.split(/_/g)
+		.map((word) => word.charAt(0).toUpperCase() + word.substring(1).toLowerCase())
+		.join(' ');
+}
+
+/**
  * Shorten a string upto num length
  */
 export function shorten(str: string, num = 1000): string | undefined {
