@@ -8,6 +8,7 @@ import {
 } from 'discord.js';
 import type { Command } from '../../struct/types';
 import { log, parseEmoji } from '../../util';
+import {} from '@prisma/client';
 
 export const command: Command = {
 	data: new SlashCommandBuilder()
@@ -73,6 +74,7 @@ export const command: Command = {
 		switch (interaction.options.getSubcommand()) {
 			case 'add': {
 				const role = interaction.options.getRole('role') as Role;
+				const type = interaction.options.getString('type') as 'VERIFY' | 'NORMAL' | undefined;
 
 				if (role.id === interaction.guildId) {
 					interaction.editReply(
@@ -120,6 +122,7 @@ export const command: Command = {
 						channel: channel.id,
 						role: role.id,
 						reaction: emoji,
+						type,
 					},
 				});
 				if (prev) {
