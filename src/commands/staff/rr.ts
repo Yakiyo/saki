@@ -74,7 +74,7 @@ export const command: Command = {
 		switch (interaction.options.getSubcommand()) {
 			case 'add': {
 				const role = interaction.options.getRole('role') as Role;
-				const type = interaction.options.getString('type') as 'VERIFY' | 'NORMAL' | undefined;
+				const type = interaction.options.getString('type') as 'VERIFY' | 'NORMAL' | null;
 
 				if (role.id === interaction.guildId) {
 					interaction.editReply(
@@ -122,7 +122,6 @@ export const command: Command = {
 						channel: channel.id,
 						role: role.id,
 						reaction: emoji,
-						type,
 					},
 				});
 				if (prev) {
@@ -138,6 +137,7 @@ export const command: Command = {
 						channel: channel.id,
 						role: role.id,
 						reaction: emoji,
+						type: type ?? undefined,
 					},
 				});
 				interaction.editReply('Successfully created reaction role!');
