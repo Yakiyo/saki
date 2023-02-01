@@ -76,6 +76,6 @@ $ npm run start
 ```
 For any queries or problems, feel free to open an [issue](https://github.com/Yakiyo/saki/issues/new/choose). I'll be happy to help.
 ## Author
-**Saki** © [Yakiyo](https://github.com/Yakiyo). Authored and maintained by Yakiyo.
+**Saki** © [Yakiyo](https://github.com/Yakiyo). Authored and maintained by Yakiyo & [Look](https://github.com/Muril-o).
 
 Released under [MIT License](https://opensource.org/licenses/MIT).

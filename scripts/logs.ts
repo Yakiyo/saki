@@ -3,7 +3,7 @@
  * It parses each line as a Object and then prints it. To only get the latest `n`
  * errors, pass the number to the script invokation. i.e.
  *
- *   ts-node scripts/logs.ts 6 # to get the last 6 errors
+ *   npm run logs 6 # to get the last 6 errors
  *
  */
 
