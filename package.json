@@ -45,7 +45,6 @@
   },
   "devDependencies": {
     "@types/node": "^18.11.18",
-    "@types/node-fetch": "^2.6.2",
     "husky": "^8.0.3",
     "prisma": "^4.9.0",
     "rome": "^11.0.0",
