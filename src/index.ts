@@ -55,6 +55,7 @@ const distube = new DisTube(client, {
 	leaveOnFinish: true,
 	leaveOnStop: false,
 	plugins: [new YtDlpPlugin({ update: true })],
+	youtubeCookie: process.env.YOUTUBE_COOKIE,
 });
 
 client.commandHandler = new CommandHandler();
