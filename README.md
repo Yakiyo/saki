@@ -54,6 +54,7 @@ DATABASE_URL=<Mongodb URI>
 DEPLOY=<Set this to TRUE for registering slash commands on startup>
 NODE_ENV=<production|dev>
 YOUTUBE_API_KEY=<Youtube api key>
+YOUTUBE_COOKIE=<Youtube cookie keys>
 TWITTER_BEARER_TOKEN=<Twitter bearer token>
 ```
 If you are deploying in production, do set the `NODE_ENV` to `production`. On dev it logs errors to console and other helpful stuff which are usually not needed in production. Once you are done with the env file, install packages and seed the database. Seeding is required as some of the code expect the bare minimum data to be there in the database.
