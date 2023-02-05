@@ -25,7 +25,7 @@ export const job: Job = {
 
 		const channel = (await client.channels
 			.fetch(config.channels.updates)
-			.catch(() => null)) as GuildTextBasedChannel | null;
+			.catch(log)) as GuildTextBasedChannel | null;
 		channel
 			?.send(str)
 			.then((message) => message.crosspost())
