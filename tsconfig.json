@@ -17,7 +17,7 @@
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "removeComments": true,
-    "noEmitOnError": ,            
+    "noEmitOnError": false            
   },
   "include": [
     "src/"
