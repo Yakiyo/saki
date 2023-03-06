@@ -9,15 +9,15 @@ export const event: Event = {
 		if (!message.inGuild() || message.interaction) return;
 		const embed: APIEmbed = {
 			author: {
-				name: message.author.tag,
-				icon_url: message.author.displayAvatarURL() as string | undefined,
+				name: message?.author?.tag ?? 'Unknown user',
+				icon_url: (message?.author?.displayAvatarURL() as string | undefined) ?? '',
 			},
 			fields: [],
 			color: 16729871,
-			description: `**Message sent by <@${message.author.id}> deleted in <#${message.channelId}>**\n${message.content}`,
+			description: `**Message sent by <@${message.author?.id}> deleted in <#${message.channelId}>**\n${message.content}`,
 			timestamp: new Date().toISOString(),
 			footer: {
-				text: `ID: ${message.author.id}`,
+				text: `ID: ${message.author?.id}`,
 			},
 		};
 		const attachments = [];
