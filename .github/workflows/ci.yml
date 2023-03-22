@@ -9,11 +9,14 @@ jobs:
             - uses: actions/setup-node@v2
               with:
                   node-version: '16.x'
-            - name: Install Packages
-              run: npm install
+            - name: Install pnpm
+              run: npm install -g pnpm
+
+            - name: Install packages
+              run: pnpm install
 
             - name: Code Quality
-              run: npx rome ci .
+              run: pnpm rome ci .
 
             - name: Build Files
-              run: npm run build
+              run: pnpm build

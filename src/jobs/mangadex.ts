@@ -25,11 +25,13 @@ export const job: Job = {
 		const finals = [];
 		for (const chap of chaps) {
 			const link = `https://mangadex.org/chapter/${chap.id}`;
-			if (
-				chap.relationships?.find((rel) => rel.type === 'scanlation_group')?.id !==
-				'6b27f0ac-8ed1-45af-a24a-1a4246ec6305'
-			)
+
+			const cclaw_id = '6b27f0ac-8ed1-45af-a24a-1a4246ec6305';
+			// If its not posted by cclaw, we skip it
+			if (chap.relationships?.find((rel) => rel.type === 'scanlation_group')?.id !== cclaw_id) {
 				continue;
+			}
+
 			if (feeds?.filter((x) => x.link === link).length !== 0) continue;
 			finals.push({
 				link,
