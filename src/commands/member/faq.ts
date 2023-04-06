@@ -12,7 +12,7 @@ const faqs = [
 	},
 	{
 		title: 'Is there an official translation for the LN in English?',
-		desc: "- Yes, the series is officially licensed by Yen Press. You can buy copies by visiting their official website.",
+		desc: '- Yes, the series is officially licensed by Yen Press. You can buy copies by visiting their official website.',
 	},
 	{
 		title: 'What is the release schedule of the YouTube videos?',
