@@ -8,11 +8,11 @@ const faqs = [
 	},
 	{
 		title: 'Is Gimai Seikatsu anime, manga, LN, or a game?',
-		desc: "- Gimai Seikatsu as a series was originally a YouTube VN-style series with short videos which you can [check out here](https://bit.ly/gimaiyoutube).\n- Later the Light Novel had its debut, currently there are 5 released volumes with the 6th coming on the 25th August 2022.\n- The manga adaptation was then announced and is available digitally on [ComicWalker](https://comic-walker.com/contents/detail/KDCW_KS13202353010000_68).\n- Anime was then announced but we don't know its release date or animation studio yet.",
+		desc: "- Gimai Seikatsu as a series was originally a YouTube VN-style series with short videos which you can [check out here](https://bit.ly/gimaiyoutube).\n- Later the Light Novel had its debut, and is still releasing. The Light Novel is licensed by Yen Press and you can buy your copy by visiting their official website.\n- Anime was then announced but we don't know its release date or animation studio yet.",
 	},
 	{
 		title: 'Is there an official translation for the LN in English?',
-		desc: "- Currently, there's no official translation available for Gimai Seikatsu in English. However, there's currently a Fan Translation for it by [CClaws Translations](https://discord.gg/e4BJxX6).",
+		desc: "- Yes, the series is officially licensed by Yen Press. You can buy copies by visiting their official website.",
 	},
 	{
 		title: 'What is the release schedule of the YouTube videos?',
