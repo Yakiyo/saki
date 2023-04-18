@@ -82,6 +82,11 @@ export const command: Command = {
 				interaction.editReply('Not implemented yet!');
 				return;
 			}
+
+			case 'list': {
+				interaction.editReply('Not implemented yet!');
+				return;
+			}
 		}
 	},
 };
