@@ -1,5 +1,6 @@
-import { SlashCommandBuilder, User } from 'discord.js';
+import { Colors, SlashCommandBuilder, type User } from 'discord.js';
 import type { Command } from '../../struct/types';
+import { log, sendLog } from '../../util';
 
 export const command: Command = {
 	data: new SlashCommandBuilder()
@@ -33,12 +34,36 @@ export const command: Command = {
 				),
 		),
 	async execute(interaction) {
-		const user = interaction.options.getUser('user') as User;
-		await interaction.deferReply();
+		const target = interaction.options.getUser('user') as User;
+		await interaction.deferReply({ ephemeral: true });
 		switch (interaction.options.getSubcommand()) {
 			case 'add': {
-				console.log(user);
-				interaction.editReply('Not implemented yet!');
+				const reason = interaction.options.getString('reason') as string;
+				const count = await prisma.warn.count();
+				await prisma.warn.create({
+					data: {
+						id: count + 1,
+						target: target.id,
+						moderator: interaction.user.id,
+						reason,
+					},
+				});
+				sendLog({
+					title: `Warn Case #${count + 1}`,
+					color: Colors.Blurple,
+					description: `**Offender:** ${target.id} | <@!${target.id}>\n**Moderator:** ${interaction.user.tag}\n**Reason:** ${reason}`,
+				});
+				target
+					.send({
+						embeds: [
+							{
+								description: `You have been warned from **Gimai Seikatsu** server.\n**Reason:** ${reason}`,
+								color: Colors.Blurple,
+							},
+						],
+					})
+					.catch(log);
+				interaction.editReply(`Succesfully warned **${target.username}**`);
 				return;
 			}
 
