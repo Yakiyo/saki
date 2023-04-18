@@ -32,6 +32,17 @@ export const command: Command = {
 						.setName('id')
 						.setDescription('An id of a warning to remove. If empty, all warnings are removed'),
 				),
+		)
+		.addSubcommand((sub) =>
+			sub
+				.setName('list')
+				.setDescription('List all warnings of a user')
+				.addUserOption((option) =>
+					option
+						.setName('user')
+						.setDescription('The user whose warnings to show')
+						.setRequired(true),
+				),
 		),
 	async execute(interaction) {
 		const target = interaction.options.getUser('user') as User;
