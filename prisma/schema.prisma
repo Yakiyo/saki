@@ -81,6 +81,16 @@ model Modmail {
   @@map("Modmail")
 }
 
+// A model respresenting a warn object
+model Warn {
+  // This count needs to be manually incremented everytime as mongodb
+  // doesnt support `autoincrement()`
+  id        Int      @id @map("_id")
+  target    String
+  moderator String
+  createdAt DateTime @default(now())
+}
+
 type Feed {
   link String
 }
