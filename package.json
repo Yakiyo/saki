@@ -6,7 +6,7 @@
   "scripts": {
     "prepare": "husky install && prisma generate",
     "build": "tsc",
-    "dev": "ts-node src",
+    "dev": "ts-node --transpile-only src",
     "start": "node .",
     "prestart": "rm -rf dist/ && tsc",
     "deploy": "ts-node --transpile-only src/deploy.ts",
