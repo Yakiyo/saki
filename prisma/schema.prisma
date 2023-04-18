@@ -89,6 +89,7 @@ model Warn {
   target    String
   moderator String
   createdAt DateTime @default(now())
+  reason    String
 }
 
 type Feed {
