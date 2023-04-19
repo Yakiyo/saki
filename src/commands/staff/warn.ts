@@ -21,16 +21,11 @@ export const command: Command = {
 			sub
 				.setName('remove')
 				.setDescription('Remove one or all warnings from a user')
-				.addUserOption((option) =>
-					option
-						.setName('user')
-						.setDescription('The user whose warn(s) to remove')
-						.setRequired(true),
-				)
 				.addNumberOption((option) =>
 					option
 						.setName('id')
-						.setDescription('An id of a warning to remove. If empty, all warnings are removed'),
+						.setDescription('An id of a warning to remove. If empty, all warnings are removed')
+						.setRequired(true),
 				),
 		)
 		.addSubcommand((sub) =>
@@ -46,11 +41,26 @@ export const command: Command = {
 		),
 	async execute(interaction) {
 		const target = interaction.options.getUser('user') as User;
-		await interaction.deferReply({ ephemeral: true });
+		if (target?.bot) {
+			interaction.reply({
+				ephemeral: true,
+				content: 'Cannot add/remove/list warn for bots',
+			});
+			return;
+		}
 		switch (interaction.options.getSubcommand()) {
 			case 'add': {
+				await interaction.deferReply({ ephemeral: true });
 				const reason = interaction.options.getString('reason') as string;
-				const count = await prisma.warn.count();
+				const count =
+					(await prisma.warn
+						.findFirst({
+							orderBy: {
+								id: 'desc',
+							},
+						})
+						.then((m) => m?.id)
+						.catch(log)) ?? 1;
 				await prisma.warn.create({
 					data: {
 						id: count + 1,
@@ -75,16 +85,76 @@ export const command: Command = {
 					})
 					.catch(log);
 				interaction.editReply(`Succesfully warned **${target.username}**`);
+				// const len = await prisma.warn.findMany({
+				// 	where: {
+				// 		target: target.id,
+				// 	}
+				// }).then(m => m.length);
+				// if (len === 2) {
+
+				// }
 				return;
 			}
 
 			case 'remove': {
-				interaction.editReply('Not implemented yet!');
+				await interaction.deferReply({ ephemeral: true });
+				const id = interaction.options.getNumber('id') as number;
+				const warn = await prisma.warn.findFirst({
+					where: {
+						id,
+					},
+				});
+				if (!warn) {
+					interaction.editReply(`No warn with id #${id} exists`);
+					return;
+				}
+				await prisma.warn
+					.delete({
+						where: {
+							id,
+						},
+					})
+					.catch(log);
+				sendLog({
+					title: `Warn Remove #${warn.id}`,
+					color: Colors.Blurple,
+					description: `Warn case #${warn.id} removed by <@${interaction.user.id}>`,
+				});
+				interaction.editReply(`Deleted warn entry #${id}`);
 				return;
 			}
 
 			case 'list': {
-				interaction.editReply('Not implemented yet!');
+				await interaction.deferReply();
+				const warns = await prisma.warn
+					.findMany({
+						where: {
+							target: target.id,
+						},
+					})
+					.catch(log);
+				if (!warns?.length) {
+					interaction.editReply('The user has no warns!');
+					return;
+				}
+
+				interaction.editReply({
+					embeds: [
+						{
+							color: Colors.Blurple,
+							title: `${warns.length} warnings found`,
+							author: {
+								name: target.tag,
+								icon_url: target.displayAvatarURL(),
+							},
+							fields: warns.map((warn) => ({
+								inline: true,
+								name: `#${warn.id} | ${warn.createdAt.toDateString()}`,
+								value: `**Moderator:** <@${warn.moderator}>\n**Reason:** ${warn.reason}`,
+							})),
+						},
+					],
+				});
 				return;
 			}
 		}
