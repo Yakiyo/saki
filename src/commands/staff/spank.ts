@@ -27,33 +27,32 @@ export const command: Command = {
 			return;
 		}
 
-		if (!target.moderatable) {
-			interaction.editReply('This user is higher then me in hierarchy. Cannot timeout them');
-			return;
+		if (target.moderatable) {
+			// Timeout for 1 min -> 1 min * 60 seconds * 1000 ms -> 6 * 10^4 ms (??)
+			await target.timeout(1 * 60 * 1000);
+
+			sendLog(
+				{
+					title: 'Spank Case',
+					color: Colors.Green,
+					description: `**Offender:** ${target.user.id} | <@!${target.user.id}>\n**Moderator:** ${interaction.user.tag}\n**Reason:** Spanks\n**Duration:** 1 minute`,
+				},
+				LogDestination.mod,
+			);
 		}
-		// Timeout for 1 min -> 1 min * 60 seconds * 1000 ms -> 6 * 10^4 ms (??)
-		await target.timeout(1 * 60 * 1000);
 
 		target
 			.send({
 				embeds: [
 					{
-						description:
-							'You have been muted in **Gimai Seikatsu** server for 1 minute.\n**Reason:** Spanks',
+						description: `You have been spanked in **Gimai Seikatsu** server${
+							target.moderatable ? ' (1 minute timeout).' : '.'
+						} by <@${interaction.user.id}>`,
 						color: 16025922,
 					},
 				],
 			})
 			.catch(log);
-
-		sendLog(
-			{
-				title: 'Spank Case',
-				color: Colors.Green,
-				description: `**Offender:** ${target.user.id} | <@!${target.user.id}>\n**Moderator:** ${interaction.user.tag}\n**Reason:** Spanks\n**Duration:** 1 minute`,
-			},
-			LogDestination.mod,
-		);
 
 		interaction.editReply({
 			embeds: [
