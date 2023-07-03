@@ -8,20 +8,12 @@ export const job: Job = {
 	name: 'Twitter',
 	interval: 15 * 60,
 	async run() {
-		const gimai_id = '1250594468262113280';
-		const res: string[] | null = await fetch(
-			`https://api.twitter.com/2/users/${gimai_id}/tweets?max_results=5`,
-			{
-				headers: {
-					Authorization: `Bearer ${process.env.TWITTER_BEARER_TOKEN}`,
-				},
-			},
+		const res = await fetch(
+			'https://rsshub.app/twitter/user/gimaiseikatsu.json?limit=5&sorted=true',
 		)
-			.then(async (v) => await v.json())
-			.then((v) => (v as Record<string, Record<string, string>[]>).data)
-			.then((v) =>
-				v.map((r: Record<string, string>) => `https://twitter.com/gimaiseikatsu/status/${r.id}`),
-			)
+			.then((v) => v.json())
+			.then((v) => (v as Record<string, any>).items as Record<string, string>[])
+			.then((v) => v.map((f) => f.url))
 			.catch(log);
 
 		if (!res?.length) return;
