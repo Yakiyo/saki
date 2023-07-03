@@ -13,7 +13,7 @@ export const job: Job = {
 		)
 			.then((v) => v.json())
 			.then((v) => (v as Record<string, any>).items as Record<string, string>[])
-			.then((v) => v.map((f) => f.url))
+			.then((v) => v.map((f) => f.url.replace('twitter.com', 'vxtwitter.com')))
 			.catch(log);
 
 		if (!res?.length) return;
@@ -32,6 +32,7 @@ export const job: Job = {
 				link,
 			});
 		}
+
 		if (!links.length) return;
 		await prisma.cache.update({
 			where: {
