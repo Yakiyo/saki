@@ -78,5 +78,8 @@ global.distube = distube;
 global.jobHandler = new JobHandler();
 
 process.on('unhandledRejection', log);
+client.on('error', (e) => {
+	log(e);
+});
 
 client.login(process.env.DISCORD_TOKEN);
