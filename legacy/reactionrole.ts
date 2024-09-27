@@ -1,5 +1,9 @@
+import { PrismaClient } from '@prisma/client';
 import { type MessageReaction, type User } from 'discord.js';
-import { log } from '../util';
+import { log } from '../src/util';
+
+// impromptu line for evading error
+let prisma = new PrismaClient();
 
 export async function reactionRole(reaction: MessageReaction, user: User) {
 	if (user.bot) return;
