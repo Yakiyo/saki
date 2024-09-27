@@ -4,6 +4,7 @@ import type {
 	ClientEvents,
 	Client as DiscordClient,
 	SlashCommandSubcommandsOnlyBuilder,
+	SlashCommandOptionsOnlyBuilder,
 } from 'discord.js';
 import { type CommandHandler } from './commandHandler';
 
@@ -20,6 +21,7 @@ export interface Client extends DiscordClient<true> {
 type CommandData =
 	| SlashCommandBuilder
 	| SlashCommandSubcommandsOnlyBuilder
+	| SlashCommandOptionsOnlyBuilder
 	| Omit<SlashCommandBuilder, 'addSubcommand' | 'addSubcommandGroup'>;
 
 export interface Command {
