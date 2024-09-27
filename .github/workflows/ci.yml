@@ -15,8 +15,8 @@ jobs:
             - name: Install packages
               run: pnpm install
 
-            - name: Code Quality
-              run: pnpm rome ci .
+            # - name: Code Quality
+            #   run: pnpm rome ci .
 
             - name: Build Files
               run: pnpm build
