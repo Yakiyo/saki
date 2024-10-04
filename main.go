@@ -9,6 +9,8 @@ import (
 	_ "github.com/joho/godotenv/autoload"
 )
 
+var client *discordgo.Session
+
 func main() {
 
 	token := os.Getenv("TOKEN")
@@ -17,7 +19,7 @@ func main() {
 		return
 	}
 
-	client, _ := discordgo.New("Bot " + token)
+	client, _ = discordgo.New("Bot " + token)
 
 	if err := client.Open(); err != nil {
 		fmt.Println("Failed to open connection", err)
