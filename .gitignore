@@ -1,10 +1,3 @@
-# Typescript builds
-dist/
-
-# Nodejs related files
-node_modules/
-package-lock.json
-
 # Environment variables and secrets
 .env
 
@@ -13,4 +6,7 @@ config.dev.json
 **/dev.ts
 
 # Error logs
-error.log
+logs/
+
+# Lock file (should this be ignored or no?)
+deno.lock
