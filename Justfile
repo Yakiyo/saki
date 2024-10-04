@@ -9,7 +9,7 @@ default:
   @just --list
 
 @run *arg:
-    go run main.go $@
+    go run . $@
 
 test:
 	go test ./...

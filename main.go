@@ -1,36 +1,64 @@
 package main
 
 import (
+	"context"
 	"fmt"
+	"log/slog"
 	"os"
 	"os/signal"
 
-	"github.com/bwmarrin/discordgo"
+	"github.com/disgoorg/disgo"
+	"github.com/disgoorg/disgo/bot"
+	"github.com/disgoorg/disgo/discord"
+	"github.com/disgoorg/disgo/gateway"
+	"github.com/disgoorg/snowflake/v2"
 	_ "github.com/joho/godotenv/autoload"
 )
-
-var client *discordgo.Session
 
 func main() {
 
 	token := os.Getenv("TOKEN")
 	if token == "" {
-		fmt.Println("Missing required env value TOKEN")
+		slog.Error("Missing required env valoe TOKEN")
 		return
 	}
 
-	client, _ = discordgo.New("Bot " + token)
+	client, err := disgo.New(token,
+		bot.WithGatewayConfigOpts(
+			gateway.WithIntents(
+				gateway.IntentGuilds,
+				gateway.IntentGuildMessages,
+				gateway.IntentGuildMessageReactions,
+				gateway.IntentMessageContent,
+				gateway.IntentDirectMessages,
+			),
+			gateway.WithPresenceOpts(
+				gateway.WithOnlineStatus(discord.OnlineStatusOnline),
+				gateway.WithListeningActivity("Lofi Music"),
+			),
+		),
+		bot.WithEventListenerFunc(interactionHandler),
+		bot.WithEventListenerFunc(messageHandler))
 
-	if err := client.Open(); err != nil {
-		fmt.Println("Failed to open connection", err)
+	if err != nil {
+		slog.Error("Error when creating client", slog.Any("err", err))
+		return
+	}
+	slog.Info("bot id", slog.Any("id", client.ID()))
+	if _, err := client.Rest().SetGuildCommands(snowflake.GetEnv("BOT_ID"), snowflake.GetEnv("GUILD_ID"), commands); err != nil {
+		slog.Error("Error when deploying guild commands", slog.Any("err", err))
 		return
 	}
 
-	defer client.Close()
+	if err := client.OpenGateway(context.TODO()); err != nil {
+		slog.Error("Failed to open gateway connection", slog.Any("err", err))
+		return
+	}
+
 	fmt.Println("Starting bot...")
-
+	slog.Info("bot id", slog.Any("id", client.ID()))
 	stop := make(chan os.Signal, 1)
 	signal.Notify(stop, os.Interrupt)
 	<-stop
-	fmt.Println("Graceful shutdown")
+	fmt.Println("Shutting down...")
 }
