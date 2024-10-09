@@ -10,3 +10,6 @@ logs/
 
 # Lock file (should this be ignored or no?)
 deno.lock
+
+# prisma generated files
+generated/

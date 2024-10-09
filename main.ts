@@ -1,6 +1,8 @@
 import { client } from "./mod.ts";
 
-if (!Deno.env.has("TOKEN")) {
+const token = Deno.env.get("TOKEN");
+
+if (!token) {
   console.error("Missing required env variable TOKEN");
   Deno.exit(1);
 }
@@ -15,4 +17,4 @@ Deno.addSignalListener("SIGINT", () => {
   Deno.exit();
 });
 
-client.login(Deno.env.get("TOKEN"));
+client.login(token);

@@ -1,11 +1,20 @@
 {
   "tasks": {
     "dev": "deno run -A --env main.ts",
-    "prod": "PRODUCTION=true deno run -A --env main.ts"
+    "prod": "PRODUCTION=true deno run -A --env main.ts",
+    "prisma": "deno run -A npm:prisma@latest",
+    "prs:gen": "deno run -A --unstable npm:prisma@latest generate --no-engine",
+    "prs:push": "deno run -A npm:prisma@latest db push"
   },
   "imports": {
     "@deno-lib/logger": "jsr:@deno-lib/logger@^1.1.6",
     "@std/assert": "jsr:@std/assert@1",
     "discord.js": "npm:discord.js@^14.16.3"
+  },
+  "fmt": {
+    "exclude": ["generated"]
+  },
+  "lint": {
+    "exclude": ["generated"]
   }
 }
