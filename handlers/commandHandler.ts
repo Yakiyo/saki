@@ -1,13 +1,15 @@
 import {
+  ChatInputCommandInteraction,
   Collection,
   InteractionContextType,
   PermissionFlagsBits,
   REST,
   Routes,
 } from "discord.js";
-import { logger } from "../util/log.ts";
+import { log, logger } from "../util/log.ts";
 import type { Command } from "./types.ts";
 import kv from "../util/kv.ts";
+import { shorten } from "../util/misc.ts";
 
 export class CommandHandler {
   public commands: Collection<string, Command>;
@@ -40,6 +42,38 @@ export class CommandHandler {
     }
 
     console.info("Successfully registered application (/) commands.");
+  }
+
+  public async handleCommand(interaction: ChatInputCommandInteraction) {
+    const command = this.commands.get(interaction.commandName);
+    if (!command) return;
+
+    try {
+      command.execute(interaction);
+    } catch (error) {
+      log(
+        `Failed to execute command ${command.data.name} in response to interactin`,
+        error,
+      );
+
+      const content = `Internal error when executing the command!\n\`\`\` ${
+        shorten(
+          `${error}`,
+          500,
+        )
+      }\`\`\` `;
+
+      if (interaction.replied || interaction.deferred) {
+        await interaction.editReply({
+          content,
+        });
+      } else {
+        await interaction.reply({
+          content,
+          ephemeral: true,
+        });
+      }
+    }
   }
 
   /**
