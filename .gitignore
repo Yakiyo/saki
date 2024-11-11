@@ -13,3 +13,6 @@ deno.lock
 
 # prisma generated files
 generated/
+
+# node modules
+node_modules/

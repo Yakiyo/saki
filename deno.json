@@ -1,5 +1,6 @@
 {
   "tasks": {
+    "i": "deno install --allow-scripts",
     "dev": "deno run -A --env main.ts",
     "prod": "PRODUCTION=true deno run -A --env main.ts",
     "prisma": "deno run -A npm:prisma@latest",
@@ -16,5 +17,6 @@
   },
   "lint": {
     "exclude": ["generated"]
-  }
+  },
+  "nodeModulesDir": "auto"
 }
