@@ -2,9 +2,12 @@ import {
   Collection,
   InteractionContextType,
   PermissionFlagsBits,
+  REST,
+  Routes,
 } from "discord.js";
 import { logger } from "../util/log.ts";
 import type { Command } from "./types.ts";
+import kv from "../util/kv.ts";
 
 export class CommandHandler {
   public commands: Collection<string, Command>;
@@ -14,6 +17,34 @@ export class CommandHandler {
     this.registerCommands();
   }
 
+  /**
+   * Deploys interactions to discord
+   */
+  public async registerInteractions(global: boolean) {
+    const rest = new REST().setToken(Deno.env.get("DISCORD_TOKEN")!);
+    const route = global
+      ? Routes.applicationCommands(kv.client.get()!)
+      : Routes.applicationGuildCommands(kv.client.get()!, kv.guild.get()!);
+
+    console.info(
+      `Started refreshing ${this.commands.size} application commands`,
+    );
+
+    try {
+      await rest.put(route, {
+        body: this.commands.map((command) => command.data.toJSON()),
+      });
+    } catch (error) {
+      console.error("Failed to register application commands.", error);
+      return;
+    }
+
+    console.info("Successfully registered application (/) commands.");
+  }
+
+  /**
+   * Loads commands from file system into a map
+   */
   private async registerCommands() {
     const path = "./commands";
     const folders = Deno.readDir(path);

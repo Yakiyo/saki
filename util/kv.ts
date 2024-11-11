@@ -11,7 +11,10 @@ export const channels = [
 export const feeds = ["reddit", "twitter", "youtube"] as const;
 export const roles = ["mod", "member", "bot", "ln", "manga"] as const;
 
-export default {
+const _get = (key: string) => localStorage.getItem(key);
+const _set = (key: string, value: string) => localStorage.setItem(key, value);
+
+export const kv = {
   roles: {
     get: (key: typeof roles[number]) => localStorage.getItem(`roles.${key}`),
     set: (key: typeof channels[number], value: string) =>
@@ -19,19 +22,25 @@ export default {
   },
 
   owners: {
-    get: () => localStorage.getItem("owners")?.split(","),
+    get: () => localStorage.getItem("owners")?.split(",") ?? [],
     set: (ids: string[]) => localStorage.setItem("owners", ids.join(",")),
     // adds an individual id to the list of owners
     add: (id: string) => {
-      let ids = localStorage.getItem("owners")?.split(",");
-      if (!ids) ids = [];
+      const ids = localStorage.getItem("owners")?.split(",") ?? [];
       ids.push(id);
       localStorage.setItem("owners", ids.join(","));
     },
   },
 
   guild: {
-    get: () => localStorage.getItem("guild"),
-    set: (id: string) => localStorage.setItem("guild", id),
+    get: () => _get("guild"),
+    set: (value: string) => _set("guild", value),
+  },
+
+  client: {
+    get: () => _get("client"),
+    set: (value: string) => _set("client", value),
   },
 };
+
+export default kv;
