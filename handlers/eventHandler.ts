@@ -12,7 +12,7 @@ export class EventHandler {
     const folder = Deno.readDir(path);
 
     for await (const file of folder) {
-      const { event } = await import(`${path}/${file.name}`) as {
+      const { event } = await import(`../${path}/${file.name}`) as {
         event: Event;
       };
 
