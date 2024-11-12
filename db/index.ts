@@ -1,7 +1,7 @@
-import { connect as conn, disconnect as disconn, pluralize } from "mongoose";
+import { connect as conn, disconnect as disconn } from "mongoose";
 
 // disable mongoose's custom pluralization thingy, my model names are wanky
-pluralize((str) => str);
+// pluralize((str) => str);
 
 /**
  * Connect to the database

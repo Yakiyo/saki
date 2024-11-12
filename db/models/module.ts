@@ -18,6 +18,8 @@ export const moduleSchema = new Schema({
   Twitter: moduleSchemaPart,
   Welcome: moduleSchemaPart,
   Youtube: moduleSchemaPart,
+}, {
+  collection: "Modules",
 });
 
 /**

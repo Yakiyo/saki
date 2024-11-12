@@ -14,6 +14,8 @@ export const cacheSchema = new Schema({
   twitter: [linkType],
   reddit: [linkType],
   mangadex: [linkType],
+}, {
+  collection: "Cache",
 });
 
 /**

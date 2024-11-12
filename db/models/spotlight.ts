@@ -16,6 +16,7 @@ export const spotlightSchema = new Schema({
       },
     },
   },
+  collection: "Spotlights",
 });
 
 /**

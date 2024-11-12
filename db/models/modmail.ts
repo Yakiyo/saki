@@ -18,6 +18,7 @@ export const modmailSchema = new Schema({
       },
     },
   },
+  collection: "Modmail",
 });
 
 /**
