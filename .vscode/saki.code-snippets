@@ -4,7 +4,7 @@
         "description": "Creates boilerplate code for a slash command",
         "body": [
             "import { SlashCommandBuilder } from \"discord.js\";",
-            "import type { Command } from \"../../struct/types\";",
+            "import type { Command } from \"../../handlers/types\";",
             "",
             "export const command: Command = {",
                 "\tdata: new SlashCommandBuilder()",
@@ -20,7 +20,7 @@
         "prefix": ["event"],
         "description": "Creates boilerplate code for an event",
         "body": [
-            "import type { Event } from '../struct/types';",
+            "import type { Event } from '../handlers/types';",
             "import { Events } from 'discord.js';",
             "",
             "export const event: Event = {",
@@ -36,7 +36,7 @@
         "prefix": ["job", "jobs"],
         "description": "Creates boilerplate code for a Job",
         "body": [
-            "import { Job } from '../struct/types';",
+            "import { Job } from '../handlers/types';",
             "",
             "export const job: Job = {",
             "\tname: '${1:job}',",
