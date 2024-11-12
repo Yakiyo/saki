@@ -7,10 +7,6 @@ if (!token) {
   Deno.exit(1);
 }
 
-client.once("ready", () => {
-  console.log(Deno.env.get("PRODUCTION"));
-});
-
 Deno.addSignalListener("SIGINT", () => {
   console.log("Shutting down process...");
   client.destroy();

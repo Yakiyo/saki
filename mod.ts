@@ -4,6 +4,8 @@ import {
   GatewayIntentBits as Intents,
   Partials,
 } from "discord.js";
+import { CommandHandler } from "./handlers/commandHandler.ts";
+import { EventHandler } from "./handlers/eventHandler.ts";
 
 export const client = new Client({
   intents: [
@@ -25,3 +27,6 @@ export const client = new Client({
     ],
   },
 });
+
+export const commandHandler = new CommandHandler();
+export const eventHandler = new EventHandler(client);
