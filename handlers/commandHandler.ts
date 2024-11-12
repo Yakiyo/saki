@@ -86,7 +86,7 @@ export class CommandHandler {
       const files = Deno.readDir(`${path}/${folder.name}`);
       for await (const file of files) {
         const { command } = await import(
-          `${path}/${folder.name}/${file.name}`
+          `../${path}/${folder.name}/${file.name}`
         ) as {
           command: Command;
         };
