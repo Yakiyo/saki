@@ -16,4 +16,10 @@ export const cacheSchema = new Schema({
   mangadex: [linkType],
 });
 
+/**
+ * A cache to store misc contents like the last chapter url, youtube url, twitter post
+ * or reddit post that was sent from the feeds.
+ * We only need one instance of this. So in prod, should only fetch
+ * the entry with id 1
+ */
 export const Cache = model("Cache", cacheSchema);

@@ -18,4 +18,8 @@ export const spotlightSchema = new Schema({
   },
 });
 
+/**
+ * A spotlight entry. The model id the message (the one sent in #spotlight channel).
+ * Source is the id of the message that got starred and channel is where its from.
+ */
 export const Spotlight = model("Spotlights", spotlightSchema);

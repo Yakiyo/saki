@@ -20,4 +20,9 @@ export const moduleSchema = new Schema({
   Youtube: moduleSchemaPart,
 });
 
+/**
+ * A data model for the modules in the bot. All defaults are true,
+ * We only need one instance of this. So in prod, should only fetch
+ * the entry with id 1
+ */
 export const Module = model("Modules", moduleSchema);
