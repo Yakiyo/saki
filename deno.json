@@ -5,7 +5,8 @@
     "prod": "PRODUCTION=true deno run -A --env main.ts",
     "prisma": "deno run -A npm:prisma@latest",
     "prs:gen": "deno run -A --unstable npm:prisma@latest generate --no-engine",
-    "prs:push": "deno run -A npm:prisma@latest db push"
+    "prs:push": "deno run -A npm:prisma@latest db push",
+    "seed:kv": "deno run --allow-env --allow-read seeds/kv.ts"
   },
   "imports": {
     "@deno-lib/logger": "jsr:@deno-lib/logger@^1.1.6",
