@@ -4,7 +4,7 @@
         "description": "Creates boilerplate code for a slash command",
         "body": [
             "import { SlashCommandBuilder } from \"discord.js\";",
-            "import type { Command } from \"../../handlers/types\";",
+            "import type { Command } from \"../../handlers/types.ts\";",
             "",
             "export const command: Command = {",
                 "\tdata: new SlashCommandBuilder()",
@@ -20,14 +20,14 @@
         "prefix": ["event"],
         "description": "Creates boilerplate code for an event",
         "body": [
-            "import type { Event } from '../handlers/types';",
+            "import type { Event } from '../handlers/types.ts';",
             "import { Events } from 'discord.js';",
             "",
             "export const event: Event = {",
             "\tname: Events.${1:event},",
             "\tonce: false,",
             "\tasync handle() {",
-            "\t\tconsole.log(`Ready and logged in as ${client.user.tag}`);",
+            "\t\tconsole.log(`Ready`);",
             "\t},",
             "};"
         ]
@@ -36,7 +36,7 @@
         "prefix": ["job", "jobs"],
         "description": "Creates boilerplate code for a Job",
         "body": [
-            "import { Job } from '../handlers/types';",
+            "import { Job } from '../handlers/types.ts';",
             "",
             "export const job: Job = {",
             "\tname: '${1:job}',",
