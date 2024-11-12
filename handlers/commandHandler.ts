@@ -16,14 +16,17 @@ export class CommandHandler {
 
   constructor() {
     this.commands = new Collection();
-    this.registerCommands();
   }
 
   /**
    * Deploys interactions to discord
    */
-  public async registerInteractions(global: boolean) {
-    const rest = new REST().setToken(Deno.env.get("DISCORD_TOKEN")!);
+  public async registerInteractions(global = false) {
+    if (!this.commands.size) {
+      console.warn("loading commands");
+      await this.registerCommands();
+    }
+    const rest = new REST().setToken(Deno.env.get("TOKEN")!);
     const route = global
       ? Routes.applicationCommands(kv.client.get()!)
       : Routes.applicationGuildCommands(kv.client.get()!, kv.guild.get()!);
@@ -79,7 +82,7 @@ export class CommandHandler {
   /**
    * Loads commands from file system into a map
    */
-  private async registerCommands() {
+  public async registerCommands() {
     const path = "./commands";
     const folders = Deno.readDir(path);
     for await (const folder of folders) {
@@ -116,6 +119,6 @@ export class CommandHandler {
       }
     }
 
-    return this.commands;
+    return this;
   }
 }
