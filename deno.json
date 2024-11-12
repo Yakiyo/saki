@@ -19,5 +19,5 @@
   "lint": {
     "exclude": ["generated"]
   },
-  "nodeModulesDir": "auto"
+  "nodeModulesDir": "none"
 }

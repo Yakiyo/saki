@@ -28,5 +28,5 @@ export const client = new Client({
   },
 });
 
-export const commandHandler = new CommandHandler();
+export const commandHandler = await new CommandHandler().registerCommands();
 export const eventHandler = new EventHandler(client);
