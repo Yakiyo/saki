@@ -59,11 +59,12 @@ export class CommandHandler {
         error,
       );
 
-      const content = `Internal error when executing the command!\n\`\`\` ${shorten(
-        `${error}`,
-        500,
-      )
-        }\`\`\` `;
+      const content = `Internal error when executing the command!\n\`\`\` ${
+        shorten(
+          `${error}`,
+          500,
+        )
+      }\`\`\` `;
 
       if (interaction.replied || interaction.deferred) {
         await interaction.editReply({
