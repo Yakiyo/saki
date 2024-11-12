@@ -11,7 +11,8 @@
   "imports": {
     "@deno-lib/logger": "jsr:@deno-lib/logger@^1.1.6",
     "@std/assert": "jsr:@std/assert@1",
-    "discord.js": "npm:discord.js@^14.16.3"
+    "discord.js": "npm:discord.js@^14.16.3",
+    "mongoose": "npm:mongoose@^8.8.1"
   },
   "fmt": {
     "exclude": ["generated"]
