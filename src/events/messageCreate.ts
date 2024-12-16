@@ -7,6 +7,7 @@ import {
 	ButtonStyle,
 	ComponentType,
 	type BaseGuildTextChannel,
+	ThreadChannel,
 } from 'discord.js';
 import type { Event } from '../struct/types';
 import config from '../config';
@@ -152,10 +153,11 @@ export const event: Event = {
 						threadId: message.channelId,
 					},
 				});
+				const channel = message.channel as ThreadChannel;
 				if (!mail?.isOpen) return;
 				const member = await message.guild?.members.fetch(mail.userId).catch(log);
 				if (!member) {
-					message.channel.send(
+					channel.send(
 						'Could not find member in server. Member probably left. Please close this modmail',
 					);
 					return;
@@ -176,12 +178,12 @@ export const event: Event = {
 					.then(() => message.react('✅'))
 					.catch((e) => {
 						if (e.code === 50007) {
-							message.channel.send(
+							channel.send(
 								'Unable the send modmail reply. The user has their dms disabled for this server. Please tell them to enable it first!',
 							);
 							return;
 						}
-						message.channel.send('Unexpected error while sending message. Please check logs');
+						channel.send('Unexpected error while sending message. Please check logs');
 						message.react('❌');
 						return log(e);
 					});
