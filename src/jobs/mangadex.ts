@@ -26,9 +26,9 @@ export const job: Job = {
 		for (const chap of chaps) {
 			const link = `https://mangadex.org/chapter/${chap.id}`;
 
-			const cclaw_id = '6b27f0ac-8ed1-45af-a24a-1a4246ec6305';
-			// If its not posted by cclaw, we skip it
-			if (chap.relationships?.find((rel) => rel.type === 'scanlation_group')?.id !== cclaw_id) {
+			const tomo_id = '77ecc547-d877-4354-836d-395022a8f8f6';
+			// If its not posted by tomo scans, we skip it
+			if (chap.relationships?.find((rel) => rel.type === 'scanlation_group')?.id !== tomo_id) {
 				continue;
 			}
 
