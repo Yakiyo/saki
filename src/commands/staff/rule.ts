@@ -1,4 +1,4 @@
-import { SlashCommandBuilder } from 'discord.js';
+import { GuildTextBasedChannel, SlashCommandBuilder } from 'discord.js';
 import type { Command } from '../../struct/types';
 import { sendLog } from '../../util';
 
@@ -49,7 +49,7 @@ export const command: Command = {
 		const int = interaction.options.getNumber('number') as number;
 		const rule = rules[int];
 
-		const message = await interaction.channel?.send({
+		const message = await (interaction.channel as GuildTextBasedChannel | null)?.send({
 			content: `Hey, you are probably violating rule ${int}, consider removing or editing that message or moderators might have to take an action.`,
 			embeds: [
 				{

@@ -1,4 +1,4 @@
-import { SlashCommandBuilder, ChannelType as CT } from 'discord.js';
+import { SlashCommandBuilder, ChannelType as CT, GuildTextBasedChannel } from 'discord.js';
 import type { Command } from '../../struct/types';
 import { sendLog } from '../../util';
 
@@ -16,7 +16,9 @@ export const command: Command = {
 	async execute(interaction) {
 		const c = interaction.options.getChannel('channel');
 
-		const message = await interaction.channel?.send({
+		if (interaction.channel?.isSendable) return;
+
+		const message = await (interaction.channel as GuildTextBasedChannel | null)?.send({
 			embeds: [
 				{
 					color: 16762880,
