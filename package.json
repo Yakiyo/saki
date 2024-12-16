@@ -27,6 +27,7 @@
   "author": "Yakiyo#1206",
   "license": "MIT",
   "dependencies": {
+    "@discordjs/builders": "^1.9.0",
     "@discordjs/opus": "^0.8.0",
     "@discordjs/voice": "^0.14.0",
     "@distube/yt-dlp": "^1.1.3",
